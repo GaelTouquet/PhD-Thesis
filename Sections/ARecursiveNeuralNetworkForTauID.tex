@@ -1,3 +1,5 @@
+\colin{use items. more details, but no need for complete sentences. 1 item / phrase. add actual references to the various sections}
+
 chapeau : rappel tau decays, different final state. Hadronic final state can resemble QCD jets, which are produce in great numbers in CMS, leading to lots of misidentification. Standard CMS identification achieves significant performances thanks to a great PF reconstruction but does not use its full potential. To minimize information loss, we propose not only to use deep learning, but also to create a specific architecture that would be most adequate for the task at hand. Plan announce : first datasets involved in performance quantifying but also training. then standard CMS tauID technique. then an introduction to neural networks.
 
 \section{Simulated jet and tau datasets}
@@ -13,10 +15,10 @@ chapeau : In order to compare dscriminating power, we need dataset of jets and h
 \subsection{Signal and background definition}
 
 \begin{itemize}
-    \item seeding jet
-    \item jet selection
-    \item background jet definition = jet from QCD samples
-    \item signal definition = matched with gen-level tau from Higgs/DY samples
+    \item reconstructed jet: either correspond to a tau or to a qcd jet 
+    \item jet selection $\pt>20$, eta... other? 
+    \item background jet definition = reconstructed jet from QCD samples
+    \item signal definition = reconstructed jet matched with gen-level tau from Higgs/DY samples (cf. Section~\ref{sec:cms_physics_event_generation})
 \end{itemize}
 
 \section{The standard CMS \tauh ID}
@@ -50,7 +52,7 @@ chapeau : In order to differentiate tauh from jet, isolation is used as jet fake
     \item use pf paper
 \end{itemize}
 
-\subsection{Intrinsic limits}
+\subsection{Intrinsic limitations}
 
 \begin{itemize}
     \item introduce the idea of working point = trade-off between background rejection and signal efficiency

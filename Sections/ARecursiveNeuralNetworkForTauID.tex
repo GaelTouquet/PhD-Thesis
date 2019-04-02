@@ -1,40 +1,193 @@
-chapeau : annonce du plan et motivation des sous-sections: recurent -> recursive.
-tau against jets mainly ; throwback to jet clustering and tau reconstruction; main idea : use clustering with deep learning; also main idea : minimize information loss => particle level information; Study done on CMS simulated jets
+chapeau : rappel tau decays, different final state. Hadronic final state can resemble QCD jets, which are produce in great numbers in CMS, leading to lots of misidentification. Standard CMS identification achieves significant performances thanks to a great PF reconstruction but does not use its full potential. To minimize information loss, we propose not only to use deep learning, but also to create a specific architecture that would be most adequate for the task at hand. Plan announce : first datasets involved in performance quantifying but also training. then standard CMS tauID technique. then an introduction to neural networks.
 
 \section{Simulated jet and tau datasets}
+chapeau : In order to compare dscriminating power, we need dataset of jets and hadronic taus. This dataset will also be used as training and testing sample later on in the training phase.
 
 \subsection{Datasets}
 
+\begin{itemize}
+    \item QCD MC datasets
+    \item Higgs and DY hadronic taus from MC datasets
+\end{itemize}
+
 \subsection{Signal and background definition}
 
-seeding jet...
+\begin{itemize}
+    \item seeding jet
+    \item jet selection
+    \item background jet definition = jet from QCD samples
+    \item signal definition = matched with gen-level tau from Higgs/DY samples
+\end{itemize}
 
 \section{The standard CMS $\tau_{h}$ID}
 
 \subsection{Paricle flow $\tau_{h}$ algorithm}
 
-\subsection{Multi-variate analysis for isolation}
+\begin{itemize}
+    \item hadronic taus decay products (1/3prong+0/...pi0) (table)
+    \item Hadron plus strip algorithm:
+    \item since pi0 -> 2 photons and photon conversion in tracker material and electron in the cascade are bent by magnetic field ->
+    \item reconstruction of 1 or 3 hadrons plus a "strip" (narrow in eta, long in phi) of photons (mass required to be consistent with pi0)
+    \item all reconstructed hadrons and photons are required to be in a cone of deltaR = 2.8 GeV/c / pttau
+    \item pttau required to match seeding jet direction
+    \item decay must be compatible with corresponding resonance hypothesis (not sure what it means, need more investigation to be sure)
+\end{itemize}
+
+\subsection{Isolation}
+chapeau : In order to differentiate tauh from jet, isolation is used as jet fakes from QCD are very much less likely to give an isolated reconstructed tauh. Two approaches are available : cut-based and multi-variate
+
+\begin{itemize}
+    \item cut-based : isolation cone of dR=0.5, measures pt of objects in isolation cone and outside of signal cone (also pile-up mitigation)
+    \item multi-variate : BDT based
+    \item quick overview of a BDT
+    \item BDT trained to reject jet fakes
+    \item also specific anti-muon and anti-electron algorithms (to research, quick overview)
+\end{itemize}
 
 \subsection{Performance}
 
-c.f. PF flow paper
+\begin{itemize}
+    \item use pf paper
+\end{itemize}
 
 \subsection{Intrinsic limits}
 
-information loss in process => deep learning should be better
+\begin{itemize}
+    \item introduce the idea of working point = trade-off between background rejection and signal efficiency
+    \item as seen before : hard cuts are used in both methods, and some information might be lost there
+    \item if we could use a method that uses all the information we might be able to establish algorithms that gives better background rejection for similar signal efficiency, or better signal efficiency for same background rejection.
+    \item information loss in process => deep learning should be better (diagram of machine learning using human-defined high level variables VS deep learning using low level variables)
+
+\end{itemize}
+
 
 \section{From a single neuron to recurrent networks}
+chapeau : neural networks are trending. Based on basic understanding of a human neuron, and its properties when combined in a network. Several huge steps in AI, data analysis and even pseudo-data generation. We will start from the basic block : a neuron, then will see the idea of a basic network, then an architecture style known as recurrent, that will lead us to the main architecture of interest here : the recursive neural network.
 
 \subsection{Basics : neurons, dense networks, deep learning}
 
+\begin{itemize}
+    \item neuron (diagram)
+    \item network (diagram)
+    \item loss function
+    \item backpropagation
+    \item a few words on architecture
+\end{itemize}
+
 \subsection{Recurrent neural networks}
 
-class of neural networks that allows a flexible number of entry variables
+\begin{itemize}
+    \item class of neural networks that allows a flexible number of entry variables
+    \item classically used in language processing
+    \item how it works (diagram)
+\end{itemize}
 
-A basic recurrent network
+\section{Recursive neural network}
 
-\subsection{Recursive neural network}
+chapeau : started from Gilles' work : QCD-based architecture in neural nets for Wjet tagging. As we intend to separate QCD jets for hadronic taus jets, idea is fitting for our case, need to appropriate the concept and optimise
 
-(include here a mix of gilles' work and mine to make a coherent and comprehensible case of the RecNN while aknowledging gilles' work here and there)
+\subsection{Jet clustering}
 
-chapeau : gilles's work idea, our appropriation of the concept, optimisation and why it is adequate for TauId
+\begin{itemize}
+    \item chapeau : hadronisation = decay into "jet" of particles = > clustering = "reversing" the process to have caracteristics of original object
+    \item basic idea : list the particles , combine two into pseudo-particle , start again until hit a pre-determined condition
+    \item  The choice of the order in which particles are combine and the stopping condition define the different clustering algorithms. some examples :
+
+
+
+\begin{itemize}
+    \item cambridge
+    \item kt
+    \item anti-kt
+\end{itemize}
+
+\end{itemize}
+
+\subsection{Ordering}
+
+\begin{itemize}
+    \item In this study the clustering into jets from CMS events has already been done using the anti-kt algorithm with distance parameter R = 0.4.
+    
+    \item need to structure the merging of information from the different pseudo-particles.
+    \item Now we intend to create an architecture for our network by applying one of the following orderings :
+
+\begin{itemize}
+    \item kt 
+    \item cambridge
+    \item anti-kt
+    \item randomize
+    \item pt-ordered
+    \item reversed pt-ordered
+\end{itemize}
+
+
+
+\end{itemize}
+
+\subsection{Pre-processing}
+
+\begin{itemize}
+    \item jet centered and de-boosted, orientated.
+    \item All raw variables are scaled (sklearn.preprocessing.RobustScaler) before being fed to a network layer to avoid scaling issues.
+\end{itemize}
+
+
+\subsection{Unbiased training sample}
+
+\begin{itemize}
+    \item To first avoid biases, the number of signal and background "jets" are forced to be the same:
+    \item in our case, having many more background "jets" at hand than signal "jets", every signal "jet" is kept and background is then selected
+    \item This selection of background "jet" is not completely random, as in order to avoid biases in the training, pt distribution of background and signal must match.
+    \item To achieve this, "jets" in the background samples are chosen at random, then are only added to the training sample if the number of background "jets" already selected in a given pt range is lower than the number of signal "jets" in the same pt range
+\end{itemize}
+
+\subsection{Variables}
+
+\begin{itemize}
+    \item for merging : (px,py,pz,E, Ephotonic, Eelectronic, EchargedHadronic,...)
+    \item information given to internal representation : (p,eta, phi, E, E/Ejet, pt, theta, jet eta, jet pt, Ephotonic, Eelectronic,...)
+\end{itemize}
+
+\subsection{Adaptive architecture}
+
+\begin{itemize}
+    \item A first look: first half of the network (tree shaped) is here to provide a representation of the jet, and trained so that this representation allows an easier solving of the task of classification at hand. (diagram from Gilles' paper, first half)
+    \item "Twin" trees : the clustering tree and the "inner representation" tree.
+    \item At every node of the clustering tree, the same layer transforms and adds the information of the node into the equivalent node of the "inner representation" tree.
+    \item This transformation is entirely learned from data.
+    \item This gives us the architecture of the first part of our basic RecNN.
+    \item Then the top node of the tree (equivalent to the re-clustered jet p4 of the clustering tree) is given as input to a standard DNN. (full diagram from Gilles' paper)
+\end{itemize}
+
+\subsection{Gating}
+
+\begin{itemize}
+    \item Based on a type of RNN called LSTM
+    \item adds the possibility for the network to "choose" at each node whether previously gathered information should be more or less neglected ("forgot").
+    \item (base all explanation on seminar diagram)
+    \item a new layer, takes each 3 input channel to the node (two from previous nodes, 1 from the clustering tree) as input and gives an output between 0 and 1 for each channel.
+    \item Those outputs are number between 0 and 1 and are going to multiply each channel variable vector before being fed into a ReLU layer.
+    \item now have 4 variable vectors : two from previous nodes, one from equivalent node in clustering tree and one from a new neuron layer combining the previous three
+    \item finally each vector are "softmax" added to give the output to that node
+    \item softmax addition : same as before, get a layer to give scalar outputs for each channel, then use softmax func on each. Finally multiply each vector by the softmaxed scalar, and add all vectors.
+\end{itemize}
+
+
+
+\subsection{Optimisation}
+
+This section is on work that is not done yet ...
+
+\begin{itemize}
+    \item TODO, optimise the different inner layers (add more layers with more neurons)
+    \item pre-train "embedding" layers following auto-encoder phylosophy
+\end{itemize}
+
+\subsection{Performance}
+
+\begin{itemize}
+    \item show all the plots
+    \item so far all ordering are similar
+    \item gated gives the best results
+    \item discuss possible upgradings (TBD)
+\end{itemize}

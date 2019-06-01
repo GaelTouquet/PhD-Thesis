@@ -10,8 +10,17 @@
 \usepackage[a4paper,width=150mm,headheight=110pt,top=25mm,bottom=25mm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{subfig}
 \usepackage{graphicx}
+\usepackage{slashed}
 \usepackage{pgffor} 
+\usepackage{feynmf}
+\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{amsmath}
 \usepackage{float}
 \usepackage{graphics} 
 \usepackage{fancyhdr}
@@ -42,8 +51,7 @@
 \usepackage[hypcap=true,font={small,it}]{caption}
 
 \captionsetup{belowskip=2pt,aboveskip=2pt}
-\bibliographystyle{abbrvnat}
-
+\bibliographystyle{elsarticle-num}
 \renewcommand{\chaptername}{}
 
 \renewcommand{\figureautorefname}{figure} % lower case default ref
@@ -67,7 +75,6 @@
     %\chapter*{Dedication}
     %\chapter*{Declaration}
     \chapter*{Acknowledgements}
-    \textcolor{red}{It is usual, but not compulsory, to thank those who have been of particular help to you in completing the thesis.}
 
 % Table of contents, list of figures, and list of tables
     {\hypersetup{linkcolor=black}
@@ -81,12 +88,16 @@
     \chapter{Introduction} 
     \input{Sections/Introduction}
      
+% Theoretical context
+    \chapter{Theoretical context}
+    \input{Sections/TheoreticalContext.tex}
+
 % The CMS experiment
     \chapter{The CMS experiment}
     \input{Sections/TheCMSExperiment.tex}
     
 % A recursive neural network for \tau_{h} identification
-    \chapter{A recursive neural network for \tauh identification}[A
+    \chapter{A recursive neural network for hadronic tau decay identification}[A
     recursive neural network for tauh identification]
     \input{Sections/ARecursiveNeuralNetworkForTauID.tex}
     
@@ -114,10 +125,10 @@
     % The template has an automated bibliography section based on references 
     % consistent with entries in the 'bibliography.bib' file 
 
-% % Appendices
-%     \appendix
-%     \chapter{(Appendix A title)}
-%     \input{Sections/Appendix_A}
+% Appendices
+    \appendix
+    \chapter{(Appendix A title)}
+    \input{Sections/Appendix_A}
     
 %      \chapter{(Appendix B title)}
 %     \input{Sections/Appendix_B}

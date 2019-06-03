@@ -510,52 +510,211 @@ Since SUSY is a general framework which depends on many unknown parameters, it c
         \multirow{2}{*}{Fermions} & \multirow{2}{*}{1/2} & Quark & \psi_f & \Tilde{\phi}_f & Squark & \multirow{2}{*}{0} & \multirow{2}{*}{SFermions} \\
          & & Lepton & \psi_l & \Tilde{\psi}_l & Slepton & & \\
          \hline
-         \multirow{5}{*}{Bosons} & \multirow{3}{*}{1} & Gluon & g & \Tilde{}
+         \multirow{5}{*}{Bosons} & \multirow{3}{*}{1} & Gluon & g & \Tilde{g}
   gGluino & \multirow{5}{*}{1/2} & \multirow{5}{*}{Bosinos} \\
           & & W & W^i & \Tilde{W} & Wino & & \\
           & & B & B & \Tilde{B} & Bino & & \\
-          & \multirow{2}{*}{0} & \multirow{2}{*}{Higgs} & h, H, & \Tilde{W} & Wino & & \\
-            &  \end{tabular}
-    \caption{Caption}
-    \label{tab:my_label}
+          & \multirow{2}{*}{0} & \multirow{2}{*}{Higgs} & h, H, & \Tilde{h}, \Tilde{H}, & \multicolumn{2}{*}{Higgsinos} & & \\
+          & & & H^{\pm}, A & \Tilde{H}^{\pm}, \Tilde{A} & & & \\ 
+          \hline
+    \end{tabular}
+    \caption{Relations between the SM particles and their superpartners, before the EW symmetry-breaking, according to the MSSM. In the MSSM, the ordinary SM Higgs sector requires four additional Higgs bosons $H$, $A$ and $H^{\pm}$ in addition to the SM Higgs, called $h$ here.}
+    \label{tab:superpartneres}
 \end{table}
+
+This approach would allow certain interactions which have not been observed in the SM. In particular, SUSY models could allow processes where the baryon ($B$) and Lepton($L$) numbers are not conserved, and by extension $B - L$ either. Since processes violating those numbers would make the proton unstable, which has not been observed, a new symmetry has to be added to the MSSM to suppress the $B-L$ violating process : the $R-parity$. The operator of said $R$-parity, which is discrete, is defined for each particle in an interaction as :
+
+\begin{equation}
+    P_R = (-1)^{3(B-L)-2s}
+\end{equation}
+where $s$ stands for the spin of the particle, $B$ and $L$ are the baryon and lepton number, respectively. The SM particles are defined as having $P_R = 1$ while superpartners have $P_R = -1$. To conserve $R$-parity the combined $P_R$ has to be positive. SUSY models conserving $R$-parity have an additional consequence : the lightest supersymmetric particle (LSP) is stable, thus chains of heavier SUSY particles end in the LSP. If the LSP is, in addition, electrically nutral, it would be a candidate for the composition of Drak Matter. Multiple searches looking for a LSP are being performed but no evidence of its existence has been observed so far.\newline
+
+Adding an unique fermionic superpartner for the Higgs boson (named higgsino) has several implications. First, a chiral anomaly would appear, meaning the generation of low mass-states due to the non-conservation of a chiral current. These states have not been observed in the Higgs sector, so a mechanism to suppress such states must be present. Second the suppression of the flavor-changing neutral currents, which are not observed in nature either, is not granted. Finally the ration between the neutral($G_n$) and charged ($G_c$) currents in the EWT could not be of the order of the unit, which seems to be the case from observations. The simplest solution which avoid these issues, recovering the observations of the SM, is the addition of a second Higgs field doublet.
+
+Mathematically the simplified Higgs potential can be written as \cite{Nagashima:2014tva}:
+
+\begin{multline}
+    V(\phi_d , \phi_u) = \mu^{2}_u (\phi^{\dagger}_u \phi_u) + \mu^{2}_u (\phi^{\dagger}_d \phi_d) - \mu^{4}(\epsilon_{ij}\phi^{i}_d \phi^{j}_u + h.c.) \\ \frac{g^{2}_W + g^{2}_B}{8}(\phi^{\dagger}_d \phi_d - (\phi^{\dagger}_u \phi_u) + \frac{g^{2}_W}{2} | \phi^{\dagger}_d \phi_u |^2
+\end{multline}
+where $\epsilon = 0$ if $i = j$ and $\epsilon_du = -\epsilon_ud = 1$.To ensure vacuum stability, the potential must be bound from below, meaning $\mu_{d}^2 + \mu_{u}^2 > 2\mu^2$. The requirement for the spontaneous symmetry breaking becomes $\mu^4 > \mu_{u}^2 \mu_{d}^2$, and the symmetry is spontaneously broken by the choice of the non-zero vacuum at:
+
+\begin{multline}
+    \langle \phi_d \rangle = \frac{1}{\sqrt{2}} \begin{pmatrix} 0 \\ \nu_d \end{pmatrix} \\
+    \langle \phi_d \rangle = \frac{1}{\sqrt{2}} \begin{pmatrix} \nu_u \\ 0 \end{pmatrix}
+\end{multline}
+
+The vacuum expectation value of the SM , $\nu$ is recovered by:
+\begin{equation}
+    \nu^2 \equiv \nu_{d}^2 + \nu_{u}^2
+\end{equation}
+
+A useful parameter is $\beta$ defined as :
+
+\begin{equation}
+    tan \beta \equiv \frac{\nu_u}{\nu_d}
+\end{equation}
+
+The masses of the $W^{\pm}$ and $Z$ bosons are now defined as :
+
+\begin{multline}
+    m_W \equiv \frac{v.g_W}{2} \\
+    m_Z \equiv \frac{\mu_{d}^2 \mu_{u}^2 . tan^2 \beta}{tan^2 \beta - 1}
+\end{multline}
+
+The Yukawa couplings of the different Higgs bosons to the quarks are also modified with respect to the SM. It can be expressed as a correction of the coupling of the SM boson, depending on $tan \beta$ and a second angle $\alpha$ defined as :
+
+\begin{equation}
+    tan 2\alpha \equiv \frac{m_{A}^2 + m_{Z}^2}{m_{A}^2 - m_{Z}^2} tan2\beta
+\end{equation}
+
+The Yukawa couplings expressed in terms of the $\alpha$ and $\beta$ parameters can be found in table \ref{tab:yukawaMSSM}. Measurements of such couplings could be very powerful to discriminate between SM and MSSM.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{c c c c}
+        \lambda_ij / \lambda_SM & \lambda_VV & \lambda_VV & \lambda_uu & \lambda_dd,ll \\
+        \hline
+        h & sin(\beta - \alpha) & cos\alpha/sin_\beta & -sin\alpha / cos\beta \\
+        H & cos(\beta - \alpha) & sin\alpha / sin\beta & cos\alpha / cos \beta \\
+        A & 0 & cot\beta & tan\beta \\
+        \hline
+    \end{tabular}
+    \caption{Relation of the Yukawa coupling parameters ($\lambda_ii$) with respect to the SM coupling ($\lambda_SM$) for the neutral MSSM Higgs bosons ($h$, $H$ and $A$) to the vector bosons ($\lambda_VV$), and to the different fermions, split in $u$-type (only quarks, $\lambda_uu$) and $d$-type (quarks and electron type $\lambda_{dd,ll}$) as a function of the angles $\alpha$ and $\beta$.}
+    \label{tab:yukawaMSSM}
+\end{table}
+
+The masses of the five Higgs bosons at tree level is then :
+
+\begin{multline}
+    m_{A}^2 = \frac{2\mu^2}{sin 2\beta} \\
+    m_{H^{\pm}}^2 = m_{A}^2 + m_{W}^2 \\
+    m_{H,h}^2 = \frac{1}{2} \big( m_A^2 + m_Z^2 \pm \sqrt{(m_A^2 + m_Z^2)^2 - 4m_Z^2 m_A^2 cos^2 2\beta} \big)
+\end{multline}
+
+Indeed at lowest order, the masses of the Higgs bosons depend on two free unknown parameters, which are conventionally chosen to be $tan \beta$ and $m_A$. However when higher-order corrections are included, several additional parameters such as the stop (top quark superpartner) mixing parameter :
+
+\begin{equation}
+    X_t \equiv A_t - \mu cot\beta
+\end{equation}
+which depends on the soft SUSY-breaking Higgs-stop coupling $A_t$. Another such parameter is the average scale of SUSY, average scale of the stop masses:
+
+\begin{equation}
+    m_SUSY \equiv \sqrt{m_{\Tilde{t_1}}m_{\Tilde{t_2}}}
+\end{equation}
+
+Indeed at higher orders the corrections on the Higgs mass become \cite{Nagashima:2014tva} :
+
+\begin{equation}
+    \delta m_h^2 \approx \frac{3 m_t^4}{2\pi^2 v^2} \Big[] ln\frac{m_SUSY^2}{m_t^2} + \frac{X_t^2}{m_SUSY^2} \big( 1 - \frac{X_t^2}{12 m_SUSY^2} \big) \Big]
+\end{equation}
+
+As a huge number of free parameters is impractical for experimental tests, a common procedure is to set high-order parameters to a particular value, aiming to focus on specific MSSM phenomenologies, called scenarios, and then set experimental limits on the $tan \beta$ vs $m_A$ parameters. Such scenarios  are detailed in section \ref{sec:pheno}.
+
+The search for the additional neutral heavy Higgs boson of the MSSM is one of the goal of this thesis. This search is done in several MSSM scenarios, aiming for topologies where the differences with respect to the SM is enhanced. 
 
 \section{Phenomenology of MSSM Higgs bosons production and decay into $\tau\tau$ in $pp$ collisions at the LHC}
 \label{sec:pheno}
 
+In order to challenge not only the SM but also any BSM theories like the MSSM, many experiments have been designed, either to make indirect measurements of parameters, or to directly detect new particles by allowing their creation and detecting their decay products. The Large Hadron Collider was designed with both in mind. Indeed the LHC accelerates beams of protons to achieve the necessary energy in the center of mass to generate processes of interest. When two proton collide, most cases are elastic scatters due to the repulsion of their electric charge. But in some cases the interaction is inelastic, resulting in the production of new particles. Protons are hadrons, composite particles formed by three valence quarks, namely $uud$, that are bound together by a continuous exchange of gluons. Within the proton, gluons are transformed continuously in pairs of quark-antiquark, which forms the sea of quarks.
+
+The main collision, called event, comes from the hard scattering of the protons at high energy, and can be described using a perturbative approximation of QCD, assuming asymptotic freedom. However, the collisions are cominated by the soft scattering, radiation of low energy interactions. The estimation of such processes cannot be done through perturbative QCD,and is therefore parametrized from data.
+
+The elements that are effectively taking part of the collision, either quarks (valence or from the sea) or gluons,  are called partons. Since they are bound within the proton, they carry part of its energy in a dynamic way. Therefore the partons carry a fraction of the energy carried by the proton as a whole, meaning the energy available at the collision wil be a spectrum upperly bounded by the energy given to both protons. Several different probability distributions, called Parton Distribution Functions (PDFs) are used to estimate this energy distribution. Different PDF schemes, such as CTEQ \cite{Pumplin:2002vw}, MSTW \cite{Martin:2009iq} and NNPDF \cite{Ball:2008by} have been developed and tested at different energy regimes.
+
+The cross-section of the pp collisions, $\sigma(pp\rightarrow X)$ is given by the QCD factorization theorem \cite{Butterworth:2012fj}:
+
+\begin{equation}
+    \sigma(pp\rightarrow X) = \sum_{i,j} \int \int f_i (x_1 , \mu_F^2 )f_j (x_2 , \mu_F^2 ) \hat{\sigma}_{ij \rightarrow X} (s x_1 x_2 , \mu_R^2 , \mu_F^2 ) dx_1 dx_2 
+\end{equation}
+where $x_1$ and $x_2$ variables are the fraction of the total momentum that the partons $i,j$ carry, providing an effective centre-of-mass energy of $\hat{s} = sx_1 x_2$ , and the variables $\mu_R^2$ and $\mu_F^2$ are the renormalization and factorization factors respectively, which are obtained by truncating the strong coupling constant. Finally, the variables $f_i$ and $f_j$ are the parton densities, obtained from ODFs for a momenter transfer of $Q^2 = (p_1 - p_2 )^2$, where $p_1$ and $p_2$ are the momenta of the respective partons.
+
+The partial cross-section $\hat{\sigma}_{ij \rightarrow X}$ can be computed through the QCD lagrangian in the perturbative method, up to Leading Order (LO), or adding further corrections to next orders, (NLO, NNLO,...). However, the physical process does not end here: the partons involved in the collision can irradiate soft-gluons (parton shower) which later will hadronize, forming a cascade of particles. An accurate theoretical modeling of these effects is not possible and thus, their simulation is constrained using experimental data.
+
+On top of the all this happening when a collision happens, several other interaction can happen simultaneously to the main collision event, due to the interactions of either other protons or from the remainder of the partons from the main event. Those are called pile-up or underlying event respectively.
+
+\subsubsection{Higgs boson production}
+
+Most of the MSSM Higgs boson characteristics can be defined with respect to the SM Higgs boson. At the LHC, neutral Higgs bosons can be produced in several different processes, which have been measured with great accuracy \cite{Dittmaier:1318996}. The cross-section of the Higgs boson production modes as a functiun of energy in the center of mass is in figure \ref{fig:higgscrosssec}.
+
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Cross-sections for different Higgs boson production processes as a function of center of mass energies}
+    \label{fig:higgscrosssec}
+\end{figure}
+
+The dominant Higgs production process at the LHC is the gluon fusion, labelled ggH (Figure \ref{fig:ggh}). This interaction is mediated by a loop of quarks, although the Yukawa coupling of the Higgs boson depends on the mass of the fermion, therefore the top quark dominates this process. The $ggH$ is most abundant production mode , up to $85\%$ of produced the SM Higgs bosons.
 
 
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Feynman diagram for the gluon fusion process ($ggh$) at lowest order.}
+    \label{fig:ggh}
+\end{figure}
 
 
+The second most abundant production mode at the LHC is the vector boson fusion \cite{PhysRevD.85.035002}, abbreviated as VBF (Figure \ref{fig:vbf}). This process consists of two quarks directly or indirectly producing two vector bosons ($W^{\pm}$ or $Z$) that fuse into a Higgs boson. Despite having a cross-section ten times lower than ggH at LHC, this process is particularly recognizable thanks to the behaviour of the two outgoing quarks, which hadronize giving two observable energetic jets back-to-back in the beam direction. The current computation of the cross-section includes NNLO QCD corrections and NLO EW corrections \cite{deFlorian:2227475}.
+
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Feynman diagrams for the Vector Boson Fusion process of a Higgs boson with two jets at leading order for the $t$ and $u$ channels.}
+    \label{fig:vbf}
+\end{figure}
+
+Another process is the vector boson associated production, VH (Figure \ref{fig:vh}), also called Higgs-strahlung. In this process, the quark-antiquark pair collisions give rise to an energetic vector boson ($W^{\pm}$ or $Z$), that then irradiates a Higgs boson. The cross-sections are computed up to NNLO for the QCD corrections plus NLO EW corrections \cite{deFlorian:2227475}.
+
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Feynman diagrams for the vector boson associated production process (VH) at leading order for the W boson and the Z boson. Last diagram corresponds to a gluon fusion via top quark loop which contributes to the ZH mode.}
+    \label{fig:vh}
+\end{figure}
+
+Last but not least, another production process is the associated production with heavy fermions, namely top quarks (ttH) and bottom quarks (bbH), the latter shown in Figure \ref{fig:ggh}. Even though these modes are not significant in SM Higgs boson production at the LHC, the MSSM takes advantage of the enhanced coupling of the $b$-quark to the Higgs bosons for large $tab \beta$ values. In such cases this mode becomes a significant or even dominant source of Higgs bosons. The cross-section for the bbH modes are computed at NLO for the 4-flavor schem, meaning assuming only 4 lightest quarks being available in the proton, and NNLO for the 5-flavor scheme \cite{deFlorian:2227475}.
+
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Feynman diagrams for the $b$-associated production process at leading order in the four-flavour scheme and the five-flavour scheme.}
+    \label{fig:bbh}
+\end{figure}
+
+\subsubsection{Higgs bosons decay}
+
+The Higgs bosons are particles with short life time, e.g. SM Higgs boson life time is $\sim 10^-22 s$ \cite{pdg2016}. Hence direct observations are infeasible and the searches have to focus on the signatures of their decays. Each of the decay modes have a different topology as well as different branching ratios (BR). 
+
+The MSSM introduces a second Higgs doublet because of theoretical requirements covered in section \ref{sec:MSSM}, leading to five observable Higgs boson, namely $h$, $H$, $A$ and $H^{\pm}$. The most common interpretation of the discovered Higgs boson at $\sim 125 GeV$ in the MSSM context is to assume that it holds the role of the lightest boson $h$. This thesis will rely on this interpretation to look for other higgs bosons at a heavier mass range than $m_h = 125 \pm 3 GeV$. The MSSM modifies the relations of the masses and couplings of the Higgs particles with respect to the SM. At tree level, the correction to the masses can be written to depend uniquely on the $m_A$ and $tan \beta$ parameters, while the corrections to the Yukawa couplings can be written in terms of angles $\alpha$ and $\beta$.
+
+\begin{equation}
+    \lambda(H \rightarrow bb, \tau\tau) \propto \frac{cos \aplha}{cos \beta} = \frac{cos \alpha}{sin \beta} tan \beta
+\end{equation}
+\begin{equation}
+    \lambda(A \rightarrow bb, \tau\tau) \propto tan \beta
+\end{equation}
+At leading order, by construction, $\alpha$ is defined negative while $tan \beta$ is defined positive, hence $\beta > \alpha$.
+
+As seen in previous relations, the coupling of both heavy Higgs bosons depends directly and proportionnaly on the value of the free parameter $tan \beta$. Therefore for large values of $tab \beta$ the coupling of these Higgs bosons to $d$-type fermions, such as the $b$ quark and the $\tau$ lepton is enhanced with respect to the SM. This difference can not only be used to discriminate between SM and MSSM, but also leads to new ways of detecting Higgs decays that were not favored in the SM. Large $tan \beta$ values would lead to enhanced first $H \rightarrow \tau\tau$ and $H \rightarrow bb$ decay channels and second the b-quark associated production of Higgs bosons \ref{fig:bbh}.
+
+A large $tan \beta$ would also affect the ggH mode, as the Higgs boson production in this mode happens through a fermionic loop. In the SM, the coupling of the Higgs boson with fermions depends on the mass of the fermion and therefore, due to its enormous mass, the top quark loop dominates completely the production, rendering all other contributions not significant. In the MSSM, a large value $tan \beta$ would enhance $b$-quark loops, even dominating over $t$-loops, therefore augmenting its contribution.\newline
 
 
-% generalities
+This thesis searches for evidence of a Higgs boson decaying to a pair of $\tau$ leptons, denoted as $H, A \rightarrow \tau\tau$ channel, whose Feynman diagram is shown in Figure \ref{fig:htt}. The $H,A \rightarrow \tau\tau$ is a very sensitive fermionic channel despite its relatively low branching ratio because its final state provides a clear signature (high energetic $\tau$ leptons), while the more abundant $H,A \rightarrow bb$ channel suffers from significant backgrounds at the LHC.
 
-% mathematical approach (gauge q field theory) ++ symmetries ++ lagrangian def
+The $\tau$ lepton is an unstable particle with a mean life of $\sim 10^{-13} s$ \cite{pdg2016} and therefore, a decay length of $87.03 \mu m$. Its decaying vertex is therefore usually close to the production vertex. The $\tau$ decays via the electroweak interaction, converting into a $\nu_{\tau}$ and emitting other fermions, mediated by a $W^{\pm}$ in the process, as shown in Figure \ref{fig:htt}.
 
-% fermion/boson introduction
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Feynman diagrams for the $H \rightarrow \tau\tau$ decay at tree level.}
+    \label{fig:htt}
+\end{figure}
 
-% \subsection{Fermions}
+The decay of a $\tau$ lepton can produce a quark-antiquark pair, which is labelled hadronic decay. This decay leads to observed final states of mainly either 1 or 3 charged hadrons, and potentially several \pizero. On the other hand a $\tau$ lepton can lead to a an electron or muon, and neutrinos in the final states. All the important $\tau$ decays and their branching fractions are detailed in Table \ref{tab:tau_decay_products}. 
 
-% generalities (matter)
+Those different decays can lead many different final states of $H,A \rightarrow \tau\tau$ events. This thesis will focus on the fully hadronic channel, denoted $\tau_h \tau_h$.
 
-% Dirac equation -> waveform
-
-% lagrangian fermionic terms
-
-
-
-
-
-
-
-\label{sec:conserved_quantities}
-
-\subsection{QCD jets}
-\label{sec:qcd_jets}
-see fastjet fragmentation links
-\subsection{The $\tau$ lepton}
-\label{sec:the_tau_lepton}
 
 \begin{table}[]
     \centering

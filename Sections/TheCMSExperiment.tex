@@ -1,9 +1,55 @@
-Chapeau :
+
+Most of the ordinary matter is made up of stable particles. Indeed, rare particles are not easily found since most of the time because they will decay before they could be observed. The best way to observe unstable or rare particles is at the place and time of their production. Physicists have therefore turned their detectors towards the skies for a time, as the interactions between cosmic rays and the atmosphere can create many of the desired new particles. Even though this approach lead to great discoveries, and to a better understanding of particle physics, ways to produce such processes in a controlled environment can be designed and have many advantages. One of the experimental context is the Large Hadron Collider (LHC), which collides protons together with the goal of creating new particles. This apparatus will be presented in section \ref{sec:LHC}. One of the advantages of this experimental context is the possibility of having a global understanding of collision through the detection of most of the outgoing products. The Compact Muon Solenoid (CMS) experiment is a detector placed around of the collision points of the LHC that will provide such detection, and will be presented in section \ref{sec:detectors}. In order to compare and eventually match results with theory, simulation of both the hard processes of the collision and interaction of the products with the detector is then explained in section \ref{sec:cms_physics_event_generation}. Finally, to interpret the signals gathered by the detector, a reconstruction algorithm is applied to both data and simulation, as detailed in section \ref{sec:cms_physics_event_reconstruction}.
 
 \section{The Large Hadron Collider}
+\label{sec:LHC}
+
+The LHC is the biggest and most powerful collider in the world. It was built in a 27 km long kilometer underground circle cave, over 100m below the surface. It is situated at the Franch-Swiss border on the CERN (European Center of Nuclear Research) campus.
+
+Made of two rings that will each accelerate protons giving them up to 7 TeV of usable energy in the collision, totaling 14 TeV in the centre of mass \cite{Brüning:782076,Brüning:815187,Benedikt:823808}. This acceleration is done through the use of 16 radio frequency cavities, and kept along a circular trajectory by about 9500 magnets. Those magnets are cooled down to 1.8 K thanks to superfluid helium, and through supraconductivity are able to deliver a nominal magnetic field of 8.33 T.
+
+\subsection{Proton acceleration}
+
+Before they reach nominal energy in the LHC rings, protons are gradually accelerated by smaller accelerators :
+
+\paragraph{LINAC 2} is the start of the whole acceleration process. Hydrogen is ionized by an electric field to provide protons accelerated to an energy of 50 MeV.
+
+\paragraph{The Proton Synchrotron Booster (PSB)} is a circular accelerator where the beams of protons reach an energy of 1.4 GeV.
+
+\paragraph{The Proton Synchrotron (PS)} is another circular accelerator, accelerating protons to an energy of 25 GeV.
+
+\paragraph{The Super Proton Synchrotron (SPS)} is the last accelerator before the LHC. Protons will be accelerated to 450 GeV before being injected in the LHC to reach 7 TeV.
+
+A descriptive diagram of the acceleration chain is presented in figure \ref{fig:LHC_acceleration}
+
+\begin{figure}
+    \centering
+    \includegraphics{Images/placeholder.jpeg}
+    \caption{Diagrams of the full accelerator complex at CERN, including the LINAC2, BOOSTER (PSB), PS, SPS and LHC accelerators.}
+    \label{fig:LHC_acceleration}
+\end{figure}
+
+\subsection{Luminosity}
+
+Instantaneous luminosity is a key variable in a collider experiment. Expressed in $\mathrm{cm^-2 s^-1}$, it is proportional to the number of collisions per seconde and per square centimeter. It can be expressed as
+
+\begin{equation}
+    \Lagr_{\rm{inst}} = \frac{\gamma f n_p N_p^2}{4\pi \epsilon_n \beta^{*}} = \frac{f n_p N_p^2}{4\pi \sigma_x \sigma_y}
+\end{equation}
+where $\gamma$ is the Lorentz boost, $f$ is the revolution frequency of the bunches, $n_p$ is the number of bunches, $N_p$ is the number of proton per bunch, $\epsilon_n$ is the transverse emittance which is a measure of the parallelism of the beam, $\beta^*$ is the amplitude function which measures the distance between the interaction point and the place where the beam gets twice as wide, and $\sigma_{x,y}$ the width of each beam at the interaction point.
+
+The integrated luminosity over a period of data-taking is defined by $\lagr = \int \lagr_{\rm{inst}} dt$. This variables denotes of the quantity of data, and therefore its statistical potency for the experiments. Indeed, the number of events produced by collitions for a given process is 
+\begin{equation}
+    N = \lagr\sigma \mend
+\end{equation}
+In this equation, $\sigma$ is the cross-section of the considered process. This equation shows that to study rare particles or rare decays, it is beneficial to combine both an important instantaneous luminosity and a long data-taking period.
+
+\subsection{Pile-up}
 
 
-\section{CMS detector overview}
+\subsection{The experiments}
+
+\section{The Compact Muon Solenoid experiment}
 \label{sec:detectors}
 \subsection{Tracker}
 
@@ -19,7 +65,34 @@ LHC rate too big for bandwidth capabilities => trigger system to only save relev
 
 L1 - HLT trigger (final point = need reconstruction system if we want to have physics-based triggering)
 
+\section{Simulation}
+
+\subsection{Physics event generation} 
+\label{sec:cms_physics_event_generation}
+
+\begin{itemize}
+\item Generator(s)
+\item gen level tau
+\end{itemize}
+
+\subsection{Detectors and interactions}
+
+detector simulation, interactions
+
+(not forget to define $\Deltar$ and $\Deltaz$)
+
+reconstruction
+
+\subsection{Corrections}
+
+\begin{enumerate}
+\item JEC residual
+\item pile up
+\item ...
+\end{enumerate}
+
 \section{Event reconstruction}
+\label{sec:cms_physics_event_reconstruction}
 
 \subsection{Specific algorithms}
 
@@ -45,29 +118,3 @@ JEC (before resudial)
 
 basic tau identification, mention seeding jets, refer to next chapter
 
-\section{Simulation}
-
-\subsection{Physics event generation} 
-\label{sec:cms_physics_event_generation}
-
-\begin{itemize}
-\item Generator(s)
-\item gen level tau
-\end{itemize}
-
-\subsection{Detectors and interactions}
-\label{sec:cms_physics_event_reconstruction}
-
-detector simulation, interactions
-
-(not forget to define \Deltar and \Deltaz)
-
-reconstruction
-
-\subsection{Corrections}
-
-\begin{enumerate}
-\item JEC residual
-\item pile up
-\item ...
-\end{enumerate}

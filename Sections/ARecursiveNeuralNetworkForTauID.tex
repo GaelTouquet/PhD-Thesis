@@ -1,14 +1,14 @@
 
-As seen before in sec \ref{sec:the_tau_lepton}, when a $\tau$ is produced in a collision, it can decay into several different final states.
-Hadronic final states, noted \tauh, represent about 65\% of tau decays.
-In reconstruction, Hadronic final states characterised by 1 or 3 charged hadrons with or without \pizero .
+As seen before in sec \ref{sec:tau_lepton}, when a $\tau$ is produced in a collision, it can decay into several different final states.
+Hadronic final states, denoted \tauh, represent about 65\% of tau decays.
+In recnstruction phase, Hadronic final states are characterised by 1 or 3 charged hadrons with or without \pizero .
 
-Similar particles can be reconstructed from the final states of QCD jets \ref{sec:qcd_jets}, so-named because they arise from the hadronization of quarks and/or gluons.
-Since those QCD jets greatly outnumber \tauh in the proton-proton collisions at the LHC, \tauh identification algorithms have be designed to reject QCD jets as much as possible while keeping a \tauh identification efficiency between around 35\% and 70\%.
+Similar particles can be reconstructed from the final states of QCD jets.
+Since those QCD jets greatly outnumber \tauh in the final states of proton-proton collisions at the LHC, \tauh identification algorithms have be designed to reject QCD jets as much as possible while keeping a \tauh identification efficiency somewhere between 35\% and 70\%, depending on the purity needed by an analysis.
 
 Such pre-existing standard CMS identification, as will be presented in section \ref{sec:std_tau_id}, has reached excellent performances thanks to the use of particle-flow reconstruction but does not use its full potential.
 
-Deep learning algorithms, that will be talk about in section \ref{sec:NN}, have shown a capacity to use all available information at their disposal in the task they were trained for. More recently, they have started to be used with great results in similar applications as in heavy flavour jet-tagging \cite{btagging_NN}. Some neural network designs, called architectures, specifically designed for high energy physics proton-proton collisions have started to appear too. One of such is the Recursive Neural Network (RecNN) as is detailed in this article \cite{qcd_aware_RecNN}, the section \ref{sec:RecNN} will detail the adaptation to the \tauh identification task and the improvements from the original design.
+Deep learning algorithms, that will be presented in section \ref{sec:NN}, have shown a capacity to use all available information at their disposal in the task they are trained for. More recently, they have started to be used with great results in similar applications as in heavy flavour jet-tagging \cite{btagging_NN}. Some neural network designs, called architectures, specifically designed for high energy physics proton-proton collisions have started to appear too. One of such is the Recursive Neural Network (RecNN) as is detailed in this article \cite{qcd_aware_RecNN}, the section \ref{sec:RecNN} will detail the adaptation to the \tauh identification task and the improvements from the original design.
 
 But first, section \ref{sec:NN_datasets} will give a quick overview of the CMS simulated data that will be used to quantify the performance of both standard and new technique. This simulation will also be used to train the deep learning algorithm
 

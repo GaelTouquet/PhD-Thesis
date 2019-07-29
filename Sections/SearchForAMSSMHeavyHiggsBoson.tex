@@ -1,71 +1,74 @@
-This chapter describes the search for a neutral MSSM Higgs boson through its decay to a pair of hadronically decay tau leptons ($H \rightarrow \tauh\tauh$). Both CMS and ATLAS collaborations have discovered a Higgs boson's direct decay into a pair of $\tau$ \cite{ATLASHtt,CMSHtt}. In the context of the MSSM, three neutral Higgs bosons are predicted: the CP-even states h and H and the CP-odd state A, which may all decay to $\tau$ pairs. The search is performed in the $m_A - \mathrm{tan}\beta$ parameter space of the $m_{h}^{max}$ scenario \cite{Carena2003} for $m_A$ in the range 90 GeV to 3200 GeV. The analysis is sensitive to production via gluon-gluon fusion and production in association with b-quarks. The cross section of the latter increases for larger values of $\mathrm{tan}\beta$ due to the enhanced down-type fermion Yukawa couplings. A model-independant search for a single Higgs boson, denoted $\Phi$, is performed in the same mass range.
+This chapter describes the search for a neutral MSSM Higgs boson through its decay to a pair of hadronically decaying tau leptons ($H \rightarrow \tauh\tauh$). Both CMS and ATLAS collaborations have discovered a Higgs boson's direct decay into a pair of $\tau$ \cite{ATLASHtt,CMSHtt}. In the context of the MSSM, three neutral Higgs bosons are predicted: the CP-even states h and H and the CP-odd state A, which may all decay to $\tau$ pairs. The search is performed in the $m_A - \mathrm{tan}\beta$ parameter space of the $m_{h}^{max}$ scenario \cite{Carena2003} for $m_A$ in the range 90 GeV to 3200 GeV. The analysis is sensitive to production via gluon-gluon fusion and production in association with b-quarks. The cross section of the latter increases for larger values of $\mathrm{tan}\beta$ due to the enhanced down-type fermion Yukawa couplings. A model-independant search for a single Higgs boson, denoted $\Phi$, is performed in the same mass range.
 
 Searches for MSSM neutral Higgs bosons have been performed by the collaborations at LEP \cite{Schael2006}, the Tevatron \cite{Benjamin:2010xb}, and at LHC by the CMS and ATLAS collaborations \cite{Aaboud2018,Sirunyan2018} with no excess observed above the background expectation. The results presented here follow those published by CMS but is restricted to the \tauh\tauh channel.
 
-This search is performed on the data recorded by CMS throughout 2017. This corresponds to an integrated luminosity of 41,5 $\mathrm{fb^{-1}}$. Event categorisation is used to enhance sensitivity to particular production modes and results are extracted from distributions of the $m_{T_{total}}$ variable, designed to give a better signal to background separation from the presence of neutrinos, and therefore MET in signal events.
+This search is performed on the data recorded by CMS throughout 2017. This corresponds to an integrated luminosity of 41,5 $\mathrm{fb^{-1}}$. Event categorisation is used to enhance sensitivity to particular production modes and results are extracted from distributions of the $m_{T_{total}}$ variable, designed to give a better signal to background separation from the presence of neutrinos, and therefore \MET in signal events.
 
-Section \ref{sec:analysis_samples} outlines the triggering of events in data and the use of MC simulation. The event selection is done in a framework partially developed for this purpose, as is described in section \ref{sec:heppy}. The event selection is then detailed in section \ref{sec:analysis_eventsel}. The split of events into categories is then described in section \ref{sec:categorisation}. The estimation of each backgroung process, using data-driven methods where possible, is detailed in section \ref{sec:analysis_background_methods} and followed by a summary of the experimental and theoretical uncertainties affecting the signal and background estimations in section \ref{sec:analysis_systematics}. The statistical procedures used to quantify the presence of signal in the data is given in section \ref{sec:analysis_statistical_interpretation} and is followed by the results of the search in section \ref{sec:analysis_results}.
+Section \ref{sec:analysis_samples} outlines the triggering of events in data and the use of MC simulation. The event selection is then detailed in section \ref{sec:analysis_eventsel} which is done in a framework partially developed for this purpose. The estimation of each background process, using data-driven methods where possible, is detailed in section \ref{sec:analysis_background_methods} and followed by a summary of the experimental and theoretical uncertainties affecting the signal and background estimations in section \ref{sec:analysis_systematics}. The statistical procedures used to quantify the presence of signal in the data is given in section \ref{sec:analysis_statistical_interpretation} and is followed by the results of the search in section \ref{sec:analysis_results}.
 
 \section{Data samples and simulation}
 \label{sec:analysis_samples}
 
-Events for are elected by dedicated trigger algorithms which require the appropriate pair of \tauh objects. An additional single high \pt \tauh trigger was added to improve sensitivity in the high \pt region. At the HLT level, the di-\tauh triggers require two \tauh objects to be identified and to not overlap. For this a simplified version of the PF algorithm is run for both \tauh reconstruction and isolation. The isolation requirement is designed to be loose with respect to the analysis selection. The object properties determined in the trigger reconstruction, such as \pt and isolation, are only approximate to those in the full offline reconstruction. Consequently, the triggering of events that would pass the offline event selection is not fully efficient. The trigger efficiencies for \tauh candidates typically reach a plateau of between $85\%$ and $95\%$ when above the trigger \pt thresholds \cite{Sirunyan_2018}.
+Events first are selected by dedicated trigger algorithms which require the appropriate pair of \tauh objects. An additional single high \pt \tauh trigger was added to improve sensitivity in the high \pt region. At the HLT level, the di-\tauh triggers require two \tauh objects to be identified and to not overlap. For this a simplified version of the PF algorithm is run for both \tauh reconstruction and isolation. The isolation requirement is designed to be loose with respect to the analysis selection. The object properties determined in the trigger reconstruction, such as \pt and isolation, are only approximate to those in the full offline reconstruction. Consequently, the triggering of events that would pass the offline event selection is not fully efficient. The trigger efficiencies for \tauh candidates typically reach a plateau of between $85\%$ and $95\%$ when above the trigger \pt thresholds \cite{Sirunyan_2018}.
 
-Several MC generators are employed to produce simulated samples of signal and background events. The MADGRAPH \cite{Alwall2011} matrix element generator is used for Z+jets, W+jets, $\mathrm{t\Bar{t}}$+jets and diboson production. To increase the number of simulated Z+jets and W+jets events passing the most signal-sensitive category selections, additional samples are generated with fixed jet multiplicity in the matrix element for up to four jets. These are combined with the inclusive samples by weighting events to maintain the cross-section ratios between jet multiplicity bins. The POWHEG \cite{Alioli2010} generator is used for single top-quark production. The SM gluon-gluon fusion and VBF production modes of the Higgs boson are also simulated with POWHEG at NLO precision. Production in association with a vector boson and both MSSM modes are provided by PYTHIA \cite{SJOSTRAND2008852}. All samples utilise PYTHIA for parton showering and hadronisation and TAUOLA \cite{JADACH1991275} for tau decays. Additional proton-proton interactions are also simulated with PYTHIA and added to these events. The events are then weighted according to the number of these pileup interactions to match the distribution expected in data.
+Several MC generators are employed to produce simulated samples of signal and background events. The MADGRAPH \cite{Alwall2011} matrix element generator is used for Z+jets, W+jets, $\mathrm{t\Bar{t}}$+jets and diboson production. To increase the number of simulated Z+jets and W+jets events passing the most signal-sensitive category selections, additional samples are generated with fixed jet multiplicity in the matrix element for up to four jets. These are combined with the inclusive samples by weighting events to maintain the cross-section ratios between jet multiplicity bins. The POWHEG \cite{Alioli2010} generator is used for single top-quark production. The SM gluon-gluon fusion and VBF production modes of the Higgs boson are also simulated with POWHEG at NLO precision. Production in association with a vector boson and both MSSM modes are provided by PYTHIA \cite{SJOSTRAND2008852}. All samples utilise PYTHIA for parton showering and hadronisation and TAUOLA \cite{JADACH1991275} for tau decays. Additional proton-proton interactions are also simulated with PYTHIA and added to these events. The events are then weighted according to the number of these pileup interactions to match the distribution expected in data, as detailed in section \ref{sec:MC_corr}.
 
 \section{Event selection}
 \label{sec:analysis_eventsel}
 
-This section describes the baseline event selection and categorisation, starting with an overview of the framework partially developed and used for the selection. This is followed by a description of the di-\tauh selection, which is important for reducing the contamination from backgrounds, including lepton vetoes. Finally, the jet selection allowing to later categorise the events is presented.
+This section describes the baseline event selection, starting with an overview of the framework partially developed and used for the selection. This is followed by a description of the selection, which is important for reducing the contamination from backgrounds, including lepton vetoes. Finally, the jet selection allowing to later categorise the events is presented.
 
 \subsection{Framework : HEPPy}
 \label{sec:heppy}
 
-HEPPy is a python event processing framework for high energy physics based on ROOT. The inputs used in this analysis follow the MINIAOD format of the CMS collaboration. This format was design to hold the event-based information needed by most analyses. Therefore, this generic format holds a lot of information, i.e. the lists of reconstructed physics objects, making it quite important in size, leading to sizeable computing times. HEPPy's role is then to select events by rejecting along criteria that are defined in the next sections, while also trimming the non-analysis specific information, leading to a new light-weight format.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Images/HEPPY_diagram.pdf}
+    \caption{Diagram of the selection flow implemented in HEPPy. Every box represents a module, called analyzer. Green analyzers create collections in the event instance by wrapping objects from the input in dedicated python classes. Yellow analyzers modify or compute a variable of the event. Red analyzers filter events, meaning if their condition is not satisfied, the chain stops, then starts again with the next event. Finally, the blue highlighted section is the only part of the sequence that is specific to the \tauh\tauh channel. The rest of the sequence is usable by other channels, like the semileptonic channels $e\tauh$ and $\mu\tauh$, and has been successfully tested.}
+    \label{fig:HEPPY}
+\end{figure}
 
-HEPPy is an analyzer-based framework, meaning all the processing will be done in a feed-forward workflow with each step being encoded into a module called analyzer. Since most physics objects retrieved from the ROOT files will be wrapped in python classes, allowing definition of useful methods and compatibility, most analyzer of this workflow will work by manipulating the defined physics objects to either create new useful variables, select subsets of objects or reject events based on specific criteria. Most of this analysis has seen new sets of analyzers created in order to provide as much modularity and clarity as possible so that future analysis would be able to easily and promptly create this selection step.
-
-Another advantage of the framework is the newly-created ability to easily set the output format. For this analysis, the chosen format is a simple ROOT tree with each variable having a specific name, in order to easily perform comparison with other groups version of this selection step.
-
-\subsection{Di-\tauh selections}
-
-First, each considered \tauh should have :
+HEPPy is a python event processing framework for high energy physics based on ROOT. The inputs used in this analysis follow the MINIAOD format of the CMS collaboration. This format was design to hold the event-based information needed by most analyses. Therefore, the input files hold a lot of information, i.e. the lists of reconstructed physics objects, making it quite important in size, leading to sizeable computing times. HEPPy's role is then to select events by rejecting along criteria that are defined in the next sections, while also trimming the non-analysis specific information, leading to a new light-weight format. HEPPy is an analyzer-based framework, meaning all the processing will be done in a feed-forward workflow with each step being encoded into a module called analyzer. Since most physics objects retrieved from the ROOT files will be wrapped in python classes, allowing definition of useful methods and compatibility, most analyzer of this workflow will work by manipulating the defined physics objects to either create new useful variables, select subsets of objects or reject events based on specific criteria. Most of this analysis has seen new sets of analyzers created in order to provide as much modularity and clarity as possible so that future analysis would be able to easily and promptly create this selection step. A diagram of the workflow developed in HEPPy is detailed in figure \ref{fig:HEPPY}. In order of appearance of the workflow, the role of the analyzers are: 
 \begin{itemize}
+    \item JSON: Only active when running on real data, rejects the events that have not been validated by the CMS collaboration.
+    \item SkimCount: counts the number of simulated events pres-selections for renormalisation purposes later.
+    \item Vertex/Tau/Muon/Electron: creates collection of the respective objects, wrap them in HEPPy classes, adding useful methods and attributes.
+    \item Genmatcher: Only active when running on simulation, matches reconstructed hadronic taus with generator-level particles, as described in the next section.
+    \item Tau energy scaler: only active when running on simulation, scales the energy of the taus, depending on their gen-level match. Stores the difference for eventual propagation to the \MET.
+    \item Tau selector: first analyzer of the channel specific sequence, selects \tauh which have:
+    \begin{itemize}
     \item $\pt > 40 \mathrm{GeV}$ and $|\eta| < 2.1$.
-    \item Pass the PF decay mode finding discriminator detailed in section \ref{sec:std_tau_id}.
+    \item Passed the PF decay mode finding discriminator detailed in section \ref{sec:std_tau_id}.
     \item $d_z$ between leading charged track and first primary vertex $d_z < 0.2 \mathrm{cm}$.
-    \item Pass the very loose working point of the anti-electron discriminator and the loose working point of the anti-muon discriminator. detailed in section \ref{sec:std_tau_id}.
-\end{itemize}
-Then a \tauh\tauh pairs are selected if:
-\begin{itemize}
+    \item Passed the very loose working point of the anti-electron discriminator and the loose working point of the anti-muon discriminator. detailed in section \ref{sec:std_tau_id}.
+    \end{itemize}
+    \item Double tau filter: filters the event if less than two \tauh fulfilling the requirements have been found.
+    \item Di-lepton builder: creates all possible combinations of two \tauh that have passed the selections, provided:
+    \begin{itemize}
     \item the pair is separated by $\Delta R > 0.5$.
     \item the pair has opposite-sign electric charges.
     \item the pair matches the trigger objects associated with one of the triggers within $\Delta R > 0.5$.
+    \end{itemize}
+    \item Di-lepton sorter: after those requirements there can be more than one possible candidate pair. In this case the pair with the \tauh of highest \pt is chosen. If two pairs have the same \pt for their leading \tauh, the pair which highest \pt \tauh is most isolated is chosen. If there is still two pairs, the same criteria are then used on the second \tauh.
+    \item Trigger: retrieve the trigger information
+    \item Trigger matcher: checks if the selected \tauh pair matches the trigger information
+    \item METFilter: retireves several filters have been implemented by the CMS collaboration to reject events in order to mitigate several \MET reconstruction issues
+    \item Gen analyzer: Only active when running on simulation, retrieves more generator level information in order to compute several weights, i.e the top quark and Drell-Yan \pt reweighting that are detailed in the next section.
+    \item Pileup analyzer: Only active when running on simulation, retrieves pilup information and computes pileup weights, as detailed in the next section.
+    \item Jet: creates collection of jets, wrap them in a HEPPy classe, adding useful methods and attributes. Also applies the jet energy corrections as detailed in next section, while also storing the information for propagation to the \MET.
+    \item Jet sorter: sorts the jet collection by \pt.
+    \item Jet selector: jets are required to have corrected $\pt > 30 \mathrm{GeV}$ and $|\eta| < 4.7$, and must pass identification criteria to reject fakes that originate from detector noise or pileup interactions.
+    \item Jet cleaner: jets that overlap with either of the selected leptons are discarded.
+    \item b-jet tagger: applies the b-tagging scheme including the promote-demote method detailed in the next section.
+    \item b-jet selector: creates a b-tagged jet collection from all jets passing the b-tagging scheme and of $|\eta|<2.5$.
+    \item MET: \MET focused analyzer, retrieves \MET of the event and applies all needed corrections and adjustment for previously corrected objects.
+    \item extra muon(electron)/cleaners: checks the muon(electron) collections for quality criteria and rejects event with quality extra leptons, in order to avoid overlap of different channels, and to reduce background contribution.
+    \item TauID/trigger weighters: compute and apply the respective correction weights detailed in the next section.
+    \item Output producer: Gathers all desired retrieved/computed information and stores it in a flexible ROOT format for easy synchronisation with other analyses groups.
 \end{itemize}
 
-After those requirements there can be more than one possible candidate pair. In this case the pair with the most isolated \tauh is chosen. If two pairs have the same isolation on their most isolated \tauh, the pair which most isolated \tauh which has the highest \pt is chosen. If there is still two pairs, the same criteria are then used on the second \tauh.
+Indeed synchronisation at this stage is usually performed. For example a prototype of this sequence was used to synchronise with the other groups for the previous MSSM search for a heavy Higgs bosons \cite{Aaboud2018} and helped successfully figure out tweaks and upgrades in other group codes, and vice-versa. For this 2017 data analysis, a new synchronisation has been successfully performed.
 
-Jets are clustered from PF candidates as described in section \ref{sec:jet_clustering}. Those which overlap with either of the selected leptons are discarded. Jets are required to have corrected $\pt > 30 \mathrm{GeV}$ and $|\eta| < 4.7$, and must pass identification criteria to reject fakes that originate from detector noise or pileup interactions. The selection or veto of events containing b-tagged jets is part of the category definitions, as a b-tag category targets the production of a Higgs boson in association with b jets.
-
-
-\subsection{Event filters}
-
-All events are required to contain at least one well reconstructed vertex passing the standard quality criteria listed in chapter \ref{sec:CMSchapter}. The higher rate of pileup interactions in the 2017 dataset has the potential to degrade the performance of objects reconstruction and selection. This motivates the use of more sophisticated pileup mitigation techniques.
-
-In order to avoid overlap with other potential channel involving leptons, and also to reduce specific backgrounds, events are vetoed in the the presence of additional electrons or muons.
-
-Several filters have been implemented by the CMS collaboration to reject events in order to mitigate several \met reconstruction problems:
-\begin{itemize}
-    \item primary vertex filter
-    \item beam halo filter
-    \item HBHE noise filter
-    \item HBHEiso noise filter
-    \item eebadSC noise filter
-    \item ECAL TP filter
-    \item badMuon filter
-    \item badCharged hadron filter
-    \item ECAL bad calibration filter
-\end{itemize}
 
 \section{Background estimation methods}
 \label{sec:analysis_background_methods}
@@ -73,8 +76,9 @@ Several filters have been implemented by the CMS collaboration to reject events 
 For all processes apart from QCD multijets events, appropriate samples generated by MC simulation are available. In this analysis, these are still used even though in the final analysis model, a large part is described by data driven methods, which improves the data/MC agreement and reduces the involved systematic uncertainties: $\mathrm{Z} \rightarrow \tau\tau$ embedded samples replace all simulated events with two genuine tau lepton decays involved. All events where at least one of the tau candidates is faked by a jet are described by the fake factor method.
 
 \subsection{Monte-Carlo simulation}
+\label{sec:MC_corr}
 
-Monte-carlo simulated events (MC) are meant to provide an estimation of events for processes that are not covered by the data-driven techniques. Since those techniques cover some parts of samples, it is necessary to be able to discern MC events that is supposed to be kept. Therefore the reconstructed particles have to be matched to the generator particles available in the simulated samples. This is called generator matching. The exact definitions used for each type can be found in table \ref{tab:mc_matching}.
+Monte-carlo simulated events (MC) are meant to provide an estimation of events for processes that are not covered by the data-driven techniques. Since those techniques cover only specific parts of samples, it is necessary to be able to discern the MC events that are relevant. Therefore the reconstructed \tauh have to be matched to the generator particles available in the simulated samples. This is called generator matching. The exact definitions used for each type can be found in table \ref{tab:mc_matching}.
 
 \begin{table}[]
     \centering
@@ -90,7 +94,7 @@ Monte-carlo simulated events (MC) are meant to provide an estimation of events f
         \hline
         4 & $\tau \rightarrow \mu$ & $|\mathrm{pdgID}|==13$, $\pt > 8 \mathrm{GeV}$, status flag IsDirectPromptTauDecayProduct\\
         \hline
-        5 & $\tau \rightarrow \tauh$ & Gen-tau jet, rebuilt by summing the 4-momenta of the visible gen tau decay products, excluding electrons and muons. Only the products of generator-level taus with status flag IsPrompt are considered. The \pt of the gen tau jet should be larger than 15 GeV \\
+        5 & $\tau \rightarrow \tauh$ & Gen-tau jet \\
         \hline
         6 & Jet/pu fake & Anything that does not fall into any of the above categories \\
         \hline
@@ -99,15 +103,15 @@ Monte-carlo simulated events (MC) are meant to provide an estimation of events f
     \label{tab:mc_matching}
 \end{table}
 
-The simulated background samples are split into three parts labeled T,J,L. T corresponds to events with gen match = 3, 4, 5 for both tau candidates. J corresponds to events with gen match = 6 for at least one of the hadronic tau candidates. L corresponds to all remaining events. In this analysis the T part of the background samples is replaced by the embedded samples and the J part is covered by the fake factor method. The remaining part is then covered by simulation.
+The simulated background samples are split into three parts labeled T, J and L. T corresponds to events with gen match = 3, 4, 5 for both tau candidates. J corresponds to events with gen match = 6 for at least one of the hadronic tau candidates. L corresponds to all remaining events. In this analysis the T part of the background samples is replaced by the embedded samples and the J part is covered by the fake factor method. The remaining part is then covered by simulation.
 
-In order to mitigate the differences between data and simulations, several measurements have provided corrections that are applied in the analysis. Which are :
+In order to mitigate the differences between data and simulations, several measurements have provided corrections that are applied in the analysis. Which are:
 
 \paragraph{Pileup reweighting} In order to better fit the pileup distribution in recorded data a pileup reweighting is applied to MC events to match the data distribution.
 
-\paragraph{EE noise jets removal} Due to noise in the ECAL endcaps, all jets in the covered pseudo-rapidity of less than $50 \mathrm{GeV}$ are removed in both data and MC. The removal of the jet is also propagated to the \met.
+\paragraph{EE noise jets removal} Due to noise in the ECAL endcaps, all jets in the covered pseudo-rapidity of less than $50 \mathrm{GeV}$ are removed in both data and MC. The removal of the jet is also propagated to the \MET.
 
-\paragraph{Tau ID/isolation and trigger efficiency} Data/MC scale factors (SF) measured in $\mathrm{Z}\rightarrow\tau\tau$ events with a maximum likelihood fit using the invariant mass of the tau and muon candidates as an observable. The SF is given for product of tau reconstruction and ID efficiency. For the embedded samples this scale factor is measured using a similar procedure. An additional correction is applied for embedded taus to correct for biases due to higher tracking efficiencies in embedded events than data. Trigger scale factors are measured using a tag and probe method. The efficiencies of the triggers are measured for data and MC and then the scale factor is computed as:
+\paragraph{Tau ID/isolation and trigger efficiency} Data/MC scale factors (SF) measured in $\mathrm{Z}\rightarrow\tau\tau$ events with a maximum likelihood fit using the invariant mass of the tau and muon candidates as an observable are used. The SF is given for product of tau reconstruction and ID efficiency. For the embedded samples this scale factor is measured using a similar procedure. An additional correction is applied for embedded taus to correct for biases due to higher tracking efficiencies in embedded events than data. Trigger scale factors are measured using a tag and probe method. The efficiencies of the triggers are measured for data and MC and then the scale factor is computed as:
 \begin{equation}
     SF = \frac{\epsilon(\mathrm{data})}{\epsilon(\mathrm{MC})} \mend
 \end{equation}
@@ -116,7 +120,7 @@ The scale factors for the double-tau trigger are measured in bins of the tau \pt
     SF = \frac{\epsilon(\mathrm{data})}{\epsilon(\mathrm{embedding})} \mend
 \end{equation}
 
-\paragraph{Tau energy scale} The tau energy scale was measured using as observables the tau mass and visible mass of the invariant system of the muon and the hadronic tau decay. 
+\paragraph{Tau energy scale} The tau energy scale was measured using as observables the tau mass and visible mass of the invariant system of the muon and the hadronic tau decay in $\mathrm{Z}\rightarrow\tau_{\mu}\tauh$ events. 
 
 \paragraph{Jet energy} On top of the corrections detailed in section \ref{sec:jet_clustering}, corrections derived by the CMS collaborations are also applied \cite{collaboration_2011}.
 
@@ -124,14 +128,14 @@ The scale factors for the double-tau trigger are measured in bins of the tau \pt
 
 \paragraph{Lepton to tau fake energy scale} A correction to the central values of the \tauh energies for \tauh candidates originating from electron (muon) fakes is applied for the 1-prong and 1-prong+1-\pizero decay-modes. 
 
-\paragraph{Recoil corrections} Recoil corrections are applied to correct for the mismodeling of \met in the simulated samples of Drell-Yan, W+Jets and Higgs production. The corrections are measured in $\mathrm{Z} \rightarrow \mu\mu$ events and performed on the variable defined as the vectorial difference of the measured missing transverse momentum and total transverse momentum of neutrinos originating from the decay of Z, W or Higgs boson. The corrections are propagated to \met using
+\paragraph{Recoil corrections} Recoil corrections are applied to correct for the mismodeling of \MET in the simulated samples of Drell-Yan, W+Jets and Higgs production. The corrections are measured in $\mathrm{Z} \rightarrow \mu\mu$ events and performed on the variable defined as the vectorial difference of the measured missing transverse momentum and total transverse momentum of neutrinos originating from the decay of Z, W or Higgs boson. The corrections are propagated to \MET using
 \begin{equation}
-    \Vec{U} = \met - \Vec{p}_{T,\nu} \mend
+    \Vec{U} = \Vec{\MET} - \Vec{p}_{T,\nu} \mend
 \end{equation}
 
-\paragraph{Top quark transverse momentum reweighting} The modeling of the $t\Bar{t}$ background is improved by reweighting the p T spectrum of the top quarks.
+\paragraph{Top quark transverse momentum reweighting} The modeling of the $t\Bar{t}$ background is improved by reweighting the \pt spectrum of the top quarks.
 
-\paragraph{b-tagging efficiency} The efficiency for the tagging of b jets and the mistagging rate for light-flavour jets has been measured in both data and simulation. Differences are corrected for in the simulation through the application of effciency and mistagging scale factors. The values of these factors and a description of the methods used to determine them can be found in \cite{Sirunyan_2018}. The simulation is corrected by randomly reclassifying a fraction of tagged jets as non-tagged, or vice versa, as necessary to result in the correct average efficiency. The promotion or demotion probabilities for each jet are defined as
+\paragraph{b-tagging efficiency} The efficiency for the tagging of b jets and the mistagging rate for light-flavour jets has been measured in both data and simulation. Differences are corrected for in the simulation through the application of efficiency and mistagging scale factors. The values of these factors and a description of the methods used to determine them can be found in \cite{Sirunyan_2018}. The simulation is corrected by randomly reclassifying a fraction of tagged jets as non-tagged, or vice versa, as necessary to result in the correct average efficiency. The promotion or demotion probabilities for each jet are defined as
 \begin{equation*}
     P(\mathrm{demote}) = 1 - SF \msep when SF < 1
 \end{equation*}
@@ -150,7 +154,7 @@ In this analysis, embedded samples are used and replace the MC simulated samples
 
 The fake factor method (FF) can be used to predict all background sources with gluon- or quark-initiated jets misidentified as hadronic $\tau$ decays. The method is based on measuring two numbers: the number of events where jets pass the nominal \tauh identification (ID) criteria (called isolated), corresponding to the signal region selection of the corresponding analysis, and the number of events where jets satisfy a set of loose ID criteria, but fail the nominal \tauh ID criteria (inverted isolation, referred to as “anti-isolated” in the following). The FF is defined as the ratio of the two numbers:
 \begin{equation}
-    FF = \frac{\text{passes preselection and passes the nominal WP of the MVA-based \tauh ID discriminant}}{\text{passes preselection and fails nominal WP of the MVA-based \tauh ID discriminant}}
+    FF = \frac{\text{passes preselection and passes MVA-based \tauh ID discriminant WP}}{\text{passes preselection and fails MVA-based \tauh ID discriminant WP}}
 \end{equation}
 and is applied as a weight to events which pass the corresponding signal region selection except that the events are required to contain \tauh candidates satisfying the loose preselection criteria, but failing the nominal \tauh ID criteria (application region). The fake factor is estimated as a function of the jet multiplicity (0 or $\geq$ 1). The \pt dependency is fit. This is done separately for the QCD multi-jet, the W+jets and the $t\Bar{t}$ background.
 
@@ -163,20 +167,20 @@ The fake factor applied to a given event in the application region is a weighted
 \section{Systematic uncertainties}
 \label{sec:analysis_systematics}
 
-This section describes the sources of uncertainty that affect the signal and background predictions of the \mttot distributions. The experimental uncertainties typically concern either object selection or the methods to estimate the backgrounds described in the previous section. The former are more important for the signal prediction, whereas the latter have a large effect on the background estimation. Theoretical uncertainties affect the predictions of both signal and background but are larger for the signal. Most uncertainties affect only the rate of signal, but a smaller number may affect both the shape and rate. A summary of all sources of uncertainty and the processes they affect is given in table \ref{tab:systematics}. Throughout this section the values of uncertainties given as percentages refer directly to variations in the predicted signal and background yields, unless otherwise specified.
+This section describes the sources of uncertainty that affect the signal and background predictions of the \mttot distributions. The experimental uncertainties typically concern either object selection or the methods to estimate the backgrounds described in the previous section, and are inherent to their respective measurement. The object selection are more important for the signal prediction, whereas the estimation methods have a large effect on the background estimation. Theoretical uncertainties affect the predictions of both signal and background but are larger for the signal. Most uncertainties affect only the rate of signal, but a smaller number may affect both the shape and rate. Throughout this section the values of uncertainties given as percentages refer directly to variations in the predicted signal and background yields, unless otherwise specified.
 
 \subsection{Shape uncertainties}
-The following uncertainties cause variations in the shapes of the process templates which is realized via event-wise application of the respective shifts.
+The following uncertainties cause variations in the shapes of the process templates which are realized via event-wise application of the respective shifts.
 
-\paragraph{Tau energy scale} Shape uncertainties are applied for each decay mode. In the embedded samples we have hybrid events where the simulated taus might be mixed with calorimeter deposits remaining from the muon cleaning. For this reason, the tau energy scale for embedded samples is split into two parts where $50\%$ are fully correlated with the uncertainty for fully simulated samples and $50\%$ are uncorrelated.
+\paragraph{Tau energy scale} Shape uncertainties are applied for each decay mode. In the embedded samples we have hybrid events where the simulated taus might be mixed with calorimeter deposits remaining from the muon cleaning. For this reason, the tau energy scale uncertainties for embedded samples are split into two parts where $50\%$ are fully correlated with the uncertainty for fully simulated samples and $50\%$ are uncorrelated.
 
 \paragraph{Jet energy scale} In general, the CMS collaboration derives uncertainties on the jet energy scale from 28 sources and combines them in a single uncertainty with one nuisance parameter. This uncertainty has turned out to be overconstrained in the previous analysis and during the preparations of this analysis. For this reason the uncertainty is split into several parts, not to all 27 sources, because this would result in a large technical effort. Instead, the sources are grouped according to the affected detector regions.
 
 \paragraph{Lepton to \tauh fake energy scale} Uncertainty shifts are applied to the \pt of lepton to \tauh fakes in MC samples uncorrelated between decay modes.
 
-\paragraph{\met unclustered energy uncertainty} The \met unclustered energy uncertainty is applied to all MC processes that do not have recoil correction applied.
+\paragraph{\MET unclustered energy uncertainty} The \MET unclustered energy uncertainty is applied to all MC processes that do not have recoil correction applied.
 
-\paragraph{\met recoil correction uncertainties} For all MC processes that have recoil correction, uncertainties determined by varying the hadronic response and its resolution within the uncertainties determined during the computation of the recoil corrections.
+\paragraph{\MET recoil correction uncertainties} For all MC processes that have recoil correction, uncertainties determined by varying the hadronic response and its resolution within the uncertainties determined during the computation of the recoil corrections.
 
 \paragraph{Top \pt reweighting} Uncertainty between no and twice the correction on the re-weighting applied to $t\Bar{t}$ events.
 

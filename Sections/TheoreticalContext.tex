@@ -17,7 +17,7 @@ The Standard Model (SM) is the prevalent theoretical framework that describes fu
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{Images/SM_zoo.png}
-    \caption{Overview of the standard model content in term of particles and their characteristics.}
+    \caption{Overview of the standard model content in term of particles and their characteristics from \cite{SMschema}.}
     \label{fig:SM}
 \end{figure}
 
@@ -167,21 +167,20 @@ At low energies, two additional forces are known : the electromagnetic and weak 
 The electromagnetic force was successfully quantized by Schwinger, Tomonaga, Feynman and Dyso, leading to the birth of Quantum Electrodynamics (QED) \cite{PhysRev.80.440,PhysRev.76.749,PhysRev.76.769,PhysRev.74.1439,PhysRev.73.416,10.1143/PTP.1.27} . It was described as an interaction of two fermions with the mediation of a boson, the photon ($\gamma$). QED was gauge invariant and overall renormalizable. These features pushed the physics community to consider gauge symmetries as fundamental symmetries of nature, and to try to formalize the other forces in the context of a gauge theory. However, these attempts failed due to the weak interaction's short range and the fact that it was not renormalizable.
 
 To overcome this, Schwinger proposed a description of the weak interaction analogue to the one of the electromagnetic force \cite{SCHWINGER1957407}. The weak force would not be a short-range interaction of 4 fermions but a long-range interaction of two fermions mediated by a charged vector boson, called $W^{\pm}$ \ref{fig:melectroweak}. The similarities between QED and this weak force, and the root of the gauge invariance, led to the hope of unification of the two forces. Many attempts were done in the following years with little success, though small advances were achieved. One such advance was parity (P-symmetry) violation, meaning a behavioral difference of chiral components. This could be achieved by a Vector-Axial theory (V-A theory) \cite{PhysRev.109.193,PhysRev.109.1860.2}, in which QED would play the vectorial role.
-
 \begin{figure}
-    \centering
-    \begin{subfigure}{.5\textwidth}
-    \label{fig:fermi_int}
-    \centering
-    
-    \end{subfigure}
-    \begin{subfigure}{.5\textwidth}
-    \label{fig:melectroweak}
-    \centering
-    
-    \end{subfigure}
-    \caption{Caption}
-    \label{fig:etomununu}
+\centering
+\begin{subfigure}[b]{0.5\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/FF_method.png}
+  \caption{\label{fig:fermi_int}}
+\end{subfigure}%
+\begin{subfigure}[b]{0.5\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/FF_values.png}
+  \caption{\label{fig:melectroweak}}
+\end{subfigure}
+\caption{Feynman diagrams for the muon decay as \subref{fig:fermi_int} a Fermi's interaction, without a propagator and \subref{fig:melectroweak} a Yang-Mills theory mediated by a $\mathrm{W}^{-}$ boson.}
+\label{fig:etomununu}
 \end{figure}
 
 In 1961, Sheldon Glashow proposed a $SU(2) \times U(1)$ Yang-Mills theory \cite{GLASHOW1961579} to unify both interaction.  The proposal defined two fields, $B_{\mu}$ and $W_{\mu}^a$, with four fundamental bosons, $B$ and $W^i$. The observable features, like the vector bosons $W^{\pm}$ and $Z$, were actually a linear combination of both fields with a mixing angle called $\theta_W$. But the model had several flaws and was ignored at the time.
@@ -236,6 +235,7 @@ The interaction with fermions depends on the chiral properties and the structure
 
 \begin{table}[h]
     \centering
+    \caption{Values of the electroweak charges (weak isospin $I_3$, hypercharge $Y$ and electromagnetic charge $Q$) for the fermions, according to their type and chirality.}
     \resizebox{\textwidth}{!}{
     \begin{tabular}{c c | c c | c c | c c | c c}
         \multicolumn{2}{c}{\multirow{2}{*}{\textbf{Interaction}}} & \multicolumn{4}{c}{\textbf{Left chirality} $\psi_L$} & \multicolumn{4}{c}{\textbf{Right chirality} $\psi_R$} \\
@@ -248,7 +248,6 @@ The interaction with fermions depends on the chiral properties and the structure
          EM Charge ($Q$) & $U(1)_Q$ & $+2/3$ & $-1/3$ & $0$ & $-1$ & $+2/3$ & $-1/3$ & $0$ & $-1$ \\
          \hline
     \end{tabular}}
-    \caption{Values of the electroweak charges (weak isospin $I_3$, hypercharge $Y$ and electromagnetic charge $Q$) for the fermions, according to their type and chirality.}
     \label{tab:hypercharge}
 \end{table}
 
@@ -448,6 +447,7 @@ and the experimental value of the nineteen free parameters of the SM are in Tabl
 
 \begin{table}[]
     \centering
+    \caption{Experimental value of the 19 free parameters of the standard model.}
     \begin{tabular}{l c r c}
         \hline
         \textbf{Name} & \textbf{Symbol} & \textbf{Value} & \\
@@ -465,14 +465,13 @@ and the experimental value of the nineteen free parameters of the SM are in Tabl
         CKM II-III mixing angle & $\theta_{23}$ & $(2.35 \pm 0.09)$\degree & \\
         CKM I-III mixing angle & $\theta_{13}$ & $(0.20 \pm 0.04)$\degree & \\
         CKM CP-violating phase & $\delta_{\mathrm{CKM}}$ & $(70 \pm 3)$\degree & \\
-        $U(1)_{Y}$ gauge coupling & g_{B} & $0.34970 \pm 0.00019$ & \\
-        $SU(2)_{L}$ gauge coupling & g_{W} & $0.65295 \pm 0.00012$ & \\
-        $SU(3)_{C}$ gauge coupling & g_{s} & $0.1182 \pm 0.00012$ & \\
+        $U(1)_{Y}$ gauge coupling & $g_{B}$ & $0.34970 \pm 0.00019$ & \\
+        $SU(2)_{L}$ gauge coupling & $g_{W}$ & $0.65295 \pm 0.00012$ & \\
+        $SU(3)_{C}$ gauge coupling & $g_{s}$ & $0.1182 \pm 0.00012$ & \\
         QCD vacuum angle & \theta_{\mathrm{QCD}} & $< 10^{-10}$ & $\sim 0$ \\
         Higgs v.e.v. & $v$ & $246 \pm (6\times 10^{-5})$ & GeV \\
         Higgs boson mass & $m_H$ & $125.09 \pm 0.24$ & GeV 
     \end{tabular}
-    \caption{Experimental value of the 19 free parameters of the standard model.}
     \label{tab:SMparams}
 \end{table}
 
@@ -509,6 +508,7 @@ Since SUSY is a general framework which depends on many unknown parameters, it c
 
 \begin{table}[]
     \centering
+    \caption{Relations between the SM particles and their superpartners, before the EW symmetry-breaking, according to the MSSM. In the MSSM, the ordinary SM Higgs sector requires four additional Higgs bosons $H$, $A$ and $H^{\pm}$ in addition to the SM Higgs, called $h$ here.}
     \begin{tabular}{c c c c | c c c c}
         \hline
          \multicolumn{4}{c}{\textbf{SM particle} (R = +1)} & \multicolumn{4}{c}{\textbf{Superpartner} (R = -1)} \\
@@ -525,7 +525,6 @@ Since SUSY is a general framework which depends on many unknown parameters, it c
           & & & $H^{\pm}$, A & $\Tilde{H}^{\pm}$, $\Tilde{A}$ & & & \\ 
           \hline
     \end{tabular}
-    \caption{Relations between the SM particles and their superpartners, before the EW symmetry-breaking, according to the MSSM. In the MSSM, the ordinary SM Higgs sector requires four additional Higgs bosons $H$, $A$ and $H^{\pm}$ in addition to the SM Higgs, called $h$ here.}
     \label{tab:superpartners}
 \end{table}
 
@@ -573,6 +572,7 @@ The Yukawa couplings expressed in terms of the $\alpha$ and $\beta$ parameters c
 
 \begin{table}[]
     \centering
+    \caption{Relation of the Yukawa coupling parameters ($\lambda_ii$) with respect to the SM coupling ($\lambda_{SM}$) for the neutral MSSM Higgs bosons ($h$, $H$ and $A$) to the vector bosons ($\lambda_{VV}$), and to the different fermions, split in $u$-type (only quarks, $\lambda_{uu}$) and $d$-type (quarks and electron type $\lambda_{dd,ll}$) as a function of the angles $\alpha$ and $\beta$.}
     \begin{tabular}{c c c c}
         $\lambda_{ij}$ / $\lambda_{SM}$ & $\lambda_{VV}$ & $\lambda_{uu}$ & $\lambda_{dd,ll}$ \\
         \hline
@@ -581,7 +581,6 @@ The Yukawa couplings expressed in terms of the $\alpha$ and $\beta$ parameters c
         A & 0 & $\mathrm{cot\beta}$ & $\mathrm{tan\beta}$ \\
         \hline
     \end{tabular}
-    \caption{Relation of the Yukawa coupling parameters ($\lambda_ii$) with respect to the SM coupling ($\lambda_{SM}$) for the neutral MSSM Higgs bosons ($h$, $H$ and $A$) to the vector bosons ($\lambda_{VV}$), and to the different fermions, split in $u$-type (only quarks, $\lambda_{uu}$) and $d$-type (quarks and electron type $\lambda_{dd,ll}$) as a function of the angles $\alpha$ and $\beta$.}
     \label{tab:yukawaMSSM}
 \end{table}
 
@@ -720,6 +719,7 @@ Those different decays can lead many different final states of $H,A \rightarrow 
 
 \begin{table}[]
     \centering
+    \caption{Branching fractions of the main (negative) $\tau$ decay modes. The generic symbol $h^-$ represents a charged hadron, pion or kaon. In some cases, the decay products arise from an intermediate mesonic resonance.}
     \begin{tabular}{l c c}
         \hline
          Decay mode & Meson resonance & Branching fraction [\%] \\
@@ -737,6 +737,5 @@ Those different decays can lead many different final states of $H,A \rightarrow 
          All modes containing hadrons & & 64.8 \\
          \hline
     \end{tabular}
-    \caption{Branching fractions of the main (negative) $\tau$ decay modes. The generic symbol $h^-$ represents a charged hadron, pion or kaon. In some cases, the decay products arise from an intermediate mesonic resonance.}
     \label{tab:tau_decay_products}
 \end{table}

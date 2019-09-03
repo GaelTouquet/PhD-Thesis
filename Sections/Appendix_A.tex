@@ -1,3 +1,40 @@
-\textcolor{red}{The final sections of your thesis are the appendices. Each appendix should be lettered (A, B, etc.,) and should consist of detailed information that is interesting but not essential to the main thrust of your findings section.\\
-The appendices should be in the order that they are referred to in the main text. For instance, if Appendix A refers to something on page 25 and Appendix B refers to something on page 15, the appendices need to be re-lettered. This inconsistency occurs when text is moved around or inserted.)}
+
 \label{appendixA}
+
+This appendix covers mathematical definitions not included in Chapter \ref{sec:TheoryChapter}.
+
+\paragraph{Gama matrices} - $\gamma^{i}$
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c c}
+        $\gamma^{0} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & -1 \end{pmatrix}$ & $\gamma^{1} = \begin{pmatrix} 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & -1 & 0 & 0 \\ -1 & 0 & 0 & 0 \end{pmatrix}$ \\
+        $\gamma^{2} = \begin{pmatrix} 0 & 0 & 0 & -i \\ 0 & 0 & i & 0 \\ 0 & i & 0 & 0 \\ -i & 0 & 0 & 0 \end{pmatrix}$ & $\gamma^{3} = \begin{pmatrix} 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & -1 \\ -1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \end{pmatrix}$
+    \end{tabular}
+\end{table}
+
+\paragraph{Chiral projector} - $\gamma^{5}$
+
+\begin{equation*}
+    \gamma^{5} = i \gamma^{0}\gamma^{1}\gamma^{2}\gamma^{3} = \begin{pmatrix} 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \end{pmatrix}
+\end{equation*}
+
+\paragraph{Pauli matrices} - The generators of $SU(2)$ are the $\tau_i$ matrices defined as $\tau_i = \frac{1}{2}\sigma_i$, with $\sigma_i$ as:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c c c}
+        $\sigma_{1} = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ &  $\sigma_{1} = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}$ & $\sigma_{1} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$
+    \end{tabular}
+\end{table}
+
+\paragraph{Gell-Mann matrices} - The generators of $SU(3)$ are the $T_i$ matrices defined as $T_i = \frac{1}{2}\lambda_i$, with $\lambda_i$ as:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c c c}
+        $\lambda_1 =  \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}$ & $\lambda_2 =  \begin{pmatrix} 0 & -i & 0 \\ i & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}$ & $\lambda_3 =  \begin{pmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 0 \end{pmatrix}$ \\
+        $\lambda_4 =  \begin{pmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 0 \end{pmatrix}$ & $\lambda_5 =  \begin{pmatrix} 0 & 0 & -i \\ 0 & 0 & 0 \\ i & 0 & 0 \end{pmatrix}$ & \\
+        $\lambda_6 =  \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}$ & $\lambda_7 =  \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & -i \\ 0 & i & 0 \end{pmatrix}$ & $\lambda_8 =  \frac{1}{\sqrt{3}}\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -2 \end{pmatrix}$
+    \end{tabular}
+\end{table}

@@ -87,24 +87,30 @@ Monte-carlo simulated events (MC) are meant to provide an estimation of the cont
 
 \begin{table}[]
     \centering
+    \caption{MC generator matching.}
     \begin{tabular}{|c|c|l|}
         \hline
         Value & Type & Generator level object properties \\
         \hline
-        1 & Prompt electron & $|\mathrm{pdgID}|==11$, $\pt > 8 \,\mathrm{GeV}$, status flag IsPrompt\\
+        \multirow{2}{*}{1} & \multirow{2}{*}{Prompt electron} & $|\mathrm{pdgID}|==11$, $\pt > 8 \,\mathrm{GeV}$,\\
+         & &  status flag IsPrompt \\
         \hline
-        2 & Prompt muon & $|\mathrm{pdgID}|==13$, $\pt > 8 \,\mathrm{GeV}$, status flag IsPrompt\\
+        \multirow{2}{*}{2} & \multirow{2}{*}{Prompt muon} & $|\mathrm{pdgID}|==13$, $\pt > 8 \,\mathrm{GeV}$, \\
+         & & status flag IsPrompt \\
         \hline
-        3 & $\tau \rightarrow e$ & $|\mathrm{pdgID}|==11$, $\pt > 8 \,\mathrm{GeV}$, status flag IsDirectPromptTauDecayProduct\\
+        \multirow{2}{*}{3} & \multirow{2}{*}{$\tau \rightarrow e$} & $|\mathrm{pdgID}|==11$, $\pt > 8 \,\mathrm{GeV}$,\\
+         & &  status flag IsDirectPromptTauDecayProduct \\
         \hline
-        4 & $\tau \rightarrow \mu$ & $|\mathrm{pdgID}|==13$, $\pt > 8 \,\mathrm{GeV}$, status flag IsDirectPromptTauDecayProduct\\
+        \multirow{2}{*}{4} & \multirow{2}{*}{$\tau \rightarrow \mu$} & $|\mathrm{pdgID}|==13$, $\pt > 8 \,\mathrm{GeV}$, \\
+         & & status flag IsDirectPromptTauDecayProduct \\
         \hline
-        5 & $\tau \rightarrow \tauh$ & Gen-tau jet \\
+        \multirow{2}{*}{5} & \multirow{2}{*}{$\tau \rightarrow \tauh$} & \multirow{2}{*}{Gen-tau jet} \\
+         & & \\
         \hline
-        6 & Jet/pu fake & Anything that does not fall into any of the above categories \\
+        \multirow{2}{*}{6} & \multirow{2}{*}{Jet/pu} fake & Anything that does not fall into \\
+         & &  any of the above categories \\
         \hline
     \end{tabular}
-    \caption{MC generator matching}
     \label{tab:mc_matching}
 \end{table}
 
@@ -226,7 +232,7 @@ The fake factor applied to a given event in the application region is a weighted
 \section{Systematic uncertainties}
 \label{sec:analysis_systematics}
 
-This section describes the sources of uncertainty that affect the signal and background predictions of the \mtot distributions in each category. The experimental uncertainties typically concern either object selection or the methods to estimate the backgrounds described in the previous section, and are inherent to their respective measurement. The object selection is more important for the signal prediction, whereas the estimation methods have a large effect on the background estimation. Theoretical uncertainties affect the predictions of both signal and simulated background but are larger for the signal. Uncertainties can affect only the rate of signal, but some may affect both the shape and rate of the distributions. Each source of uncertainty will give a free parameter, called nuisance parameter, in the background estimation fit described in the next section.
+This section describes the sources of uncertainty that affect the signal and background predictions of the \mttot distributions in each category. The experimental uncertainties typically concern either object selection or the methods to estimate the backgrounds described in the previous section, and are inherent to their respective measurement. The object selection is more important for the signal prediction, whereas the estimation methods have a large effect on the background estimation. Theoretical uncertainties affect the predictions of both signal and simulated background but are larger for the signal. Uncertainties can affect only the rate of signal, but some may affect both the shape and rate of the distributions. Each source of uncertainty will give a free parameter, called nuisance parameter, in the background estimation fit described in the next section.
 
 \subsection{Shape uncertainties}
 
@@ -325,33 +331,33 @@ A major advantage of the profile likelihood test statistic is that in the limit 
 
 The statistical interpretation in the MSSM includes the use of the profile likelihood ratio as a test statistic to compare background-only and signal-plus-background hypotheses. The maximum likelihood is found through a simultaneous fit to data distributions in both categories, defined by the presence or absence of b-tagged jet. As stated before, the variable \mttot is used as discriminating variable. Upper limits in this search are determined in two different ways. The first is in the \mhmax scenario, where limits on the parameter  $\mathrm{tan}\beta$ are determined as a function of \ma. The signal model includes the three neutral Higgs bosons h, H and A with masses and cross sections specified by the \ma and $\mathrm{tan}\beta$ values in question. The second context is for model-independent limits on the cross section of a single neutral Higgs boson, denoted $\Phi$, produced either through the gluon-gluon fusion or b-associated production mode and decaying to $\tauh\tauh$. Figure \ref{fig:control_plots} give the \mttot distributions for each category. The background expectation and uncertainties correspond to the result of the global maximum likelihood fit. The signal expectation is given for the \mhmax scenario with \ma $= 160$ GeV and tan $\beta = 8$.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{Images/2016MSSMmttot.png}
-    \caption{Distribution of \mttot in the global no b-tag (left) and b-tag (right) categories.}
-    \label{fig:control_plots}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\textwidth]{Images/2016MSSMmttot.png}
+%     \caption{Distribution of \mttot in the global no b-tag (left) and b-tag (right) categories.}
+%     \label{fig:control_plots}
+% \end{figure}
 
-A number of additional steps are needed to determine the \ma -  $\mathrm{tan}\beta$ limits. Signal samples are generated only for the set of \ma mass points to be tested, in the range $90$ GeV to $3200$ GeV. The step size between points increases with \ma to scale with the increasing \mttot resolution. At each \ma -  $\mathrm{tan}\beta$ hypothesis, the masses of the other two Higgs bosons are calculated using results from the Higgs Working Group \cite{Dittmaier:1318996}. In each event category, templates for the h and H are generated by a horizontal morphing \cite{READ1999357} between templates from the two samples
+A number of additional steps are needed to determine the \ma -  $\mathrm{tan}\beta$ limits. Signal samples are generated only for the set of \ma mass points to be tested, in the range $90$ to $3200$ GeV. The step size between points increases with \ma to scale with the worsening \mttot resolution. At each \ma -  $\mathrm{tan}\beta$ hypothesis, the masses of the other two Higgs bosons are calculated using results from the Higgs Working Group \cite{Dittmaier:1318996}. In each event category, templates for the h and H are generated by a horizontal morphing \cite{READ1999357} between templates from the two samples
 closest in mass. The category acceptance is similarly interpolated from the neighbouring mass
 points. All three templates are scaled by the appropriate cross sections and branching ratios and
-combined into a single template. The $95\%$ CL upper limit is determined for each point on the \ma -  $\mathrm{tan}\beta$ grid, with the signal strength parameter $\mu$ uniformly scaling the entire signal model. The limit in  $\mathrm{tan}\beta$ is then defined as the point on which this upper limit is found to occur at $\mu = 1.0$. Practically, this is determined by interpolation between the points either side of this threshold. Note that the SM Higgs boson is added to the non Higgs boson background processes.  This turns the likelihood ratio into a comparison between the MSSM and the SM Higgs sector hypotheses,and ensures a well defined problem even when the analysis becomes sensitive to the observed Higgs boson at $125\,\mathrm{GeV}$.
+combined into a single template. The $95\%$ CL upper limit is determined for each point on the \ma -  $\mathrm{tan}\beta$ grid, with the signal strength parameter $\mu$ uniformly scaling the entire signal model. The limit in  $\mathrm{tan}\beta$ is then defined as the point on which this upper limit is found to occur at $\mu = 1.0$. Practically, this is determined by interpolation between the points on either side of this threshold. Note that the SM Higgs boson is added to the background processes. This turns the likelihood ratio into a comparison between the MSSM and the SM Higgs sector hypotheses, and ensures a well defined problem even when the analysis becomes sensitive to the observed Higgs boson at $125\,\mathrm{GeV}$.
 
-Observed and expected limits for the MSSM $m_{\mathrm{h}}^{\mathrm{mod}+}$ and the hMSSM scenarios are given in figure \ref{fig:limits}.
+The observed and expected limits for the MSSM $m_{\mathrm{h}}^{\mathrm{mod}+}$ and the hMSSM scenarios are given in figure \ref{fig:limits}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{Images/MSSMlimits.png}
-    \caption{expected and observed $95\%$ CL exclusion contour (left) in the MSSM $m_{\mathrm{h}^{\mathrm{mod}+}}$ and (right) in the hMSSM scenarios. The expected median is shown as a dashed black line. The dark and bright gray bands indicate the 68 and 95 $\%$ confidence intervals for the variation of the expected exclusion. The observed exclusion contour is indicated by the coloured blue area. For the $m_{\mathrm{h}}^{\mathrm{mod}+}$ scenario, those parts of the parameter space, where $m_{\mathrm{h}}$ deviates by more than $\pm 3 \,\mathrm{GeV}$ from the mass of the observed Higgs boson at $125\,\mathrm{GeV}$ are indicated by a red hatched area.}
-    \label{fig:limits}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\textwidth]{Images/MSSMlimits.png}
+%     \caption{expected and observed $95\%$ CL exclusion contour (left) in the MSSM $m_{\mathrm{h}^{\mathrm{mod}+}}$ and (right) in the hMSSM scenarios. The expected median is shown as a dashed black line. The dark and bright gray bands indicate the 68 and 95 $\%$ confidence intervals for the variation of the expected exclusion. The observed exclusion contour is indicated by the coloured blue area. For the $m_{\mathrm{h}}^{\mathrm{mod}+}$ scenario, those parts of the parameter space, where $m_{\mathrm{h}}$ deviates by more than $\pm 3 \,\mathrm{GeV}$ from the mass of the observed Higgs boson at $125\,\mathrm{GeV}$ are indicated by a red hatched area.}
+%     \label{fig:limits}
+% \end{figure}
 
 Figure \ref{fig:xslimits} gives model-independent upper limits on the production of a single neutral Higgs boson with mass $m_{\Phi}$. The limits on the cross section times branching fraction, $\sigma\times B(\Phi\rightarrow\tauh\tauh)$, are determined individually for gluon-gluon fusion and b-associated production. In the fit to extract gluon-gluon fusion limits the b-associated contribution is allowed to float freely, and vice versa. This is required as neither the no b-tag or b-tag categories are completely pure in one production mode, and this avoids the need to impose any assumptions about the ratio of cross sections between the two processes.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{Images/xslimitsMSSM.png}
-    \caption{Expected and observed $95\%$ CL upper limits for the production of a single narrow resonance, $\Phi$, with a mass between $90\,\mathrm{GeV}$ and $3.2\,\mathrm{TeV}$ in the $\tauh\tauh$ final state (left) for the production via gluon fusion (gg$\Phi$ and (right) in association with b quark (bb$\Phi$). The expected median of the exclusion limit is shown by the dashed line. The dark green and bright yellow bands indicate the 68 and 95$\%$ confidence intervals for the variation of the expected exclusion limit. The black dots correspond to the observed limits.}
-    \label{fig:xslimits}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\textwidth]{Images/xslimitsMSSM.png}
+%     \caption{Expected and observed $95\%$ CL upper limits for the production of a single narrow resonance, $\Phi$, with a mass between $90\,\mathrm{GeV}$ and $3.2\,\mathrm{TeV}$ in the $\tauh\tauh$ final state (left) for the production via gluon fusion (gg$\Phi$ and (right) in association with b quark (bb$\Phi$). The expected median of the exclusion limit is shown by the dashed line. The dark green and bright yellow bands indicate the 68 and 95$\%$ confidence intervals for the variation of the expected exclusion limit. The black dots correspond to the observed limits.}
+%     \label{fig:xslimits}
+% \end{figure}
 

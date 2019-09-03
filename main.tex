@@ -7,7 +7,7 @@
 
 %-------------------------------------------- PREAMBLE --------------------------------------------%
 \documentclass[12pt,twoside]{report}
-\usepackage[a4paper,width=150mm,headheight=110pt,top=25mm,bottom=25mm]{geometry}
+\usepackage[a4paper,width=150mm,headheight=110pt,top=25mm,bottom=35mm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{multirow}
@@ -29,7 +29,7 @@
 
 \graphicspath{{Images/}}
 
-\usepackage[round, numbers,authoryear]{natbib}
+\usepackage[numbers,compress,authoryear]{natbib}%numbers,authoryear
 \usepackage{color}
 \usepackage[dvipsnames]{xcolor}
 
@@ -52,7 +52,7 @@
 \usepackage[hypcap=true,font={small,it}]{caption}
 
 \captionsetup{belowskip=2pt,aboveskip=2pt}
-\bibliographystyle{elsarticle-num}
+\bibliographystyle{unsrt}%elsarticle-num unsrt
 \renewcommand{\chaptername}{}
 
 \renewcommand{\figureautorefname}{figure} % lower case default ref
@@ -86,11 +86,12 @@
         {\hypersetup{linkcolor=mycolor}}
     
 % Introduction
-    \chapter{Introduction} 
+    \chapter*{Introduction} 
     \input{Sections/Introduction}
      
 % Theoretical context
     \chapter{Theoretical context}
+    \label{sec:TheoryChapter}
     \input{Sections/TheoreticalContext.tex}
 
 % The CMS experiment
@@ -114,7 +115,7 @@
     \input{Sections/SearchForAMSSMHeavyHiggsBoson.tex}
     
 % Conclusion
-    \chapter{Conclusion}
+    \chapter*{Conclusion}
     \input{Sections/Conclusion}
     
 % Bibliography
@@ -122,20 +123,11 @@
     \addcontentsline{toc}{chapter}{References}%
     \bibliography{bibliography}
     
-    \vspace{2.0cm}
-    \textcolor{red}{Refer to \href{http://libguides.lub.lu.se/plagiarism}{LUSEM’s Harvard referencing guidelines} in the Teaching and Learning platform. \url{Lusem.lu.se/asks}}
-    % The template provides \hcite and \mcite commands to present hyperlinked references in the 
-    % Harvard referencing style '(Author, Year)'  and 'Author (Year)'
-    % The template has an automated bibliography section based on references 
-    % consistent with entries in the 'bibliography.bib' file 
 
-% Appendices
     \appendix
-    \chapter{(Appendix A title)}
+    \chapter{(Mathematical extension)}
     \input{Sections/Appendix_A}
     
-%      \chapter{(Appendix B title)}
-%     \input{Sections/Appendix_B}
-
+    
 \end{document}
 %----------------------------------------------------------------------------------------------------%

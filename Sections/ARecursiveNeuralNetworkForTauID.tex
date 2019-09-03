@@ -1,34 +1,34 @@
 
 As seen before in sec \ref{sec:tau_lepton}, when a $\tau$ is produced in a collision, it can decay into several different final states.
 Hadronic final states, denoted \tauh, represent about 65\% of tau decays.
-In the reconstruction phase, those Hadronic final states are characterised by 1 or 3 charged hadrons with or without \pizero .
+Those hadronic final states are characterised by one or three charged hadrons with or without \pizero .
 
 But similar particles can be reconstructed from other processes and decays, such as QCD jets.
-Since those QCD jets greatly outnumber \tauh in the final states of proton-proton collisions at the LHC, \tauh identification algorithms have be designed to reject QCD jets as much as possible while keeping a \tauh identification efficiency somewhere between 35\% and 70\%, depending on the purity needed by the analyses.
+Since those QCD jets greatly outnumber \tauh in the final states of proton-proton collisions at the LHC, \tauh identification algorithms have be designed in CMS to reject QCD jets as much as possible while keeping a \tauh identification efficiency somewhere between 35\% and 70\%, depending on the purity needed by the analyses. Identification is performed on a jet basis, meaning algorithms classifies all reconstructed jets as either background, meaning QCD jets, or signal, meaning \tauh decay products.
 
-Such pre-existing standard CMS identification, as will be presented in section \ref{sec:std_tau_id}, has reached excellent performances thanks to the use of particle-flow reconstruction but does not use its full potential.
+These standard \tauh identification algorithms, as will be presented in section \ref{sec:std_tau_id}, have reached excellent performance thanks to the use of particle-flow reconstruction but do not use its full potential.
 
-Deep learning algorithms, that will be introduced in section \ref{sec:NN}, have shown an ability to use available information as efficiently as possible for the task they are trained for. More recently, their use in heavy flavour jet-tagging \cite{btagging_NN} has shown significant improvements over previously used techniques. Those networks show best results when their design, or architecture, helps simplify the task at hand. New architecture specifically intended for high energy proton-proton collisions have shown promising results. One such architecture is the Recursive Neural Network (RecNN) \cite{Louppe:2017ipp} used to identify jet provenance. This could be adapted to similar tasks, such as \tauh identification. The section \ref{sec:RecNN} will detail this adaptation to the \tauh identification task and the improvements from the original design.
-The CMS simulated data used to train and evaluate the algorithm will be detailed in section \ref{sec:NN_datasets}.
+Deep learning algorithms, that will be introduced in section \ref{sec:NN}, have shown an ability to use available information as efficiently as possible for the task they are trained for. In the field of particle physics, for example, their use in heavy flavour jet-tagging \cite{btagging_NN} has shown significant improvements over previously used techniques. Those networks show best results when their design, or architecture, helps simplify the task at hand. New architectures specifically intended for high energy proton-proton collisions have shown promising results. One such architecture is the Recursive Neural Network (RecNN) \cite{Louppe:2017ipp} used to identify boosted jets originating from hadronically decaying W bosons. This could be adapted to similar tasks, such as \tauh identification. The section \ref{sec:RecNN} will detail this adaptation to the \tauh identification task and the improvements from the original design. But machine learning techniques such as the RecNN need to be trained on well identified data. The CMS simulated data offers such a possibility, as the provenance of the reconstructed jets can be easily found. A chunk of those datasets is also going to be used to compare the performance of both the standard and the RecNN approach. The specificities of the selected datasets are then first going to be presented in section \ref{sec:NN_datasets}, as it introduces the context of the study.
 
 \section{Simulation of QCD jets and hadronic $\tau$ decays}
 \label{sec:NN_datasets}
 
-In order to compare the several classification methods, their performance is expressed in terms of signal efficiency and background rejection. To quantify those, and to provide a training set for our deep learning algorithm, datasets of QCD jets and hadronic tau decays have been selected from the CMS simulations datasets that was introduced in \ref{sec:cms_physics_event_generation}. Instead of simulating QCD jets and \tauh, collision-wide simulation is used as it provides a more realistic condition of usage of the classifier.
+In order to compare the several classification methods, their performance is expressed in terms of signal efficiency and background rejection. To quantify those, and to provide a training set for our deep learning algorithm, datasets of QCD jets and hadronic tau decays have been selected from the simulated CMS datasets that were introduced in \ref{sec:cms_physics_event_generation}. Instead of simulating isolated QCD jets and \tauh separately, entire collision events are used as they provide a realistic environment in which the classifier would complete its task.
 
-Selected processes leading to \tauh and QCD jets in the final states are detailed in table \ref{tab:NN_b_s_diff}. QCD jets are selected from a QCD-only datasets, while \tauh are selected from the main analysis signal samples, as well as Drell-Yan processes, as it is classically the main source of background in the analysis.
+Selected processes leading to \tauh and QCD jets in the final state are detailed in table \ref{tab:NN_b_s_diff}. QCD jets are selected from a QCD-only datasets, while \tauh are selected from the main analysis signal samples, as well as Drell-Yan processes, as it is classically the main source of background in the analysis.
 % As seen in sec \ref{sec:cms_physics_event_reconstruction}, after particle-detector interaction is simulated, reconstruction will undergo the exact same algorithms in both real data in simulation, meaning both classical and, if proven to be useful, deep-learning based algorithms identification algorithms, the reconstruction steps that precede identification will be detailed in sub-section \ref{sec:NN_datasets_pf}. Although to be able to quantify both methods in terms of background rejection and signal identification, only simulation will be used to compare.
 
-The proton-proton collisions events are generated with PYTHIA 8 \cite{pythia}, and are then processed by the CMS GEANT4 simulation, as is detailed in section \ref{sec:cms_physics_event_generation}. The generation-level information is kept and will be referred to as gen-level. All the information coming out of the detector simulation is fed to particle flow algorithm as detailed in \ref{sec:pf}.
-The particle flow algorithm then provides the list of stable particles that have been reconstructed. Higher level objects, such as jets are reconstructed by combining elements from this list using clustering algorithms detailed in \ref{sec:jet_clustering}. In this case the clustering is done using CMS's anti-kt algorithm with distance parameter R = 0.4. 
+The proton-proton collisions events are generated with pythia 8 \cite{pythia}, and are then processed by the CMS GEANT4 simulation, as detailed in section \ref{sec:cms_physics_event_generation}. The generation-level information is kept and will be referred to as gen level. All the information coming out of the detector simulation is fed to the particle flow algorithm as detailed in \ref{sec:pf}.
+The particle flow algorithm then provides the list of the stable particles that have been reconstructed. Higher-level objects such as jets, are reconstructed by combining elements from this list using the clustering algorithms detailed in \ref{sec:jet_clustering}.
 
-At this point all reconstructed particles, isolated or not, are part of a reconstructed jet. Since the algorithms roles is to classify reconstructed jets as QCD jets or \tauh decays, the information is split on a single jet basis.
+At this point most reconstructed particles, isolated or not, are part of a reconstructed jet. Since the role of the studied classifiers is to classify reconstructed jets as QCD jets or \tauh decays, the information is split on a single jet basis.
 
-The signal and background reconstructed jets are here defined from their hard process origin and some extra cuts to ensure purity.
-The cuts can be found in table \ref{tab:NN_b_s_diff} where the matching between reconstructed jets and gen-level \tauh is done by ensuring their respective directions are aligned, meaning that the distance separating their orientation in the $\eta-\phi$ plane is less than $0.1$.
+The signal and background reconstructed jets are defined from their hard process origin, meaning if they come from a QCD-related process or from a $\tau$ generating process. Some extra cuts are applied to ensure purity.
+The cuts can be found in table \ref{tab:NN_b_s_diff} where the matching between reconstructed jets and gen-level \tauh is done by ensuring their respective directions are aligned, meaning that the distance separating their orientation in the ($\eta ,\phi$) plane is less than $0.1$.
 
 
 \begin{table}[ht]
+    \caption{Provenance and cuts applied to reconstructed jets defining signal and background.}
     \centering
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabular}{c||c|c}
@@ -40,13 +40,12 @@ The cuts can be found in table \ref{tab:NN_b_s_diff} where the matching between 
         \cline{2-2}
          & DY to tautau & \\
         \hline
-        phase-space cuts & \multicolumn{2}{c}{$20<\pt<100 abs(\eta)<0.8$}\\
+        phase-space cuts & \multicolumn{2}{c}{$20<\pt<100 |\eta|<0.8$}\\
         \hline
         specific extra cuts & matched with gen-level \tauh & any \\
         \hline
     \end{tabular}
     \end{adjustbox}
-    \caption{Provenance and cuts applied to reconstructed jets defining signal and background.}
     \label{tab:NN_b_s_diff}
 \end{table}
 
@@ -54,70 +53,57 @@ The cuts can be found in table \ref{tab:NN_b_s_diff} where the matching between 
 \label{sec:std_tau_id}
 \subsection{Decay mode finding}
 
-Identification is performed on a jet basis, meaning it classify all reconstructed jets as either background, meaning QCD jets, or signal, meaning \tauh decay products.
-
-First, the particles of the reconstructed jet are fed as input to the hadrons-plus-strip (HPS) algorithm \cite{tauh_reconstruction} to reconstruct and identify PF \tauh candidates. 
-A first selection is the requirement that reconstructed jets have \pt > 14 GeV and $|\eta|$ < 2.5.
+First, the particles of the reconstructed jet are fed as input to the hadrons-plus-strip (HPS) algorithm \cite{tauh_reconstruction} to reconstruct and identify \tauh candidates. A first selection is the requirement that reconstructed jets have $\pt > 14\,\mathrm{GeV}$ and $|\eta| < 2.5$.
 The constituent particles are combined into \tauh candidates compatible with one of the main $\tau$ decay modes, $\tau^- \rightarrow h^- \nu_\tau$, $\tau^- \rightarrow h^- \pizero \nu_\tau$, $\tau^- \rightarrow h^- \pizero \pizero \nu_\tau$, $\tau^- \rightarrow h^- h^+ h^- \nu_\tau$. The decay mode $\tau^- \rightarrow h^- h^+ h^- \pizero \nu_\tau$ is not considered owing to its relatively small branching fraction and high contamination from quark and gluon jets.
 
-The \pizero produced in some decay modes have a mean life of about $9 \times 10^{-17}\,\mathrm{s}$ and about $99\%$ of their decays lead to two photons. Because of the large amount of material in the tracker \ref{fig:tracker_material}, photons from \pizero decays often convert before reaching the ECAL. The resulting electrons and positrons can be identified as such by the PF algorithm or, in the case their track is not reconstructed, as photons displaced along the $\phi$ direction because their trajectory is bent by the magnetic field.
+The \pizero produced in some decay modes have a mean life of about $9 \times 10^{-17}\,\mathrm{s}$ and about $99\%$ of their decays lead to two photons. Because of the large amount of material in the tracker, illustrated in figure \ref{fig:tracker_material}, photons from \pizero decays often convert before reaching the ECAL. The resulting electrons and positrons can be identified as such by the PF algorithm or, in the case their track is not reconstructed, as photons displaced along the $\phi$ direction because their trajectory is bent by the magnetic field.
 Those neutral pions are therefore obtained by adding iteratively reconstructed photons and electrons located in a strip of size $0.05 \times 0.20$ in the ($\eta$,$\phi$) plane:
 \begin{itemize}
-    \item Every reconstructed electrons and photons of $\pt > 0.5 GeV$ in the strip are added iteratively from highest to lowest \pt.
+    \item Every reconstructed electrons and photons of $\pt > 0.5\,\mathrm{GeV}$ in the strip are added iteratively from highest to lowest \pt.
     \item At every step, the position of the center of the strip is re-computed as a \pt-weighted average of the position of all constituents.
     \item Any electron or photon not included in an existing strip is used as seed to another new strip.
 \end{itemize}
 
 \tauh candidates are then formed by creating all combinations of either one or three charged-particle and up to two strips in the jet.
 Each \tauh candidate is then required to have a mass compatible with its decay mode and to have unit charge.
-Collimation of the products are ensured by requiring all charged hadrons and neutral pions to be within a circle of radius $\Delta R = (2.8 GeV)/\pt$ in the ($\eta$,$\phi$), which is called the signal cone.
+Collimation of the products are ensured by requiring all charged hadrons and neutral pions to be within a circle of radius $\Delta R = (2.8\,\mathrm{GeV})/\pt$ in the ($\eta$,$\phi$), which is called the signal cone.
 The size of the signal cone is, however, not allowed to increase above 0.1 at low \pt, nor to decrease below 0.05 at high \pt. It decreases with \pt to account for the boost of the $\tau$ decay products. Finally, the highest \pt selected \tauh candidate in a given jet is retained. The four-momentum of the \tauh candidate is determined by summing the four-momenta of its constituent particles.
-More details on requirements and hypothesis can be found in \cite{tauh_reconstruction}.
 
 \subsection{Isolation}
 
 
-\tauh candidates reconstructed from QCD jets are likely to be surrounded by other particles coming from the hadronization of quarks and gluons.
-Isolation therefore can be useful to reject a lot of background QCD jets.
+\tauh candidates reconstructed from QCD jets are likely to be surrounded by other particles coming from the hadronization of their quarks and gluons.
+Isolation is therefore a powerful way to reject background QCD jets.
 
 Two approaches are available : cut-based and multi-variate.
 
-Cut-based : 
-\begin{itemize}
-    \item Isolation is roughly the sum of \pt of charged particles and photons with $\pt > 0.5$ GeV within an isolation cone of dR=0.5 centered around the \tauh direction, excluding particles used to form the \tauh candidate.
-    \item In order to mitigate pileup contribution, tracks associated to considered charged particles are required to be compatible with the \tauh production vertex within a distance $\Delta z < 0.2 cm$ and $\Delta r < 0.03 cm$.
+\paragraph{Cut-based} Isolation is computed from the sum of \pt of charged particles and photons with $\pt > 0.5$ GeV within an isolation cone of dR=0.5 centered around the \tauh direction, excluding particles used to form the \tauh candidate. In order to mitigate pileup contribution, tracks associated to considered charged particles are required to be compatible with the \tauh production vertex within a distance $\Delta z < 0.2 cm$ and $\Delta r < 0.03 cm$. The contribution from neutral particles is estimated as $\Delta \beta$ calculated from the contribution of charged displaced particles and removed as
 \begin{equation}
-    I_{\tau} = \sum_{charged, \Delta z<0.2 cm} \pt + max \Big\{ 0, \sum_{\gamma} \pt - \Delta\beta \Big\}
+    I_{\tau} = \sum_{charged, \Delta z<0.2 cm} \pt + max \Big\{ 0, \sum_{\gamma} \pt - \Delta\beta \Big\} \msep
     \label{eq:isolation}
 \end{equation}
 \begin{equation}
-    \Delta \beta = 0.46 \sum_{charged,\Delta z>0.2 cm} \pt
+    \Delta \beta = 0.46 \sum_{charged,\Delta z>0.2 cm} \pt \mend
 \end{equation}
-    \item Working points are defined by the thresholds on the value taken by the isolation defined in equation \ref{eq:isolation}. Usual working points such as Loose, medium, tight are thresholds are 2.0, 1.0 and 0.8 GeV respectively.
-\end{itemize}
+Working points are defined by the thresholds on the value taken by the isolation defined in equation \ref{eq:isolation}. Usual working points such as loose, medium, tight are thresholds are 2.0, 1.0 and $0.8\,\mathrm{GeV}$ respectively.
 
-Multi-variate : BDT based
-\begin{itemize}
-    \item Based on decision trees that are a machine learning technique that relies on finding the best successive cuts on the chosen variables to separate signal and background in a training set.
-    \item Boosting is a method of combining many weakly classifying trees into a strong classifier.
-    \item A BDT is trained on an appropriate choice of isolation variables to give best separation between QCD jets and \tauh : 
+\paragraph{Multi-variate} This method is based on decision trees. Those are machine learning techniques that rely on finding the best successive cuts on the available variables to separate signal and background in a training set. Boosting is a method of combining many weakly classifying trees into a strong classifier. A BDT is trained on an appropriate choice of isolation variables to give best separation between QCD jets and \tauh : 
     \begin{itemize}
         \item charged- and neutral-particle isolation sums defined as in eq \ref{eq:isolation}.
         \item The reconstructed decay mode.
         \item the transverse impact parameter $d_0$ of the leading tack of the \tauh candidate and its significance $d_0 / \sigma_{d_0}$
-        \item the distance between the $\tau$ production and decay vertices, $|\Vec{r}_{SV} - \Vec{r}_{PV}|$, and its significance $|\Vec{r}_{SV} - \Vec{r}_{PV}|/\sigma_{|\Vec{r}_{SV} - \Vec{r}_{PV}|}$, along with a flag indicating whether a decay vertex has successfully been reconstructed for a given \tauh candidate. The positions of the vertices, $\Vec{r}_SV$ and $\Vec{r}_PV$, are reconstructed using the adaptive vertex fitter algorithm \cite{Waltenberger_2007}.
+        \item the distance between the $\tau$ production and decay vertices, $|\Vec{r}_{SV} - \Vec{r}_{PV}|$, and its significance $|\Vec{r}_{SV} - \Vec{r}_{PV}|/\sigma_{|\Vec{r}_{SV} - \Vec{r}_{PV}|}$, along with a flag indicating whether a decay vertex has successfully been reconstructed for a given \tauh candidate. The positions of the vertices, $\Vec{r}_{SV}$ and $\Vec{r}_{PV}$, are reconstructed using the adaptive vertex-fitter algorithm \cite{Waltenberger_2007}.
+        \item More details on the variables can be found in \cite{tauh_reconstruction}.
     \end{itemize}
-    \item More details in \cite{tauh_reconstruction}.
-\end{itemize}
 
 \subsection{Anti-leptons discriminants}
 
-\tauh can also be wrongly reconstructed from electrons and muons, particularly in the $h^{\pm}$ decay mode. For example, electrons radiating a bremsstrahlung photon that subsequently converts may also get reconstructed in the $h^{\pm}\pizero$ decay mode. Therefore discriminants have been developed to separate such leptons decays from real \tauh decay products.
+Electrons and muons can easily be misidentified as \tauh, particularly in the $h^{\pm}$ decay mode. Electrons radiating a bremsstrahlung photon that subsequently converts may also get reconstructed in the $h^{\pm}\pizero$ decay mode. Therefore discriminants have been developed to separate such leptons decays from real \tauh decay products.
 
-Electrons are discriminated by a BDT using observables that quantify the distribution in energy depositions in the ECAL, in combination with observables sensitive to the amount of bremsstrahlung emitted along the leading track, and observables sensitive to the overall particle multiplicity, to distinguish electromagnetic from hadronic showers.
+Electrons are rejected by a BDT using observables that quantify the distribution in energy depositions in the ECAL and HCAL, in combination with observables sensitive to the amount of bremsstrahlung emitted along the leading track. The BDT also uses observables sensitive to the overall particle multiplicity, to distinguish electromagnetic from hadronic showers.
 All those variables are listed in \cite{tauh_reconstruction}.
     
-Muons are rejected from \tauh candidates by requiring that no track segments are found in at least two muon stations within a cone of size $\Delta R = 0.3$ around the \tauh direction. \tauh candidates are also rejected when the sum of the energies in the ECAL and HCAL corresponds to less than 20\% of the momentum of their leading track.
+Muons are rejected by requiring that no track segments are found in at least two muon stations within a cone of size $\Delta R = 0.3$ around the \tauh direction. \tauh candidates are also rejected when the sum of the energies in the ECAL and HCAL corresponds to less than 20\% of the momentum of their leading track.
     % \item Electrons are discriminated with a BDT using the following variables:
     % \begin{itemize}
     %     \item Electromagnetic energy fraction of the charged particles and photons that constitue the \tauh candidate : $E_{ECAL}/(E_{ECAL} + E_{HCAL})$.
@@ -133,15 +119,25 @@ Muons are rejected from \tauh candidates by requiring that no track segments are
 
 \subsection{Performance}
 
-While the goal of a classifier is to tag objects as signal or background, most will instead provide with a score. Usually the score is defined as taking the value 1 corresponds to signal and 0 to background. The score output of a classifier is then in our cases a score between 1 and 0, and the classifier has been trained to give a score as close to 1 as possible for signal cases, and as close to 0 for background cases. This continuous score can then be translated into a discrete tag by the choice of a working point (WP) value. In our cases, if the WP value is chosen as close to 1 as possible, it will maximize the number of rejected background, but more signal might also be then classified wrongly to background. To compare the performances of classifiers, Receiver Operating Characteristic (ROC) curves are plotted. These curves are built by computing the signal efficiency and background rejection at several working points. Each working point is then a point of the curve in the signal efficiency vs background rejection space. The standard identification ROC curve is shown in figure \ref{fig:RecNN_ROC}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Images/std_ROC.png}
+    \caption{\tauh identification ROC curve for the standard method. The x axis is set to a logarithmic scale.}
+    \label{fig:std_ROC}
+\end{figure}
+
+Performance are compared in terms of signal efficiency and background rejection. The signal efficiency is defined from the ratio of the number of well-tagged \tauh in the selected population over the total number of \tauh in this population. The background rejection is similarly defined as the ratio of the number of appropriately tagged QCD jets over the total number of QCD jets considered.
+
+While the goal of a classifier is to tag objects as signal or background, most will instead provide with a score between 0 and 1. A score close to 0 is to be interpreted as very likely to be background, and a score close to 1 as very likely to be signal. This continuous score can then be translated into a discrete tag by the choice of a working point (WP) value. For a given WP, every reconstructed jet that scores below the WP value is then tagged as QCD jet, and every reconstructed jet that scores higher than tha value a \tauh. The values of the signal efficiency and background rejection can be measured for a continuous scan of WP values, allowing to build a Receiver Operating Characteristic (ROC) curve. The standard identification ROC curve is shown in figure \ref{fig:std_ROC}
 Generally, a numerical figure of merit is the area under the ROC curve, called ROC AUC, as it is maximum when signal efficiency and background rejection is perfect.
-In our case, ROC AUC might not be the best figure of merit, as it doesn't take into account which regions are best covered by the technique.
-Indeed in our case QCD jets are overwhelmingly more present in collisions than \tauh, meaning useful working points are in the region of high background rejection. 
+In our case, ROC AUC might not be the best figure of merit, as it doesn't take into account which regions are best covered by the technique. Indeed, in our case the standard identification technique is based on applying hard cuts such as decay mode finding and anti-lepton discriminant before evaluating the score of the the isolation BDT. This is why the ROC of the standard technique reaches a plateau, as the plateau corresponds to maximum efficiency allowed by the previous cuts.
+QCD jets are also overwhelmingly more present in collisions than \tauh, meaning useful working points are in the region of high background rejection. 
 
 \subsection{Intrinsic limitations}
 
-All those identification methods rely heavily on either designing variables that are likely to have discriminating power, such as isolation, or the mixing of many of those variables using a BDTs. The construction of such variable potentially do not take into account other information that have been gathered in the detection and reconstruction.
-Fine tuning the choice of variable by hand is a tedious process, as many studies are needed and the possibilities of information combinations are potentially infinite. This is why machine learning algorithms such as BDTs have been used to mitigate this limitation, as those algorithms are able to come up with a finer tuned variable, their output, by learning how to combine the available information.
+Both cut-based and BDT-based identification methods rely heavily on designing variables that are likely to have discriminating power, to either create a hard cut directly, or to mix several of those variables into a BDT . But the construction of such variables potentially do not take into account other information that have been gathered in the detection and reconstruction.
+While the BDT combines more information than than the cut-based method, it requires fine tuning of the choice of variables. This tuning can lead to a tedious  the possibilities of information combinations are potentially infinite. This is why machine learning algorithms such as BDTs have been used to mitigate this limitation, as those algorithms are able to come up with a finer tuned variable, their output, by learning how to combine the available information.
 But they are limited by the amount of information that is available in their given set of inputs. 
 A possible improvement should therefore be expected from using a more complete set of variable rather than a selected subset.
 
@@ -250,7 +246,7 @@ Backpropagation comes with another important problem called vanishing gradient. 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/recurrent_network.png}
-    \caption{Diagram of the evaluation of a recurrent network on successive sets of inputs}
+    \caption{Diagram of the evaluation of a recurrent network on successive sets of inputs from \cite{RNN}.}
     \label{fig:recurrent_network}
 \end{figure}
 

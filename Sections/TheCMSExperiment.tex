@@ -10,7 +10,7 @@ Two rings accelerate protons in opposite directions. The acceleration gives up t
 
 \subsection{Proton acceleration}
 
-Before they reach nominal energy in the LHC rings, protons are gradually accelerated by smaller accelerators as illustrated in figure \ref{fig:LHC_acceleration}. The main accelerators are:
+Before they reach nominal energy in the LHC rings, protons are gradually accelerated by smaller accelerators as illustrated in Figure \ref{fig:LHC_acceleration}. The main accelerators are:
 
 \paragraph{LINAC 2} is the start of the whole acceleration process. Hydrogen is ionized by an electric field to provide protons, which are accelerated to an energy of 50 MeV.
 
@@ -36,7 +36,7 @@ Instantaneous luminosity is a key variable in a collider experiment. Expressed i
 \end{equation}
 where $\gamma$ is the Lorentz boost, $f$ is the revolution frequency of the bunches, $n_p$ is the number of bunches, $N_p$ is the number of proton per bunch, $\epsilon_n$ is the transverse emittance which is a measure of the parallelism of the beam, $\beta^*$ is the amplitude function that measures the distance between the interaction point and the place where the beam gets twice as wide, and $\sigma_{x,y}$ the width of each beam at the interaction point.
 
-The integrated luminosity over a period of data-taking is defined by $\Lagr = \int \Lagr_{\rm{inst}} dt$. This variables denotes of the quantity of data, and therefore represents the amount of data that can potentially be collecte by the experiment. The number of events produced by collisions for a given process is 
+The integrated luminosity over a period of data-taking is defined by $\Lagr = \int \Lagr_{\rm{inst}} dt$. This variables denotes of the quantity of data, and therefore represents the amount of data that can potentially be collected by the experiment. The number of events produced by collisions for a given process is 
 \begin{equation}
     N = \Lagr \sigma \mend
 \end{equation}
@@ -67,7 +67,7 @@ The LHC is circular, thus allowing easily for several interaction points to be s
     \label{fig:CMS_subdetectors}
 \end{figure}
 
-The CMS detector is situated in a cavern at LHC point 5, near Meyrin in France. It is a roughly cylindrical-shaped detector of 28.7 m of length and 15 m of diameter, for a weight of $14\,000$ tons. It is composed of concentric layers, with each layer a different subdetector, with a different role, as illustrated in figure \ref{fig:CMS_subdetectors}. The geometry of the overall detector and of the collisions has pushed to define measurements in terms of a cylindrical frame of reference. The x-axis is defined as pointing toward the center of the LHC, the y-axis pointing effectively upward, and the z-axis is defined as the beam axis, forming a Cartesian coordinate system. The $\phi$ angle is defined in the (x,y) plane from the x-axis. The $\theta$ angle is defined from the z-axis in the (y,z) plane. But the $\theta$ angle is rarely used and usually replaced by the pseudo-rapidity $\eta$ defined as
+The CMS detector is situated in a cavern at LHC point 5, near Meyrin in France. It is a roughly cylindrical-shaped detector of 28.7 m of length and 15 m of diameter, for a weight of $14\,000$ tons. It is composed of concentric layers, with each layer a different subdetector, with a different role, as illustrated in Figure \ref{fig:CMS_subdetectors}. The geometry of the overall detector and of the collisions has pushed to define measurements in terms of a cylindrical frame of reference. The x-axis is defined as pointing toward the center of the LHC, the y-axis pointing effectively upward, and the z-axis is defined as the beam axis, forming a Cartesian coordinate system. The $\phi$ angle is defined in the (x,y) plane from the x-axis. The $\theta$ angle is defined from the z-axis in the (y,z) plane. But the $\theta$ angle is rarely used and usually replaced by the pseudo-rapidity $\eta$ defined as
 
 \begin{equation}
     \eta = - \mathrm{ln} \big[ \mathrm{tan} \big(\frac{\theta}{2}\big)\big] \mend
@@ -87,7 +87,7 @@ One of the objectives of CMS is to measure with great precision the momentum and
 
 \subsection{The silicon inner tracker}
 
-The full-silicon inner tracking system \cite{Karimäki:368412,CERN-LHCC-2000-016} is the closest layer to the interaction point. It is a cylinder-shaped subdetector with an outer radius of 1.20 m and a length of 5.6 m. The barrel (each of the two endcaps) comprises three (two) layers of pixel detectors, surrounded by ten (twelve) layers of micro-strip detectors. The 16,588 silicon sensor modules are finely segmented into 66 million 150 $\times$ 100 $\mu$m pixels and 9.6 million strips, with a width ranging from 80 to $180\,\mu\mathrm{m}$. Its role is to detect charged particles passing through its different layers in order to reconstruct their trajectories, their charge, their momentum and approximate their vertex of origin, based on the knowledge of the intensity of the magnetic field. As displayed in figure \ref{fig:tracker_material}, these layers and the pertaining services (cables, support) represent a substantial amount of material in front of the calorimeters, up to 0.5 interaction lengths or 1.8 radiation lengths. The large number of emerging secondary particles turns out to be a major source of complication for reconstruction, but can be mitigated through the use of the combination of information with other subdetectors.
+The full-silicon inner tracking system \cite{Karimaki:368412,CERN-LHCC-2000-016} is the closest layer to the interaction point. It is a cylinder-shaped subdetector with an outer radius of 1.20 m and a length of 5.6 m. The barrel (each of the two endcaps) comprises three (two) layers of pixel detectors, surrounded by ten (twelve) layers of micro-strip detectors. The 16,588 silicon sensor modules are finely segmented into 66 million 150 $\times$ 100 $\mu$m pixels and 9.6 million strips, with a width ranging from 80 to $180\,\mu\mathrm{m}$. Its role is to detect charged particles passing through its different layers in order to reconstruct their trajectories, their charge, their momentum and approximate their vertex of origin, based on the knowledge of the intensity of the magnetic field. As displayed in Figure \ref{fig:tracker_material}, these layers and the pertaining services (cables, support) represent a substantial amount of material in front of the calorimeters, up to 0.5 interaction lengths or 1.8 radiation lengths. The large number of emerging secondary particles turns out to be a major source of complication for reconstruction, but can be mitigated through the use of the combination of information with other subdetectors.
 
 The tracker measures the \pt of charged hadrons at normal incidence with a resolution of 1 $\%$ for $\pt < 20\,\mathrm{GeV}$. The relative resolution then degrades with increasing \pt to reach the calorimeter energy resolution for track momenta of several hundred GeV.
 
@@ -164,7 +164,7 @@ In order to avoid a computational costs and time, a fast simulation has also bee
     \label{fig:pflow_illustration}
 \end{figure}
 
-At this point, the signals delivered by the different subdetectors, whether in simulation or data, is hard to interpret. In order to make sense on a physics level of the detection, an event reconstruction algorithm is applied, its goal is to provide the list of outgoing particles from the detection data. Event reconstruction is done identically for both simulated events and actual data. In the CMS experiment, this reconstruction is done by an algorithm specifically developed to optimally combine the information gathered by all subdetectors, as some particles can interact with several subdetectors, as illustrated in figure \ref{fig:pflow_illustration}. This algorithm is called the particle-flow algorithm (PF). 
+At this point, the signals delivered by the different subdetectors, whether in simulation or data, is hard to interpret. In order to make sense on a physics level of the detection, an event reconstruction algorithm is applied, its goal is to provide the list of outgoing particles from the detection data. Event reconstruction is done identically for both simulated events and actual data. In the CMS experiment, this reconstruction is done by an algorithm specifically developed to optimally combine the information gathered by all subdetectors, as some particles can interact with several subdetectors, as illustrated in Figure \ref{fig:pflow_illustration}. This algorithm is called the particle-flow algorithm (PF). 
 
 \label{sec:pf}
 

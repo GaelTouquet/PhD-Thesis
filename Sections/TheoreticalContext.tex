@@ -96,7 +96,7 @@ The fermionic fields transforms as
 \end{equation}
 However, the standard derivative do not conserve the invariance for these rotations since
 \begin{equation}
-    \partial_{\mu}\psi \rightarrow \partial_{\mu}\psi' = e^{i\lambda(x)}\partial_{\mu}\psi + iQe^{i\lamda(x)}\psi\partial_{\mu}\lambda(x) \mend
+    \partial_{\mu}\psi \rightarrow \partial_{\mu}\psi' = e^{i\lambda(x)}\partial_{\mu}\psi + iQe^{i\lamdda(x)}\psi\partial_{\mu}\lambda(x) \mend
 \end{equation}
 To recover gauge invariance, the covariant derivative must be introduced:
 \begin{equation}
@@ -167,19 +167,20 @@ At low energies, two additional forces are known : the electromagnetic and weak 
 The electromagnetic force was successfully quantized by Schwinger, Tomonaga, Feynman and Dyso, leading to the birth of Quantum Electrodynamics (QED) \cite{PhysRev.80.440,PhysRev.76.749,PhysRev.76.769,PhysRev.74.1439,PhysRev.73.416,10.1143/PTP.1.27} . It was described as an interaction of two fermions with the mediation of a boson, the photon ($\gamma$). QED was gauge invariant and overall renormalizable. These features pushed the physics community to consider gauge symmetries as fundamental symmetries of nature, and to try to formalize the other forces in the context of a gauge theory. However, these attempts failed due to the weak interaction's short range and the fact that it was not renormalizable.
 
 To overcome this, Schwinger proposed a description of the weak interaction analogue to the one of the electromagnetic force \cite{SCHWINGER1957407}. The weak force would not be a short-range interaction of 4 fermions but a long-range interaction of two fermions mediated by a charged vector boson, called $W^{\pm}$ \ref{fig:melectroweak}. The similarities between QED and this weak force, and the root of the gauge invariance, led to the hope of unification of the two forces. Many attempts were done in the following years with little success, though small advances were achieved. One such advance was parity (P-symmetry) violation, meaning a behavioral difference of chiral components. This could be achieved by a Vector-Axial theory (V-A theory) \cite{PhysRev.109.193,PhysRev.109.1860.2}, in which QED would play the vectorial role.
+
 \begin{figure}
 \centering
 \begin{subfigure}[b]{0.5\textwidth}
   \centering
-  \includegraphics[width=\textwidth]{Images/FF_method.png}
+  \includegraphics[width=\textwidth]{Images/fermi1.pdf}
   \caption{\label{fig:fermi_int}}
 \end{subfigure}%
 \begin{subfigure}[b]{0.5\textwidth}
   \centering
-  \includegraphics[width=\textwidth]{Images/FF_values.png}
+  \includegraphics[width=\textwidth]{Images/fermi2.pdf}
   \caption{\label{fig:melectroweak}}
 \end{subfigure}
-\caption{Feynman diagrams for the muon decay as \subref{fig:fermi_int} a Fermi's interaction, without a propagator and \subref{fig:melectroweak} a Yang-Mills theory mediated by a $\mathrm{W}^{-}$ boson.}
+\caption{Feynman diagrams for the muon decay as (\subref{fig:fermi_int}) a Fermi's interaction, without a propagator and (\subref{fig:melectroweak}) a Yang-Mills theory mediated by a $\mathrm{W}^{-}$ boson.}
 \label{fig:etomununu}
 \end{figure}
 
@@ -403,26 +404,26 @@ where the $\lambda_f$ terms are the coupling constants of the Higgs fields to th
 
 If the symmetry of the Higgs scalar doublet is spontaneously broken in the form of Equation \ref{eq:simphiggsfield}, a mass term for the down-type component of the fermion doublet appears. This would work for the lepton sector, as the neutrino-type is considered to be massless in the SM lagrangian, but it fails for up-type quarks, which also require a mass.
 
-But the Higgs field can be rewritten in the charge-conjugated of the $SU(2)$ framework :
+But the Higgs field can be rewritten in the charge-conjugated of the $SU(2)$ framework:
 
 \begin{equation}
     \phi^c \equiv i\sigma_2 \phi^* = \begin{pmatrix} \phi^{(0)*} \\ -\phi^{(-)} \end{pmatrix}  \xrightarrow{\text{SSB}} \frac{1}{\sqrt{2}}\begin{pmatrix} -(v+h(x)) \\ 0 \end{pmatrix} 
 \end{equation}
 where $\sigma_2$ is the second Pauli matrix, generator of $SU(2)$. The Higgs field in this form provides the symmetry-breaking term as the upper component, meaning it couples with up-type quarks to provide a mass term.
 
-The Yukawa lagrangian becomes :
+The Yukawa lagrangian becomes:
 
 \begin{align}
     \MoveEqLeft[3]
     \Lagr_Y = -i\lambda_e (\Bar{\nu}\Bar{e})_L \phi e_R - i\lambda_d (\Bar{u}\Bar{d})_L \phi d_R - i\lambda_u (\Bar{u}\Bar{d})_L \phi^c u_R \\ ={}& -i\lambda_f (\Bar{L}\phi R_f + \Bar{R}\phi L) - i\lambda_f(\Bar{L}\phi^c R_f + \Bar{R}\phi^c L) \\ ={}& -i\lambda_f(\Bar{L}\phi R_f + \Bar{L}\phi^cR_f) + h.c.
 \end{align}
 
-After picking the gauge, by arranging the chiralities, the lagrangian simplifies to :
+After picking the gauge, by arranging the chiralities, the lagrangian simplifies to:
 
 \begin{equation}
     \Lagr_Y = \frac{-\lambda_f (v+h)}{\sqrt{2}}(\Bar{\psi}_R\psi_L + \Bar{\psi}_L\psi_R)
 \end{equation}
-therefore the mass terms of the fermions are :
+therefore the mass terms of the fermions are:
 
 \begin{equation}
     m_f \equiv \lambda_f \frac{v}{\sqrt{2}}
@@ -430,12 +431,12 @@ therefore the mass terms of the fermions are :
 
 Hence the coupling of the Higgs to a fermion is proportional to its mass, making heavier fermions, such as $\tau$ leptons, having an enhanced coupling to the Higgs boson.
 
-In conclusion, the overall SM lagrangian can be written by combining all terms as :
+In conclusion, the overall SM lagrangian can be written by combining all terms as:
 
 \begin{equation}
-    \Lagr_SM = \underbrace{- \frac{1}{4} F_{\mu\nu}^a F^{\mu\nu}_a}_{Free bosons} + \underbrace{i\Bar{\psi}\slashed{D}\psi}_{Fermion term} +\underbrace{i\lambda_f(\Bar{L}\phiR_f + \Bar{L}\phi^cR_f) + h.c.}_{Yukawa interaction} + \underbrace{|D_{\mu}\phi|^2 - V(\phi)}_{Higgs mechanism}
+    \Lagr_SM = \underbrace{- \frac{1}{4} F_{\mu\nu}^a F^{\mu\nu}_a}_{Free bosons} + \underbrace{i\Bar{\psi}\slashed{D}\psi}_{Fermion term} +\underbrace{i\lambda_f(\Bar{L}\phi R_f + \Bar{L}\phi^cR_f) + h.c.}_{Yukawa interaction} + \underbrace{|D_{\mu}\phi|^2 - V(\phi)}_{Higgs mechanism}
 \end{equation}
-where :
+where:
 \begin{align*}
     & F_{\mu\nu}^a F^{\mu\nu}_a \equiv G_{\mu\nu}^a G^{\mu\nu}_a + W_{\mu\nu}^a W^{\mu\nu}_a + B_{\mu\nu}^a B^{\mu\nu}_a \\
     & i\Bar{\psi}\slashed{D}\psi \equiv i\Bar{\psi}\gamma^{\mu} (\partial_{\mu} - g_s T_a G_{\mu}^a - g_W T_a W^{a}_{\mu} - g_B Y B_{\mu})  \psi \\
@@ -639,8 +640,8 @@ At the LHC, neutral Higgs bosons can be produced in several different processes,
 
 \begin{figure}
     \centering
-    \includegraphics{}
-    \caption{Cross-sections for different Higgs boson production processes as a function of center of mass energies}
+    \includegraphics[width=0.7\textwidth]{Images/xsec.eps}
+    \caption{Cross-sections for different Higgs boson production processes as a function of center of mass energies.}
     \label{fig:higgscrosssec}
 \end{figure}
 
@@ -649,7 +650,7 @@ The dominant Higgs production process at the LHC is the gluon fusion, labelled g
 
 \begin{figure}
     \centering
-    \includegraphics{}
+    \includegraphics[width=0.4\textwidth]{Images/ggh.pdf}
     \caption{Feynman diagram for the gluon fusion process ($ggh$) at lowest order.}
     \label{fig:ggh}
 \end{figure}
@@ -657,29 +658,76 @@ The dominant Higgs production process at the LHC is the gluon fusion, labelled g
 
 The second most abundant production mode at the LHC is the vector boson fusion \cite{PhysRevD.85.035002}, abbreviated as VBF (Figure \ref{fig:vbf}). This process consists of two quarks directly or indirectly producing two vector bosons ($W^{\pm}$ or $Z$) that fuse into a Higgs boson. Despite having a cross-section ten times lower than ggH at LHC, this process is particularly recognizable thanks to the behaviour of the two outgoing quarks, which hadronize giving two observable energetic jets back-to-back in the Higgs reference frame. The current computation of the cross-section includes NNLO QCD corrections and NLO EW corrections \cite{deFlorian:2227475}.
 
+
 \begin{figure}
-    \centering
-    \includegraphics{}
-    \caption{Feynman diagrams for the Vector Boson Fusion process of a Higgs boson with two jets at leading order for the $t$ and $u$ channels.}
-    \label{fig:vbf}
+\centering
+\begin{subfigure}[b]{0.5\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/VBF1.pdf}
+  \caption{\label{fig:vbf1}}
+\end{subfigure}%
+\begin{subfigure}[b]{0.5\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/VBF2.pdf}
+  \caption{\label{fig:vbf2}}
+\end{subfigure}
+\caption{Feynman diagrams for the Vector Boson Fusion process of a Higgs boson with two jets at leading order for the $t$ (\subref{fig:vbf1}) and $u$ (\subref{fig:vbf2}) channels.}
+\label{fig:vbf}
 \end{figure}
+
 
 Another process is the production of a Higgs boson in association with a vector boson, VH (Figure \ref{fig:vh}), also called Higgs-strahlung. In this process, the quark-antiquark pair collisions give rise to an energetic vector boson ($W^{\pm}$ or $Z$), which then radiates a Higgs boson. The cross-sections are computed up to NNLO for the QCD corrections plus NLO EW corrections \cite{deFlorian:2227475}.
 
+
 \begin{figure}
-    \centering
-    \includegraphics{}
-    \caption{Feynman diagrams for the vector boson associated production process (VH) at leading order for the W boson and the Z boson. Last diagram corresponds to a gluon fusion via top quark loop which contributes to the ZH mode.}
-    \label{fig:vh}
+\centering
+\begin{subfigure}[b]{0.3\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/VH1.pdf}
+  \caption{\label{fig:vh1}}
+\end{subfigure}%
+\begin{subfigure}[b]{0.3\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/VH2.pdf}
+  \caption{\label{fig:vh2}}
+\end{subfigure}%
+\begin{subfigure}[b]{0.3\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/VH3.pdf}
+  \caption{\label{fig:vh3}}
+\end{subfigure}
+\caption{Feynman diagrams for the vector boson associated production process (VH) at leading order for (\subref{fig:vh1}) the W boson and (\subref{fig:vh2}) the Z boson. Last diagram (\subref{fig:vh3}) corresponds to a gluon fusion via top quark loop which contributes to the ZH mode.}
+\label{fig:vh}
 \end{figure}
 
-Last but not least, another production process is the associated production with heavy fermions, namely top quarks ($\mathrm{t\Bar{t}H}$) and bottom quarks ($\mathrm{b\Bar{b}H}$), the latter shown in Figure \ref{fig:ggh}. Even though these modes are not significant in SM Higgs boson production at the LHC, the MSSM takes advantage of the enhanced coupling of the $b$-quark to the Higgs bosons for large $\mathrm{tan} \beta$ values. In such cases this mode becomes a significant or even dominant source of Higgs bosons. The cross-section for the $\mathrm{b\Bar{b}H}$ modes are computed at NLO for the 4-flavor scheme, in which it is assumed that the only 4 lightest quarks being available in the proton, and NNLO for the 5-flavor scheme \cite{deFlorian:2227475}.
+
+Last but not least, another production process is the associated production with heavy fermions, namely top quarks ($\mathrm{t\Bar{t}H}$) and bottom quarks ($\mathrm{b\Bar{b}H}$), the latter shown in Figure \ref{fig:bbh}. Even though these modes are not significant in SM Higgs boson production at the LHC, the MSSM takes advantage of the enhanced coupling of the $b$-quark to the Higgs bosons for large $\mathrm{tan} \beta$ values. In such cases this mode becomes a significant or even dominant source of Higgs bosons. The cross-section for the $\mathrm{b\Bar{b}H}$ modes are computed at NLO for the 4-flavor scheme, in which it is assumed that the only 4 lightest quarks being available in the proton, and NNLO for the 5-flavor scheme \cite{deFlorian:2227475}.
+
 
 \begin{figure}
-    \centering
-    \includegraphics{}
-    \caption{Feynman diagrams for the $b$-associated production process at leading order in the four-flavour scheme and the five-flavour scheme.}
-    \label{fig:bbh}
+\centering
+\begin{subfigure}[b]{0.22\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/bbh1.pdf}
+  \caption{\label{fig:bbh1}}
+\end{subfigure}%
+\begin{subfigure}[b]{0.22\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/bbh2.pdf}
+  \caption{\label{fig:bbh2}}
+\end{subfigure}%
+\begin{subfigure}[b]{0.22\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/bbh3.pdf}
+  \caption{\label{fig:bbh3}}
+\end{subfigure}
+\begin{subfigure}[b]{0.22\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/bbh4.pdf}
+  \caption{\label{fig:bbh4}}
+\end{subfigure}%
+\caption{Feynman diagrams for the $b$-associated production process at leading order in the four-flavour scheme (\subref{fig:bbh1},\subref{fig:bbh2},\subref{fig:bbh3}) and the five-flavour scheme (\subref{fig:bbh4}).}
+\label{fig:bbh}
 \end{figure}
 
 \subsection{Higgs bosons decay}
@@ -689,7 +737,7 @@ Higgs bosons have a very short life time. For example, the SM Higgs boson has a 
 The MSSM introduces a second Higgs doublet because of theoretical requirements covered in section \ref{sec:MSSM}, leading to five observable Higgs boson, namely $h$, $H$, $A$ and $H^{\pm}$. The most common interpretation of the discovered Higgs boson at $\sim 125\, \mathrm{GeV}$ in the MSSM context is to assume that it holds the role of the lightest boson $h$. This thesis will rely on this interpretation to look for other neutral higgs bosons with masses larger than $m_h = 125 \pm 3 \, \mathrm{GeV}$. The MSSM modifies the relations of the masses and couplings of the Higgs particles with respect to the SM. At tree level, the correction to the masses can be written to depend uniquely on the $m_A$ and $\mathrm{tan} \beta$ parameters, while the corrections to the Yukawa couplings of the heavy neutral Higgs bosons to down type fermions can be written in terms of the angles $\alpha$ and $\beta$ as
 
 \begin{equation}
-    \lambda(H \rightarrow bb, \tau\tau) \propto \frac{\mathrm{cos} \aplha}{\mathrm{cos} \beta} = \frac{\mathrm{cos} \alpha}{\mathrm{sin} \beta} \mathrm{tan} \beta
+    \lambda(H \rightarrow bb, \tau\tau) \propto \frac{\mathrm{cos} \alpha}{\mathrm{cos} \beta} = \frac{\mathrm{cos} \alpha}{\mathrm{sin} \beta} \mathrm{tan} \beta
 \end{equation}
 \begin{equation}
     \lambda(A \rightarrow bb, \tau\tau) \propto \mathrm{tan} \beta \mend
@@ -701,15 +749,22 @@ A large $\mathrm{tan} \beta$ would also affect the $\mathrm{g\Bar{g}H}$ mode, as
 
 This thesis searches for a massive neutral Higgs boson decaying to a pair of $\tau$ leptons, denoted as $H, A \rightarrow \tau\tau$ channel, whose Feynman diagram is shown in Figure \ref{fig:htt}. The $H,A \rightarrow \tau\tau$ is a very sensitive fermionic channel despite its relatively low branching ratio because its final state provides a clear signature (high energetic $\tau$ leptons), while the more abundant $H,A \rightarrow bb$ channel suffers from significant backgrounds at the LHC.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/htt.pdf}
+    \caption{Feynman diagrams for the $H,A \rightarrow \tau\tau$ decay at tree level.}
+    \label{fig:htt}
+\end{figure}
+
 \subsection{The $\tau$ lepton}
 \label{sec:tau_lepton}
-The $\tau$ lepton is an unstable particle with a mean life of $\sim 10^{-13} s$ \cite{pdg2016} and therefore, a decay length of $87.03\, \mathrm{\mu m}$. Its decaying vertex is therefore usually close to the production vertex. The $\tau$ decays via the electroweak interaction, involving a virtual $W$. The main $\tau$ decay modes are given in Figure \ref{fig:htt}.
+The $\tau$ lepton is an unstable particle with a mean life of $\sim 10^{-13} s$ \cite{pdg2016} and therefore, a decay length of $87.03\, \mathrm{\mu m}$. Its decaying vertex is therefore usually close to the production vertex. The $\tau$ decays via the electroweak interaction, involving a virtual $W$, as illustrated in figure \ref{fig:tau_decay}.
 
 \begin{figure}
     \centering
-    \includegraphics{}
-    \caption{Feynman diagrams for the $H \rightarrow \tau\tau$ decay at tree level.}
-    \label{fig:htt}
+    \includegraphics[width=0.6\textwidth]{Images/taudecay.pdf}
+    \caption{Feynman diagram for the decay of the of a $\tau^-$ particle, mediated by a $W^-$ boson at tree level.}
+    \label{fig:tau_decay}
 \end{figure}
 
 Leptonic $\tau$ decays produce an electron or a muon, and two neutrinos. Hadronic $\tau$ decays, denoted \tauh, lead to a single neutrino and a quark-antiquark pair. This decay leads to observed final states of mainly either 1 or 3 charged hadrons, and potentially several \pizero which decay to photons. On the other hand a $\tau$ lepton can lead to a an electron or muon, and neutrinos in the final states. All the important $\tau$ decays and their branching fractions are detailed in Table \ref{tab:tau_decay_products}. 

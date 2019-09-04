@@ -13,18 +13,19 @@ Deep learning algorithms, that will be introduced in section \ref{sec:NN}, have 
 \section{Simulation of QCD jets and hadronic $\tau$ decays}
 \label{sec:NN_datasets}
 
-In order to compare the several classification methods, their performance is expressed in terms of signal efficiency and background rejection. To quantify these, and to provide a training set for our deep learning algorithm, datasets of QCD jets and hadronic tau decays have been selected from the simulated CMS datasets that were introduced in \ref{sec:cms_physics_event_generation}. Instead of simulating isolated QCD jets and \tauh separately, entire collision events are used as they provide a realistic environment in which the classifier would complete its task.
+In order to compare the several classification methods, their performance is expressed in terms of signal efficiency and background rejection. To quantify these, and to provide a training set for our deep learning algorithm, datasets of QCD jets and hadronic tau decays have been selected from the simulated CMS datasets that were introduced in \ref{sec:cms_physics_event_generation}. Instead of simulating isolated QCD jets and \tauh separately, entire collision events are used as they provide a realistic environment similar to the one in which the classifier will be used.
 
-Selected processes leading to \tauh and QCD jets in the final state are detailed in table \ref{tab:NN_b_s_diff}. QCD jets are selected from a QCD-only datasets, while \tauh are selected from the main analysis signal samples, as well as Drell-Yan processes, as it is classically the main source of background in the analysis.
+Selected processes leading to \tauh and QCD jets in the final state are detailed in table \ref{tab:NN_b_s_diff}. QCD jets are obtained from QCD multijet events in which true \tauh are extremely rare, while \tauh are taken from events with true taus in the final state (MSSM $H\rightarrow \tau\tau$, DY $Z\rightarrow \tau\tau$).
+
 % As seen in sec \ref{sec:cms_physics_event_reconstruction}, after particle-detector interaction is simulated, reconstruction will undergo the exact same algorithms in both real data in simulation, meaning both classical and, if proven to be useful, deep-learning based algorithms identification algorithms, the reconstruction steps that precede identification will be detailed in sub-section \ref{sec:NN_datasets_pf}. Although to be able to quantify both methods in terms of background rejection and signal identification, only simulation will be used to compare.
 
-The proton-proton collisions events are generated with PYTHIA 8 \cite{SJOSTRAND2008852}, and are then processed by the CMS GEANT4 simulation, as detailed in section \ref{sec:cms_physics_event_generation}. The generation-level information is kept and will be referred to as gen level. All the information coming out of the detector simulation is fed to the particle flow algorithm as detailed in \ref{sec:pf}.
-The particle flow algorithm then provides the list of the stable particles that have been reconstructed. Higher-level objects such as jets, are reconstructed by combining elements from these particles using the clustering algorithms detailed in \ref{sec:jet_clustering}.
+The proton-proton collision events are generated with PYTHIA 8 \cite{SJOSTRAND2008852}, and are then processed by the CMS GEANT4 simulation, as detailed in section \ref{sec:cms_physics_event_generation}. The generation-level information is kept and will be referred to as gen level. All the information coming out of the detector simulation is fed to the CMS reconstruction algorithms, where the particle flow algorithm provides the list of reconstructed stable particles. Higher-level objects such as jets, are reconstructed by combining these particles using the clustering algorithms introduced in \ref{sec:jet_clustering}.
 
 At this point most reconstructed particles, isolated or not, are part of a reconstructed jet. Since the role of the studied classifiers is to classify reconstructed jets as QCD jets or \tauh decays, the information is split on a single jet basis.
 
-The signal and background reconstructed jets are defined from their hard process origin, meaning if they come from a QCD-related process or from a $\tau$ generating process. Some extra cuts are applied to ensure purity.
-The cuts can be found in table \ref{tab:NN_b_s_diff} where the matching between reconstructed jets and gen-level \tauh is done by ensuring their respective directions are aligned, meaning that the distance separating their orientation in the ($\eta ,\phi$) plane is less than $0.1$.
+A reconstructed jet is defined as signal if it is selected from the genuine tau samples, and as background if selected from the QCD multijet samples. To ensure purity, some extra cuts are applied, these cuts can be found in table \ref{tab:NN_b_s_diff}.
+
+The matching between reconstructed jets and gen-level \tauh is done by ensuring their respective directions are aligned, meaning that the distance separating their orientation in the ($\eta ,\phi$) plane is less than $0.1$.
 
 
 \begin{table}[ht]
@@ -36,11 +37,11 @@ The cuts can be found in table \ref{tab:NN_b_s_diff} where the matching between 
         \hline \hline
         \multirow{3}{*}{Hard processes} & SUSY ggH $\rightarrow\tau\tau$ & \multirow{3}{*}{\begin{minipage}{0.4\textwidth}QCD multijets samples ordered by \pt : 15-30, 30-50, 50-80, 80-120, 120-170, 170-300 \end{minipage}} \\
         \cline{2-2}
-         & SUSY bbh to $\rightarrow\tau\tau$ & \\
+         & SUSY bbH to $\rightarrow\tau\tau$ & \\
         \cline{2-2}
          & DY to tautau & \\
         \hline
-        phase-space cuts & \multicolumn{2}{c}{$20<\pt<100 |\eta|<0.8$}\\
+        phase-space cuts & \multicolumn{2}{c}{$20<\pt<100 \text{ and } |\eta|<0.8$}\\
         \hline
         specific extra cuts & matched with gen-level \tauh & any \\
         \hline
@@ -54,9 +55,9 @@ The cuts can be found in table \ref{tab:NN_b_s_diff} where the matching between 
 \subsection{Decay mode finding}
 
 First, the particles of the reconstructed jet are fed as input to the hadrons-plus-strip (HPS) algorithm \cite{tauh_reconstruction} to reconstruct and identify \tauh candidates. A first selection is the requirement that reconstructed jets have $\pt > 14\,\mathrm{GeV}$ and $|\eta| < 2.5$.
-The constituent particles are combined into \tauh candidates compatible with one of the main $\tau$ decay modes, $\tau^- \rightarrow h^- \nu_\tau$, $\tau^- \rightarrow h^- \pizero \nu_\tau$, $\tau^- \rightarrow h^- \pizero \pizero \nu_\tau$, $\tau^- \rightarrow h^- h^+ h^- \nu_\tau$. The decay mode $\tau^- \rightarrow h^- h^+ h^- \pizero \nu_\tau$ is not considered owing to its relatively small branching fraction and high contamination from quark and gluon jets.
+The constituent particles are combined into \tauh candidates compatible with one of the main $\tau$ decay modes, $\tau^- \rightarrow h^- \nu_\tau$, $\tau^- \rightarrow h^- \pizero \nu_\tau$, $\tau^- \rightarrow h^- \pizero \pizero \nu_\tau$, $\tau^- \rightarrow h^- h^+ h^- \nu_\tau$, and charge conjugates. The decay mode $\tau^- \rightarrow h^- h^+ h^- \pizero \nu_\tau$ is not considered owing to its relatively small branching fraction and high contamination from quark and gluon jets.
 
-The \pizero produced in some decay modes have a mean life of about $9 \times 10^{-17}\,\mathrm{s}$ and about $99\%$ of their decays lead to two photons. Because of the large amount of material in the tracker, illustrated in figure \ref{fig:tracker_material}, photons from \pizero decays often convert before reaching the ECAL. The resulting electrons and positrons can be identified as such by the PF algorithm or, in the case their track is not reconstructed, as photons displaced along the $\phi$ direction because their trajectory is bent by the magnetic field.
+The \pizero produced in some decay modes have a mean life of about $9 \times 10^{-17}\,\mathrm{s}$ and about $99\%$ of their decays lead to two photons. Because of the large amount of material in the tracker, illustrated in figure \ref{fig:tracker_material}, photons often convert before reaching the ECAL. The resulting electrons and positrons can be identified as such by the PF algorithm or, in the case their track is not reconstructed, as photons displaced along the $\phi$ direction because their trajectory is bent by the magnetic field.
 These neutral pions are therefore obtained by adding iteratively reconstructed photons and electrons located in a strip of size $0.05 \times 0.20$ in the ($\eta$,$\phi$) plane:
 \begin{itemize}
     \item Every reconstructed electrons and photons of $\pt > 0.5\,\mathrm{GeV}$ in the strip are added iteratively from highest to lowest \pt.
@@ -72,12 +73,12 @@ The size of the signal cone is, however, not allowed to increase above 0.1 at lo
 \subsection{Isolation}
 
 
-\tauh candidates reconstructed from QCD jets are likely to be surrounded by other particles coming from the hadronization of their quarks and gluons.
+\tauh candidates reconstructed from QCD jets are likely to be surrounded by other particles coming from the jet.
 Isolation is therefore a powerful way to reject background QCD jets.
 
 Two approaches are available : cut-based and multi-variate.
 
-\paragraph{Cut-based} Isolation is computed from the sum of \pt of charged particles and photons with $\pt > 0.5$ GeV within an isolation cone of dR=0.5 centered around the \tauh direction, excluding particles used to form the \tauh candidate. In order to mitigate pileup contribution, tracks associated to considered charged particles are required to be compatible with the \tauh production vertex within a distance $\Delta z < 0.2 cm$ and $\Delta r < 0.03 cm$. The contribution from neutral particles is estimated as $\Delta \beta$ calculated from the contribution of charged displaced particles and removed as
+\paragraph{Cut-based} Isolation is computed from the \pt sum of charged particles and photons with $\pt > 0.5$ GeV within an isolation cone of $dR=0.5$ centered around the \tauh direction, excluding particles used to form the \tauh candidate. In order to mitigate pileup contribution, tracks associated to the considered charged particles are required to be compatible with the \tauh production vertex within a distance $\Delta z < 0.2\,\mathrm{cm}$ and $\Delta r < 0.03\,\mathrm{cm}$. The contribution from pileup is estimated as $\Delta \beta$ calculated from the contribution of charged displaced particles and removed as
 \begin{equation}
     I_{\tau} = \sum_{charged, \Delta z<0.2 cm} \pt + max \Big\{ 0, \sum_{\gamma} \pt - \Delta\beta \Big\} \msep
     \label{eq:isolation}
@@ -280,7 +281,7 @@ Neural network architectures should fit the format of the input while providing 
         \label{sub:GatedRecNNNode}
     }
     
-    \caption{Diagrams of different nodes that can be found in a RecNN architectures. Top is a leaf node, middle is a non-leaf node. Bottom is a non-leaf node for a gated RecNN architecture.}
+    \caption{Diagrams of different nodes that can be found in a RecNN architecture. Top is a leaf node, middle is a non-leaf node. Bottom is a non-leaf node for a gated RecNN architecture.}
     \label{fig:recnn_nodes}
     \end{center}
 \end{figure}
@@ -304,7 +305,7 @@ The distance of two particles $i$ and $j$ is defined as
 In this expression $\Delta_{ij}$ corresponds to the distance of the particles in the ($\eta$,$\phi$) plane, R is a distance parameter, and $p_{Ti}^{2k}$ corresponds to the modulus of the transverse momentum of particle $i$, with the $k$ parameter being equal to 1 for the kt metric, 0 for the Cambridge metric, and $-1$ for the anti-kt metric.
 
 In the jet embedding part, the information takes two distinct paths, as illustrated in figure \ref{fig:recnn_nodes}.
-The vector $O_k$ was originally the 4-momentum of the pseudo-jet at the node k in the original design. It has been upgraded to hold extra information in the new version. First, The 4-momentum is split by particle type : photon, electron, muon, charged hadron, neutral hadron. This is done to allow the network to base its decision on the types of particles rather than just the overall 4-momentum. Second, the 4-momentum vector is also concatenated with information on each subjets. As the $O_k$ vector is computed as the sum of the $O_kl$ and $O_kr$ vectors, coming from the nodes that were merged into node $k$, the new information must be addable. The chosen extra variables are the total charge and total number of particles for each type constituent. On top of this, the distance in the ($\eta$,$\phi$) plane between the merged pseudo-jets is fed to the network at each successive step of the clustering. 
+The vector $O_k$ was originally the 4-momentum of the pseudo-jet at the node k in the original design. It has been upgraded to hold extra information in the new version. First, The 4-momentum is split by particle type : photon, electron, muon, charged hadron, neutral hadron. This is done to allow the network to base its decision on the types of particles rather than just the overall 4-momentum. Second, the 4-momentum vector is also concatenated with information on each subjets. As the $O_k$ vector is computed as the sum of the $O_{kl}$ and $O_{kr}$ vectors, coming from the nodes that were merged into node $k$, the new information must be addable. The chosen extra variables are the total charge and total number of particles for each type constituent. On top of this, the distance in the ($\eta$,$\phi$) plane between the merged pseudo-jets is fed to the network at each successive step of the clustering. 
 
 At each node a full set of variables is also re-computed from the 4-momenta : p, \pt, m, $\eta$, $\phi$, $\theta$. All of these variables are then fed into a neuron layer called $\sigma_{u}$ instead of the 4-momentum in cartesian form.
 On a leaf node k, the output of $\sigma_{u}$ is then taken as the embedded output of this node, named $h_k$.
@@ -372,6 +373,6 @@ Another upgrade could be the use of subset in the training. Indeed, a majority o
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/jet_display1.png}
-    \caption{Scatter plots of the constituents in a QCD jet misidentified by the RecNN network. Top plot is the reconstructed jet, and the bottom plot is the gen-level jet. The size of the points are proportional to their \pt and their color depends on their type. Black is a charged hadron, yellow is photon and red is neutral hadron.}
+    \caption{Scatter plots of the constituents in a QCD jet misidentified by the RecNN network. Top plot is the reconstructed jet, and the bottom plot is the gen-level jet. The size of the points are proportional to their \pt and their color depends on their type. Black is a charged hadron, yellow is a photon and red is a neutral hadron.}
     \label{fig:jet_display}
 \end{figure}

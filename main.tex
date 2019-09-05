@@ -27,9 +27,13 @@
 \usepackage{mathtools}
 \usepackage{ptdr-definitions}
 
+% \usepackage{nohyperref}
+% \usepackage[pageref]{backref}
+% \usepackage{url}% for url's in bib
+
 \graphicspath{{Images/}}
 
-\usepackage[numbers,compress,authoryear]{natbib}%numbers,authoryear
+\usepackage[numbers,brackets,sort&compress]{natbib}%numbers,authoryear
 \usepackage{color}
 \usepackage[dvipsnames]{xcolor}
 
@@ -52,15 +56,12 @@
 \usepackage[hypcap=true,font={small,it}]{caption}
 
 \captionsetup{belowskip=2pt,aboveskip=2pt}
-\bibliographystyle{unsrt}%elsarticle-num unsrt
+\bibliographystyle{unsrtnat}%elsarticle-num unsrt
 \renewcommand{\chaptername}{}
 
 \renewcommand{\figureautorefname}{figure} % lower case default ref
 \renewcommand{\tableautorefname}{table} % lower case default ref
 \newcommand{\latex}{\LaTeX\xspace}
-\newcommand{\mcite}[1]{\textcolor{mycolor}{\citeauthor{#1} (\citeyear{#1})}}
-\newcommand{\hcite}[1]{(\textcolor{mycolor}{\citeauthor{#1}, \citeyear{#1}})}
-\newcommand{\colin}[1]{\textcolor{blue}{#1}}
 
 %----------------------------------------------------------------------------------------------------%
 

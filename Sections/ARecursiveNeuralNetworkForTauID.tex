@@ -1,54 +1,11 @@
 
 As seen before in sec \ref{sec:tau_lepton}, when a $\tau$ is produced in a collision, it can decay into several different final states.
 Hadronic final states, denoted \tauh, represent about 65\% of tau decays.
-These hadronic final states are characterised by one or three charged hadrons with or without \pizero .
+These hadronic final states are characterised by one or three charged hadrons with or without \pizero . But similar particles can be reconstructed from other processes and decays, such as events involving QCD jets.
+Since these QCD jets greatly outnumber \tauh in the final states of proton-proton collisions at the LHC, \tauh identification algorithms have been designed in CMS to reject QCD jets as much as possible while keeping a \tauh identification efficiency somewhere between 35\% and 70\%, depending on the purity needed by the analyses. Identification is performed on a jet basis, meaning algorithms classify all reconstructed jets as either background, meaning QCD jets, or signal, meaning \tauh decay products.
+The standard \tauh identification algorithm used in CMS, which will be detailed in section \ref{sec:std_tau_id}, have reached excellent performance thanks to the use of particle-flow reconstruction but do not use its full potential. 
 
-But similar particles can be reconstructed from other processes and decays, such as QCD jets.
-Since these QCD jets greatly outnumber \tauh in the final states of proton-proton collisions at the LHC, \tauh identification algorithms have be designed in CMS to reject QCD jets as much as possible while keeping a \tauh identification efficiency somewhere between 35\% and 70\%, depending on the purity needed by the analyses. Identification is performed on a jet basis, meaning algorithms classifies all reconstructed jets as either background, meaning QCD jets, or signal, meaning \tauh decay products.
-
-These standard \tauh identification algorithms, as will be presented in section \ref{sec:std_tau_id}, have reached excellent performance thanks to the use of particle-flow reconstruction but do not use its full potential.
-
-Deep learning algorithms, that will be introduced in section \ref{sec:NN}, have shown an ability to use available information as efficiently as possible for the task they are trained for. In the field of particle physics, for example, their use in heavy flavour jet-tagging \cite{btagging_NN} has shown significant improvements over previously used techniques. These networks show best results when their design, or architecture, helps simplify the task at hand. New architectures specifically intended for high energy proton-proton collisions have shown promising results. One such architecture is the Recursive Neural Network (RecNN) \cite{Louppe:2017ipp} used to identify boosted jets originating from hadronically decaying W bosons. This could be adapted to similar tasks, such as \tauh identification. The section \ref{sec:RecNN} will detail this adaptation to the \tauh identification task and the improvements from the original design. But machine learning techniques such as the RecNN need to be trained on well identified data. The CMS simulated data offers such a possibility, as the provenance of the reconstructed jets can be easily found. A chunk of these datasets is also going to be used to compare the performance of both the standard and the RecNN approach. The specificities of the selected datasets are then first going to be presented in section \ref{sec:NN_datasets}, as it introduces the context of the study.
-
-\section{Simulation of QCD jets and hadronic $\tau$ decays}
-\label{sec:NN_datasets}
-
-In order to compare the several classification methods, their performance is expressed in terms of signal efficiency and background rejection. To quantify these, and to provide a training set for our deep learning algorithm, datasets of QCD jets and hadronic tau decays have been selected from the simulated CMS datasets that were introduced in \ref{sec:cms_physics_event_generation}. Instead of simulating isolated QCD jets and \tauh separately, entire collision events are used as they provide a realistic environment similar to the one in which the classifier will be used.
-
-Selected processes leading to \tauh and QCD jets in the final state are detailed in table \ref{tab:NN_b_s_diff}. QCD jets are obtained from QCD multijet events in which true \tauh are extremely rare, while \tauh are taken from events with true taus in the final state (MSSM $H\rightarrow \tau\tau$, DY $Z\rightarrow \tau\tau$).
-
-% As seen in sec \ref{sec:cms_physics_event_reconstruction}, after particle-detector interaction is simulated, reconstruction will undergo the exact same algorithms in both real data in simulation, meaning both classical and, if proven to be useful, deep-learning based algorithms identification algorithms, the reconstruction steps that precede identification will be detailed in sub-section \ref{sec:NN_datasets_pf}. Although to be able to quantify both methods in terms of background rejection and signal identification, only simulation will be used to compare.
-
-The proton-proton collision events are generated with PYTHIA 8 \cite{SJOSTRAND2008852}, and are then processed by the CMS GEANT4 simulation, as detailed in section \ref{sec:cms_physics_event_generation}. The generation-level information is kept and will be referred to as gen level. All the information coming out of the detector simulation is fed to the CMS reconstruction algorithms, where the particle flow algorithm provides the list of reconstructed stable particles. Higher-level objects such as jets, are reconstructed by combining these particles using the clustering algorithms introduced in \ref{sec:jet_clustering}.
-
-At this point most reconstructed particles, isolated or not, are part of a reconstructed jet. Since the role of the studied classifiers is to classify reconstructed jets as QCD jets or \tauh decays, the information is split on a single jet basis.
-
-A reconstructed jet is defined as signal if it is selected from the genuine tau samples, and as background if selected from the QCD multijet samples. To ensure purity, some extra cuts are applied, these cuts can be found in table \ref{tab:NN_b_s_diff}.
-
-The matching between reconstructed jets and gen-level \tauh is done by ensuring their respective directions are aligned, meaning that the distance separating their orientation in the ($\eta ,\phi$) plane is less than $0.1$.
-
-
-\begin{table}[ht]
-    \caption{Provenance and cuts applied to reconstructed jets defining signal and background.}
-    \centering
-    \begin{adjustbox}{max width=\textwidth}
-    \begin{tabular}{c||c|c}
-        & \tauh (signal) & QCD jets (background) \\
-        \hline \hline
-        \multirow{3}{*}{Hard processes} & SUSY ggH $\rightarrow\tau\tau$ & \multirow{3}{*}{\begin{minipage}{0.4\textwidth}QCD multijets samples ordered by \pt : 15-30, 30-50, 50-80, 80-120, 120-170, 170-300 \end{minipage}} \\
-        \cline{2-2}
-         & SUSY bbH to $\rightarrow\tau\tau$ & \\
-        \cline{2-2}
-         & DY to tautau & \\
-        \hline
-        phase-space cuts & \multicolumn{2}{c}{$20<\pt<100 \text{ and } |\eta|<0.8$}\\
-        \hline
-        specific extra cuts & matched with gen-level \tauh & any \\
-        \hline
-    \end{tabular}
-    \end{adjustbox}
-    \label{tab:NN_b_s_diff}
-\end{table}
+Deep learning algorithms have shown an ability to use available information as efficiently as possible for the task they are trained for. In the field of particle physics, for example, their use in heavy flavour jet-tagging \cite{btagging_NN} has shown significant improvements over previously used techniques. These networks show best results when their design, or architecture, simplifies the task at hand. New architectures specifically intended for high energy proton-proton collisions have shown promising results. One such architecture is the Recursive Neural Network (RecNN) \cite{Louppe:2017ipp} used to identify boosted jets originating from hadronically decaying W bosons. Deep learning techniques will be introduced by level of complexity leading to the RecNN in section \ref{sec:NN}. This architecture has been adapted to \tauh identification, as it is a similar task. The adaptations of this architecture as well as some improvements that have been implemented will be presented in section \ref{sec:RecNN}, along with the reached performance.
 
 \section{The standard CMS hadronic $\tau$ decays identification}
 \label{sec:std_tau_id}
@@ -105,50 +62,74 @@ Electrons are rejected by a BDT using observables that quantify the distribution
 All these variables are listed in \cite{tauh_reconstruction}.
     
 Muons are rejected by requiring that no track segments are found in at least two muon stations within a cone of size $\Delta R = 0.3$ around the \tauh direction. \tauh candidates are also rejected when the sum of the energies in the ECAL and HCAL corresponds to less than 20\% of the momentum of their leading track.
-    % \item Electrons are discriminated with a BDT using the following variables:
-    % \begin{itemize}
-    %     \item Electromagnetic energy fraction of the charged particles and photons that constitue the \tauh candidate : $E_{ECAL}/(E_{ECAL} + E_{HCAL})$.
-    %     \item $E_{ECAL}/p$ and $E_{HCAL}/p$, defined as rations of ECAL and HCAL energies relative to the momentum of the leading charged-particle track of the \tauh candidate.
-    %     \item $\sqrt{\sum(\Delta \eta)^2 \pt^{\gamma}}$ and $\sqrt{\sum(\Delta \phi)^2 \pt^{\gamma}}$, the respective \pt-weighted (in GeV) root-mean-square distances in $\eta$ and $\phi$ between the photons in any strip and the leading charged particle.
-    %     \item $\sum E_{\gamma}/E_{\tau}$, the fraction of \tauh energy carried by photons.
-    %     \item $F_{brem} = (p_{in}-p_{out})/p_{in}$, where $p_{in}$ and $p_{out}$ are measured by the curvature of the leading track, reconstructed using the GSF algorithm, at the innermost and outermost positions of the tracker.
-    %     \item $(E_e + \sum E_{\gamma})/ p_{in}$, the ratio between the total ECAL energy and the ineer track momentum. Thr quantities $E_e$ and $E_{\gamma}$ represent the energies of the electron cluster and of bremsstrahlung photons, respectively. $\sum E_{gamma}$ is reconstructed by summin the energy depositions in ECAL clusters located along the tangent to the GSF track.
-    %     \item $\sum E_{\gamma}/(p_{in}-p_{out})$, the ratio of energies of the bremsstrahlung photons measured in the ECAL and in the tracker.
-    %     \item $m_{\tauh}$, the mass of the \tauh candidate.
-    %     \item $$
-    % \end{itemize}
+
+\subsection{Simulation of QCD jets and hadronic $\tau$ decays}
+\label{sec:NN_datasets}
+
+In order to compare the both classification methods, their performance is expressed in terms of signal efficiency and background rejection. To quantify these, and to provide a training set for our deep learning algorithm, datasets of QCD jets and hadronic tau decays have been selected from the simulated CMS datasets that were introduced in \ref{sec:cms_physics_event_generation}. Instead of simulating isolated QCD jets and \tauh separately, entire collision events are used as they provide a realistic environment similar to the one in which the classifier will be used.
+
+Selected processes leading to \tauh and QCD jets in the final state are detailed in table \ref{tab:NN_b_s_diff}. QCD jets are obtained from QCD multijet events in which true \tauh are extremely rare, while \tauh are taken from events with true taus in the final state (MSSM $H\rightarrow \tau\tau$, DY $Z\rightarrow \tau\tau$).
+
+
+The proton-proton collision events are generated with PYTHIA 8 \cite{SJOSTRAND2008852}, and are then processed by the CMS GEANT4 simulation, as detailed in section \ref{sec:cms_physics_event_generation}. The generation-level information is kept and will be referred to as gen level. All the information coming out of the detector simulation is fed to the CMS reconstruction algorithms, where the particle flow algorithm provides the list of reconstructed stable particles. Higher-level objects such as jets, are reconstructed by combining these particles using the clustering algorithms introduced in \ref{sec:jet_clustering}.
+
+As stated before, the identification of \tauh and QCD jets is performed jet by jet. A reconstructed jet is defined as signal if it is selected from the genuine tau samples, and as background if selected from the QCD multijet samples. To ensure purity, some extra cuts are applied, these cuts can be found in table \ref{tab:NN_b_s_diff}.
+
+The matching between reconstructed jets and gen level \tauh is done by ensuring their respective directions are aligned, meaning that the distance separating their orientation in the ($\eta ,\phi$) plane is required to be $\Delta R < 0.1$.
+
+
+\begin{table}[ht]
+    \caption{Provenance and cuts applied to reconstructed jets defining signal and background.}
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{c||c|c}
+        & \tauh (signal) & QCD jets (background) \\
+        \hline \hline
+        \multirow{3}{*}{Hard processes} & SUSY ggH $\rightarrow\tau\tau$ & \multirow{3}{*}{\begin{minipage}{0.4\textwidth}QCD multijets samples ordered by \pt : 15-30, 30-50, 50-80, 80-120, 120-170, 170-300 \end{minipage}} \\
+        \cline{2-2}
+         & SUSY bbH to $\rightarrow\tau\tau$ & \\
+        \cline{2-2}
+         & DY to tautau & \\
+        \hline
+        phase-space cuts & \multicolumn{2}{c}{$20<\pt<100 \text{ and } |\eta|<0.8$}\\
+        \hline
+        specific extra cuts & matched with gen-level \tauh & any \\
+        \hline
+    \end{tabular}
+    \end{adjustbox}
+    \label{tab:NN_b_s_diff}
+\end{table}
+
+Parts of these sets are also going to be used in the training of the deep learning algorithm. But biases coming from the difference between signal and background distribution can cause mistraining. For example, if both background and signal samples had different \pt distribution, the network could wrongly assume that the \pt of a reconstructed jet is correlated to its nature as a \tauh or a QCD jet, which should be avoided. To prevent this bias, the signal and background jets are split by \pt bins, and the selection signal and background jets is done in each \pt bin.
 
 \subsection{Performance}
 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{Images/std_ROC.png}
+    \includegraphics[width=\textwidth]{Images/ROC_comp_std.pdf}
     \caption{\tauh identification ROC curve for the standard method. The x axis is set to a logarithmic scale.}
     \label{fig:std_ROC}
 \end{figure}
 
-Performance are compared in terms of signal efficiency and background rejection. The signal efficiency is defined from the ratio of the number of well-tagged \tauh in the selected population over the total number of \tauh in this population. The background rejection is similarly defined as the ratio of the number of appropriately tagged QCD jets over the total number of QCD jets considered.
+Performance is evaluated in terms of signal efficiency and background rejection. The signal efficiency is defined as the ratio of the number of well-tagged \tauh over the total number of \tauh in the selected population. The background rejection is similarly defined as the ratio of the number of well-tagged QCD jets over the total number of QCD jets in the population.
 
-While the goal of a classifier is to tag objects as signal or background, most will instead provide with a score between 0 and 1. A score close to 0 is to be interpreted as very likely to be background, and a score close to 1 as very likely to be signal. This continuous score can then be translated into a discrete tag by the choice of a working point (WP) value. For a given WP, every reconstructed jet that scores below the WP value is then tagged as QCD jet, and every reconstructed jet that scores higher than tha value a \tauh. The values of the signal efficiency and background rejection can be measured for a continuous scan of WP values, allowing to build a Receiver Operating Characteristic (ROC) curve. The standard identification ROC curve is shown in figure \ref{fig:std_ROC}
-Generally, a numerical figure of merit is the area under the ROC curve, called ROC AUC, as it is maximum when signal efficiency and background rejection is perfect.
-In our case, ROC AUC might not be the best figure of merit, as it doesn't take into account which regions are best covered by the technique. Indeed, in our case the standard identification technique is based on applying hard cuts such as decay mode finding and anti-lepton discriminant before evaluating the score of the the isolation BDT. This is why the ROC of the standard technique reaches a plateau, as the plateau corresponds to maximum efficiency allowed by the previous cuts.
+While the goal of a classifier is to tag objects as signal or background, most will instead provide with a score between 0 and 1. A score close to 0 is to be interpreted as very likely to be background, and a score close to 1 as very likely to be signal. This continuous score can then be translated into a discrete tag by the choice of a working point (WP) value. For a given WP, every reconstructed jet that scores below the WP value is then tagged as QCD jet, and every reconstructed jet that scores higher is tagged a \tauh. The values of the signal efficiency and background rejection can be measured for a continuous scan of WP values. The created curve in the signal efficiency vs background rejection space is called a Receiver Operating Characteristic (ROC) curve. The standard identification ROC curve is shown in figure \ref{fig:std_ROC}
+A numerical figure of merit oftenly used to quantify the overall performance of a classifier is the area under the ROC curve, called ROC AUC, as it is maximum when signal efficiency and background rejection is perfect.
+In our case, ROC AUC might not be the best figure of merit, as it doesn't take into account which regions are best covered by the technique. Indeed, in our case the standard identification technique is based on applying hard cuts such as decay mode finding and anti-lepton discriminant before scanning the score of the isolation BDT. This is why the ROC of the standard technique reaches a plateau, as the plateau corresponds to maximum efficiency allowed by the previous cuts.
 QCD jets are also overwhelmingly more present in collisions than \tauh, meaning useful working points are in the region of high background rejection. 
 
 \subsection{Intrinsic limitations}
 
-Both cut-based and BDT-based identification methods rely heavily on designing variables that are likely to have discriminating power, to either create a hard cut directly, or to mix several of these variables into a BDT . But the construction of such variables potentially do not take into account other information that have been gathered in the detection and reconstruction.
-While the BDT combines more information than than the cut-based method, it requires fine tuning of the choice of variables. This tuning can lead to a tedious optimisation process since the possibilities of information combinations are potentially infinite. Machine learning techniques are intrinsically limited by the amount of information that is available in theirinputs. 
-A possible improvement should therefore be expected from using a more complete set of variable rather than a selected subset, which is one of the philosophy of deep learning.
+The cut-based method relies on a single variable, namely isolation, to classify. The BDT-based method is an improvement on the cut-based method as it combines isolation with other variables susceptible to bring more information relevant to the classification process. But the BDT still takes a limited amount of information encoded into a strict number of variables. The construction of such variables do not take into account all the information gathered in the detection and reconstruction phases. A possible improvement should therefore be expected from using all the available information rather than a chosen subset. Deep learning techniques are conceptually adequate for such a task as they take all available information in and the process of such information is then completely derived from training.
 
 
 \section{From a single neuron to recurrent networks}
 \label{sec:NN}
-Neural networks are based on combining the principle of a human neuron into networks, using the exponential possibilities of such combination.
-They usually require a substantial amount of fully known data as a reference to learn how to perform their given task. The possibility of using simulation allows to have such a substantial  well-known training dataset.
 Indeed, neural networks have brought a lot of new results in fields such as big data, image recognition and even pseudo-data generation.
+Neural networks are based on processing units called neuron. These combination of such neurons into networks allows exponential possibilities of information processing. Those neural networks are then trained to give the desired output by a trial and error process on a set of examples. The set of examples given to a neural network is called a training set. By comparison with other trained techniques, the possibilities gained by the complexity of a neural network comes with a need for a bigger training set. The use of simulation simulation allows to have such a substantial training dataset.
 
-The organisation of the neurons in the network is called architecture. The choice of architecture has a strong influence on the training, as neural networks have shown their best achievements through the use of architectures specifically designed for the given task.
+The organisation of the neurons in the network is called architecture. Neural networks have shown their best achievements when their architectures are specifically designed for the task at hand.
 
 \subsection{Basics : neurons, dense networks, deep learning}
 
@@ -169,7 +150,7 @@ The organisation of the neurons in the network is called architecture. The choic
     \label{fig:activation_functions}
 \end{figure}
 
-A neuron is defined by an activation function $f$, a set of scalar weights $wi$ and a bias $b$. It takes a number of input variables denoted $X_i$ and produces as output the result of $f(\sum w_i\times X_i + b)$. The layout of a neuron is also illustrated in figure \ref{fig:neuron_diagram}. The weighted input is also defined as $z = \sum w_i\times X_i + b$, so that the output of the neuron becomes $f(z)$. The function is called activation function and is chosen among nonlinear differentiable functions. Some examples of widely used activation function are illustrated in figure \ref{fig:activation_functions}. 
+A neuron is defined by an activation function $f$, a set of scalar weights $wi$ and a bias $b$. It takes a number of input variables denoted $X_i$ and produces as output the result of $f(\sum w_i\times X_i + b)$. The layout of a neuron taking two inputs is illustrated in figure \ref{fig:neuron_diagram}. The weighted input is also defined as $z = \sum w_i\times X_i + b$, and the output of the neuron becomes $f(z)$. The function is called activation function and is chosen among nonlinear differentiable functions. Some examples of widely used activation function are illustrated in figure \ref{fig:activation_functions}.
 
 \subsubsection{Densely connected network}
 
@@ -181,198 +162,172 @@ A neuron is defined by an activation function $f$, a set of scalar weights $wi$ 
     \label{fig:dense_network}
 \end{figure}
 
-A network can be created by connecting neurons. A simple case is the feed-forward densely connected network, such as shown in figure \ref{fig:dense_network}. The feed forward nature means that there is no cycle in the propagation of the evaluation from inputs to outputs. In this architecture, neurons are organised by layers, with each neuron's output being an input to each neuron in the next layer. Such organisation creates the possibility of approximating theoretically any task as stated by the Universal approximation theorem states \cite{Cybenko1989}, as long as the activation function is non-linear.
+A network can be created from neurons by connecting their input and outputs. A simple case is the feed-forward densely connected network, such as shown in figure \ref{fig:dense_network}. In this architecture, neurons are organised by layers, with each neuron's output being one of the inputs of the neurons in the next layer. The first layer takes the variables of the task as inputs. Then the information is propagated through each neuron evaluation of its activation function. The output of the last layers is then considered the output of the network associated with the given set of inputs. An architecture is called feed forward when there is no cycle in the propagation of the evaluation from inputs to outputs. Such an architecture creates the possibility of approximating theoretically any task, as stated by the Universal approximation theorem states \cite{Cybenko1989}, as long as the activation function used in the neurons are non-linear.
 
-\subsubsection{Loss function and backpropagation}
+\subsubsection{Training: loss function and backpropagation}
 
-In order to find the set of weights and bias most suited for a task, the network needs to be trained.
-The training phase relies on an example set of inputs associated with the target output value. Indeed, the output of the network for a given set of inputs is compared to the target output. This comparison is quantified through the use of a metric called the loss function. The loss function should be a differentiable function of the target value and the output of the network that should be minimum when these variables are equal. Training the network to perform task is therefore equivalent to minimizing the value of the loss function over all possible values for the parameters of the network (weights and biases) for the whole training set.
+In order to find the set of weights and bias that allows the network to perform the desired task, the network is trained.
+As previously mentionned, the training phase relies on a set of examples of inputs associated with their targeted output value. The training is done iteratively. The first step is comparing the output of the network for a set of inputs to the desired output. This comparison is quantified through the use of a metric called the loss function. The arguments of the loss function are the output of the network and the desired output. The loss function is required to be a differentiable function and is designed to reach a minimum when these arguments are equal, meaning the output of the network is the desired value. Training the network to perform the task is therefore equivalent to change the network parameters (weights and biases) to minimize the value of the loss function for the whole training set, provided the training set is a representative sample of the global population.
 
-But the space of configurations of the weights and biases, together called parameters, of the network has a huge dimensionnality. The iterative process of training the network can then lead to stagnation if examples are evaluated and parameters adapted for each example of the training set. To avoid this stagnation, the parameters are changed to minimize the average of the loss function over a number of examples, called mini-batch. The number of examples in each mini-batch is referred to as the mini-batch size.
+But the space of configurations of the weights and biases of the network has a huge dimensionnality. The iterative process of training the network case by case can then lead to stagnation if examples are evaluated and parameters adapted for each example of the training set. To avoid this stagnation, the parameters are changed to minimize the average of the loss function over a number of examples, called mini-batch. The number of examples in each mini-batch is referred to as the mini-batch size.
 
-The way the parameters are changed to minimize the loss function depends on which optimizer algorithm is used. Most optimizers rely on backpropagation, meaning the variation that should undergo a parameter is computed by propagating the change of the loss function backwards through all the layers of neurons between the considered neuron and the output of the network. 
+The way the parameters are changed to minimize the loss function depends on which optimizer algorithm is used. Most optimizers rely on backpropagation, meaning the variation that should undergo a parameter is computed by propagating the change of the loss function backwards through all the layers of neurons between the output of the network and the considered neuron using the chain rule.\newline
 
 
-A classical problem that can occur in the training of neural networks is the existence of local minima of the loss function. Indeed, local minima can lead to a sub-optimal training, as it prevents the network from reaching a potentially lower global minimum. To mitigate such effects, diminishing learning rates as well as momentum-based optimizers are used. The learning rate is a simple scalar that multiplies the changes in parameters for a given change in loss. By starting at a high value of this learning rate, it is possible to avoid local minima that are too small, while in later stage of the training, this rate can be lowered to help reach the lowest point of the minimum. Momentum-based optimizers try to avoid momentum by accelerating the learning rate by a factor proportional to the size of the last step. Indeed, the more a training step helped minimizing the loss function, the bigger the next step, avoiding local minima on the way to a global minimum.
+A classical problem that can occur in the training of neural networks is the existence of local minima of the loss function. Indeed, local minima can lead to a sub-optimal training, as it prevents the network from reaching a potentially lower global minimum. To mitigate such effects, diminishing learning rates as well as momentum-based optimizers are used. The learning rate is a simple scalar that multiplies the changes in parameters for a given change in loss. By starting at a high value of this learning rate, it is possible to avoid local minima that are too small. After several iterations of training, this rate can be lowered to help reach the lowest point of the minimum. 
 
-Backpropagation comes with another important problem called vanishing gradients. This roughly is due to output of layers being generally relatively small compared to the input of a neuron. Indeed, an activation function such as the sigmoid, illustrated in figure \ref{fig:activation_functions}, can be lead to states where the derivative is close to 0. Since backpropagation finds the derivatives of the cost function with respect to the parameters by using the chain rule backward from the last layer. This means the more layers are in between a neuron and the final layer, the more chance that its parameters will update based on the derivative that is likely close to 0. In other words, this also means that a change in the parameters of a neuron in an early layer will have a relatively small effect on the loss compared to a similar change in the late layers. In the training, this leads to a slower training of the early layers compared than the last layers. Therefore, a very deep network, meaning many layers, will overall need a lot bigger training set and also a longer training time. This can be mitigated by the use of activation function such as the ReLU, which is defined as $f(x)=0$ for $x < 0$ and $f(x)=x$ for $x \geq 0$ as illustrated in figure \ref{fig:activation_functions}. This activation function avoids the small derivative by not requiring its output to be between 0 and 1. The use of cross-entropy as a loss function also allows to mitigate the vanishing gradients problem, as the derivative of the activation function cancels out in the computation of the overall derivative of the cost function with respect to the parameters \cite{NN_book}. One can also mitigate further this problem by designing an architectural workaround, avoiding deep network when possible, for example using recurrent neural networks, which are introduced in the following section.
+Momentum-based optimizers try to avoid minimums by multiplying the learning rate by a factor proportional to the gain of the last step. Indeed, the more a training step helped minimizing the loss function, the bigger the next step, avoiding local minima on the way to a global minimum.\newline
 
-    % \begin{equation}
-    %     L = \frac{1}{n} \sum_x L_x
-    % \end{equation}
-    % \item (base explanation same way as http://neuralnetworksanddeeplearning.com/chap2.html and cite!)
-    % \item notation : 
-    % \begin{itemize}
-    %     \item $w_{jk}^{l}$  denote the weight for the connection from the $k^{th}$ neuron in  the $(l-1)^{th}$ layer to the $j^{th}$ neuron in the $l^{th}$ layer and $b_{j}^{l}$ the bias of the $j^{th}$ neuron in the $l^{th}$ layer
-    %     \item $\sigma$ is the activation unction
-    %     \item $a_{j}^{l}$ is the activation of the $j^{th}$ neuron in the $l^{th}$ layer
-    %     \item therefore 
-    %     \begin{equation}
-    %         a_{j}^{l} = \sigma \Big( \sum_k w_{jk}^{k}a_{k}^{l-1} + b_{j}^{l} \Big)
-    %     \end{equation}
-    %     \item to lighten the scripture, let's use the vectorized form:
-    %     \begin{equation}
-    %         a^l = \sigma \Big( w^l a^{l-1} + b^l \Big)
-    %     \end{equation}
-    %     \item with
-    %     \begin{equation}
-    %         f\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \begin{pmatrix} f(x_1) \\ f(x_2) \end{pmatrix}
-    %     \end{equation}
-    %     \item also to lighten the scripture let's define :
-    %     \begin{equation}
-    %         z_j^l = \sum_k w^l_{jk} a_k^{l-1} + b_j^l
-    %     \end{equation}
-    %     \item and
-    %     \begin{equation}
-    %         (s \odot t)_j = s_j t_j
-    %     \end{equation}
-    %     \item now let's define the "learnability" (good word?) of neuron $j$ in the $l^th$ layer:
-    %     \begin{equation}
-    %         \delta_j^l \equiv \frac{\partial L}{\partial z_l^j}
-    %     \end{equation}
-    % \end{itemize}
-    % \item problem : local minimas
-    % \item part of the solution : momentum
-    % \item further solution : ADAM
-    % \item problem : vanishing gradient
-    % \item part of the solution : right choice of loss function (cross-entropy)
+Backpropagation comes with another important problem called vanishing gradients. This roughly is due to output of a neuron being generally relatively small compared to the input of a neuron. Indeed, an activation function such as the sigmoid, illustrated in figure \ref{fig:activation_functions}, can lead to states where the derivative is close to 0. But backpropagation relies on the derivatives of the cost function with respect to the parameters being derived using the chain rule backward from the last layer. This means the more layers are in between a neuron and the final layer, the more likely it is that its parameters will update based on the derivative that is close to 0. In other words, this means that a change in the parameters of a neuron in an early layer will have a relatively small effect on the loss compared to a similar change in the later layers. In the training, this leads to a slower training of the early layers compared than the last layers. Therefore, a very deep network, meaning many layers, will explore the sapce of its parameters very slowly compared to a shallow network. This can lead to much longer training stages, and even stagnation of the overall performance, meaning the network does not train. This is mitigated by the use of activation function such as the ReLU, which is defined as $f(x)=0$ for $x < 0$ and $f(x)=x$ for $x \geq 0$ as illustrated in figure \ref{fig:activation_functions}. This activation function avoids the small derivative by not requiring its output to be between 0 and 1. The use of cross-entropy as a loss function also allows to mitigate the vanishing gradients problem, as the derivative of the activation function cancels out in the computation of the derivative of the cost function with respect to a parameter of the network \cite{NN_book}. One can also mitigate further this problem by designing an architectural workaround, avoiding deep network when possible, for example using recurrent neural networks, which are introduced in the following section.
+
 
 
 \subsection{Recurrent neural networks}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{Images/recurrent_network.png}
-    \caption{Diagram of the evaluation of a recurrent network on successive sets of inputs from \cite{RNN}.}
+    \includegraphics[width=\textwidth]{Images/Schema_RNN.pdf}
+    \caption{Diagram of the iterative evaluation of a recurrent neural network in the language processing case. Only the two last iteration corresponding to the two last word of a sentence is represented. The green boxes represent several iteration of the same unit. The yellow rectangular boxes represent a single neuron layer and the rounded yellow box represent a dense network, which can made of several layers.}
     \label{fig:recurrent_network}
 \end{figure}
 
-Recurrent neural network have been designed to fit the necessities of language processing, which are in some extent similar to the \tauh identification of reconstructed jets. Indeed, the information is delivered in sentences, which are a set of words with a varying length, which can be assimilated to a jet, which is a set of particle with a varying length. Classical neural networks, such as the densely connected network, have a fixed number of input variables, which makes them unable to process such information as it is. To fit this information format, recurrent networks work by iteration over each word. The same network will be evaluated iteratively on each word, while giving a channel of communication with its next evaluation, as illustrated in figure \ref{fig:recurrent_network}. The communication channel with its next iterations takes the form of a secondary output to the network that feeds into a secondary input at the next iteration. In most cases, only the last iteration of the primary output of the layers is considered as the final output of the network. The secondary communication channel between iteration can be interpreted as an inner representation of the inputs that builds up at each iteration, before being used in the final output.
+The dense neural network that has been introduced has a limiting characteristic that limits its usage in our case. In order to use all the information available in jets, all the characteristics of the particles of each jet must be fed into the network. But each jet has a different number of particle, and a dense network cannot accommodate its number of input on a case-by-case basis. A category of architectures, which are designed to accommodate such a varying number of inputs, exist and those architectures are referred to as recurrent neural networks (RNNs). Those networks have been particularly useful in language processing tasks. Indeed, language processing have a similar varying number of inputs requirements, as the number of words changes in different sentences. RNNs are going to be introduced here in the case of an example task of classifying sentences as positive or negative.
 
-This architecture can be interpreted as dividing the inner working of the network into two parts. A first part has the role of building up the inner representation at each iteration, while a second part is only evaluated at the last iteration in order to produce the desired output from the inner representation. An important feature is that the first part of the channel is the same at each iteration, meaning the total number of independent parameter is kept low. By designing such an architecture, one of the goals is to separate a complex task into a subset of two other simpler tasks, allowing the task to be fulfilled by a less deep network, avoiding the vanishing gradient problem.
+Every RNN is separable into two distinct part. A first part has the goal of embedding the information gathered from the inputs into a fixed-size array of values. The second part is a dense neural network that takes the elements of this array as its inputs, and its output is considered the output of the RNN as a whole. The embedding part consists in applying a unit iteratively on each input element, in this case each word. The output of the previous iteration is also taken as a secondary input. The composition of a unit in terms of network layers and information flow then defines a specific RNN architecture. A simple case of RNN architecture is illustrated in Figure \ref{fig:recurrent_network}.
 
-\section{Recursive neural network}
+While this architecture has the advantage of being able to accomodate inputs of varying size, it also benefits from the fact that the same embedding unit is applied at each iteration, with the same parameters. This mitigates the vanishing gradient problem, as all parameters of the network are evaluated close to the final layer. Conceptually, this allows the use of a small amount of layers by taking advantage of the symmetries of the inputs. 
+
+\subsection{Recursive neural networks}
 \label{sec:RecNN}
-Neural network architectures should fit the format of the input while providing an information flow as adapted as possible to the task at hand. This recursive neural network (RecNN) architecture is used to perform the task of correctly identify \tauh decay products from a set of reconstructed jets, with QCD jets as the main background. Such an architecture based on the jet structure was developed in order to separate boosted W-jet from QCD jets \cite{Louppe:2017ipp}. The architecture is chosen to be based on the jet clustering algorithms. We will detail the adaptation of such idea to our case as well as different improvements that were implemented.
 
-\subsection{Base architecture}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{Images/RecNNdiagram.pdf}
-    \caption{Nodal architecture of a Recursive neural network (RecNN).}
-    \label{fig:recnn_architecture}
+    \includegraphics[width=\textwidth]{Images/RecNN_diagram_not_parall.pdf}
+    \caption{Diagram of the overall node structure of the gated RecNN. The order in which the node are merge is determined by the chosen jet clustering metric. Every green unit represent the evaluation of the same unit. The black arrows in this diagram represent the flow of both the 4-momentum and the embedding array, meaning it represent both black and blue arrows from the node diagrams.}
+    \label{fig:recursive_network}
 \end{figure}
 
-\begin{figure}
-    \begin{center}
-    \subfloat[RecNN leaf node]{
-        \includegraphics[width=\textwidth]{Images/simpleRecNN.png}
-        \label{sub:RecNNLeafNode}
-    }
-    
-    \subfloat[RecNN node]{
-        \includegraphics[width=\textwidth]{Images/simpleRecNN2.png}
-        \label{sub:RecNNNode}
-    }
-    
-    \subfloat[Gated RecNN node]{
-        \includegraphics[width=\textwidth]{Images/gatedRecNN.png}
-        \label{sub:GatedRecNNNode}
-    }
-    
-    \caption{Diagrams of different nodes that can be found in a RecNN architecture. Top is a leaf node, middle is a non-leaf node. Bottom is a non-leaf node for a gated RecNN architecture.}
-    \label{fig:recnn_nodes}
-    \end{center}
-\end{figure}
 
-The network architecture will be divided into two parts, similarly to the recurrent architecture. A first embedding part is organised from a jet clustering structure. Its output then fed to a dense feed-forward network architecture, as illustrated in figure \ref{fig:recnn_architecture}.
-The jet-embedding part is built as an ensemble of nodes. Similarly to recurrent networks, the neuron layers in each node have the same parameters. Also similarly to the word-based scheme in recurrent network, the recursive network is particle-based, meaning the input jet is broken down to its constituent particles, and each particle is fed into an input node, called leaf-node. To build the jet-embedding structure, two nodes are selected using a chosen metric, and feed into a new node, iteratively, until there is only one node left. 
+Similarly to how RNNs were designed to fit the needs of language processing, another architecture type has been designed to fit the needs of jet classification. This architecture type, called recursive neural network (RecNN), was devellopped following the idea behind jet clustering, and applying such architectures to the problem of boosted W-jet tagging \cite{Louppe:2017ipp}.
+
+\subsection{Architecture}
+
+As in a RNN, the network architecture is divided into two parts, a jet embedding part and a final classifier made from a dense neural network. Contrarily to the linear structure of the sentence embedding, the embedding part is organised from a jet clustering structure. The 4-momentum of each input particle is fed into a version of the unit design to only take a particle as input, those units iterations are called leaf nodes. Then two nodes are selected from the clustering metric and their output is fed into an inner node, designed to now take two nodes output as inputs. This process is repeated, still using the clustering metric at each step to determine which two nodes are to be merged into a new node next, until only one node remains, as illustrated in Figure \ref{fig:recnn_architecture}. The output of the final node is finally fed to the classifier part to provide a final output. 
 The metric used to select which nodes are to be merged can be chosen among the following set:
     
 \begin{itemize}
     \item randomized : two nodes are selected at random
     \item pt-ordered : the nodes holding the two pseudo-particles with the highest pt 
     \item reversed pt-ordered : the nodes holding the two pseudo-particles with the lowest pt
-    \item kt : nodes holding closest pseudo-particles following the kt clustering metric
+    \item $k_t$ : nodes holding closest pseudo-particles following the kt clustering metric
     \item Cambridge : nodes holding closest pseudo-particles following the Cambridge clustering metric
-    \item anti-kt : nodes holding closest pseudo-particles following the anti-kt metric
+    \item anti-$k_t$ : nodes holding closest pseudo-particles following the anti-kt metric
 \end{itemize}
-The distance of two particles $i$ and $j$ is defined as
+The distance of two particles $i$ and $j$ in a clustering metric is defined as
 \begin{equation}
     d_{ij} = \mathrm{min}(p_{Ti}^{2k},p_{Tj}^{2k}) \frac{\Delta_{ij}}{\mathrm{R}} \mend
 \end{equation}
-In this expression $\Delta_{ij}$ corresponds to the distance of the particles in the ($\eta$,$\phi$) plane, R is a distance parameter, and $p_{Ti}^{2k}$ corresponds to the modulus of the transverse momentum of particle $i$, with the $k$ parameter being equal to 1 for the kt metric, 0 for the Cambridge metric, and $-1$ for the anti-kt metric.
+In this expression $\Delta_{ij}$ corresponds to the distance of the particles in the ($\eta$,$\phi$) plane, R is a distance parameter, and $p_{Ti}^{2k}$ corresponds to the modulus of the transverse momentum of particle $i$, with the $k$ parameter taking a value of 1 for the kt metric, 0 for the Cambridge metric, and $-1$ for the anti-kt metric.
 
-In the jet embedding part, the information takes two distinct paths, as illustrated in figure \ref{fig:recnn_nodes}.
-The vector $O_k$ was originally the 4-momentum of the pseudo-jet at the node k in the original design. It has been upgraded to hold extra information in the new version. First, The 4-momentum is split by particle type : photon, electron, muon, charged hadron, neutral hadron. This is done to allow the network to base its decision on the types of particles rather than just the overall 4-momentum. Second, the 4-momentum vector is also concatenated with information on each subjets. As the $O_k$ vector is computed as the sum of the $O_{kl}$ and $O_{kr}$ vectors, coming from the nodes that were merged into node $k$, the new information must be addable. The chosen extra variables are the total charge and total number of particles for each type constituent. On top of this, the distance in the ($\eta$,$\phi$) plane between the merged pseudo-jets is fed to the network at each successive step of the clustering. 
+In the jet embedding part, the information actually takes two parallel paths. For each inner nodes, the 4-momentum of the particle or pseudo-jet of the two merged nodes is added. This new pseudo-jet is both used in the change of the embedded representation array and then propagated as secondary input to the next merge.
 
-At each node a full set of variables is also re-computed from the 4-momenta : p, \pt, m, $\eta$, $\phi$, $\theta$. All of these variables are then fed into a neuron layer called $\sigma_{u}$ instead of the 4-momentum in cartesian form.
-On a leaf node k, the output of $\sigma_{u}$ is then taken as the embedded output of this node, named $h_k$.
-On a non-leaf node k, the output of $\sigma_{u}$ is fed along the embedded outputs of the previous layers into another layer, namely $\sigma_h$. the output of $\sigma_h$ is then the embedded output $h_k$.
-Effectively there are indeed two paths for the information in the architecture: a direct pseudo-particle like clustering where 4-momentum and addable characteristics are added, and a path where neuron layers embed the information and mixes it with the existing previously embedded information.
+\subsubsection{Node layout: gating}
 
-\subsection{Gating}
 
-Gated RecNN adds an extra complexity on the scheme of layers in a node, as illustrated in figure \ref{fig:recnn_nodes}. Inspired by the long short-term memory (LSTM) architecture \cite{lstm}, the gating adds the possibility for the network to select and mix information in the embedding scheme more easily. 
+\begin{figure}
+    \begin{center}
+    % \subfloat[RecNN leaf]{
+        \includegraphics[width=\textwidth]{Images/Schema_RecNN_Leaf.pdf}
+        \label{sub:RecNNLeafNode}
+    % }
+    
+    % \subfloat[RecNN node]{
+        \includegraphics[width=\textwidth]{Images/Schema_RecNN.pdf}
+        \label{sub:RecNNNode}
+    % }
+    
+    % \subfloat{
+    %     \includegraphics[width=\textwidth]{Images/RecNN_diagram_not_parall.pdf}
+    %     \label{sub:RecNN_full}
+    % }
+    
+    \caption{Diagrams of the nodes that can be found in a RecNN architecture. The top is a leaf node, meaning directly taking a particle 4-momentum as only input. Bottom illustrates the inner structure of a node as well as how its input are taken from the previous nodes. The green boxes represent several iteration of the same unit. The yellow rectangular boxes represent a single neuron layer, and their names correspond to the activation function of the neurons in that layer. The blue arrows represent the path of 4-momentum merging at each iteration. The black arrow represent the path of the embedding arrays. the plus and dot signs in the red circles represent element-wise sum and element-wise product respectively. The white box represent a preprocessing step that involves the transformation into cylindrical coordinates, as well as a scaling of each variable. More information on these operation can be found in the text.}
+    \label{fig:recnn}
+    \end{center}
+\end{figure}
 
-A new neuron layer $\mathrm{Sigmoid}_r$, takes 3 input vectors : $h_k_l$,$h_k_r$ and the output of layer $\sigma_u$. It will give 3 scalar outputs that will be used to multiply the same vectors respectively. Each multiplied vector is then fed into layer $\sigma_\hat{h}$. 
-The four vectors $h_k_l$, $h_k_r$, output of $\sigma_u$ and output of $\sigma_\hat{h}$ are going to be weighted and added. The weights $w_i$ are determined by another neuron layer called $\mathrm{Softmax}_z$. The output of $\mathrm{Softmax}_z$ are forced to respect the following equations :
-\begin{equation}    
-    h_{k} = \sum_{n_{i}=h_{kL},h_{kR},u,\hat{h}} w_{i}n_{i}
-\end{equation}
+While several node layouts are tested in \cite{Louppe:2017ipp}, the gated layout has the best results and is the basis of our version. Inspired by the long short-term memory (LSTM) architecture \cite{lstm} and gated recurrent unit (GRU) architectures \cite{GRU}, the gating conceptually adds the possibility for the network to select and mix available information more easily. While a mathematical formulation of this layout is available in the appendix of the article, the following explanation relies on the illustration in figure \ref{fig:recnn_nodes}. 
+
+First, each leaf node takes the 4-momentum of a particle and directly propagate it as its secondary output. A copy of this 4-momentum is pre-processed, which consists in two distinct steps. The first step is changing the expression of this 4-momentum from the easily addable Cartesian coordinates, to the more interpretable cylindrical coordinates. A few more variables are also computed at this step, like the 3-momentum modulus and the mass. Each of those variables are then scaled by the robustScaler method \cite{robustscale} trained on the whole dataset. The goal of this scaling is to allow the distribution of each of the variables to be comparable with one another in terms of median and quantiles, conceptually avoiding the following layers to have to learn the scales of each variable. 
+
+The output of this pre-processing step is then given as input to a ReLU layer, which output array, designed to be of the same shape as each of the concatenated embedding arrays, is also concatenated with the embedding outputs of the previous layers. A new ReLU layer is evaluated by combining the information in this new embedding array using a reset gate. Conceptually, the goal of this reset gate is to actively select which parts of the embedding array are to be emphasized, and which parts are to be forgotten. This reset gate is implemented by the use of a sigmoid layer, taking as input the embedding array and creating a same-shaped output array of values between 0 and 1. An element-wise product between the output array and a copy of the embedding array is then computed before feeding the produced array into the ReLU layer. The output of the ReLU layer, designed to have the same shape as each concatenated array, is then also concatenated to the embedding arrays.
+
+At this point the embedding array consist of the concatenation of four different arrays of the same shape: two embedding arrays outputs from the previous nodes, a local evaluation of the pseudo-jet and an array produced from the combination of all the previous ones. In order to combine all those information into an array of the desired shape, a softmax gate is applied. This softmax gate has the goal of weighting each variable of the embedded array by a scalar, before the four concatenated arrays are added element-wise. The weights are determined by a softmax neuron layer. The output weights $w_i$ of this softmax layer is determined from the activation of each output neuron $Z_i$ by
 \begin{equation}
-    w_{i} = \frac{e^{Z_i}}{\sum_{j=1}^{K}e^{Z_j}}
+    w_{i} = \frac{e^{Z_i}}{\sum_{j=1}^{K}e^{Z_j}} \mend
 \end{equation}
-This will allow the network to easily choose to enhance certain information paths and belittle information paths that seems not to be useful.
+The product of this softmax gate is then the embedding array output of this node. If the node is the final node, this output is then directly fed into the dense neural network classifier part of the architecture.
 
-\subsection{Pre-processing}
+\subsubsection{Pre-processing}
 
-In order to simplify the task, jets are de-boosted and centered using the highest \pt particle, meaning particles appear orientated around the center (0,0) of the ($\eta$,$\phi$) plane. The jet is then re-clustered into three subjets and rotated and/or mirrored so that the general disposition of subjets are similar. This is done in order to simplify the task for the network.
+In order to simplify the task, jets are de-boosted and centered using the highest \pt particle, meaning particles appear orientated around the center (0,0) of the ($\eta$,$\phi$) plane. The jet is then re-clustered into three subjets and rotated and even mirrored so that the general disposition of subjets appear similar. This is done in order to simplify the task for the network, as the orientation of the jet in the detector is not considered relevant for this task.
 
-Another issue arise from the distribution of signal and background jets in the training sample. If both background and signal samples had different \pt distribution, the network could wrongly assume that the \pt of a reconstructed jet is correlated to the identification task. To avoid statistical this bias in the training samples, the signal and background jets are selected for many \pt bins, in order to have the same number of signal and background events in each bin.
+\section{Recursive neural network for hadronic tau decay identification}
 
-\subsection{Implementation}
-
-While most neural network architecture can easily be implemented using available libraries, the RecNN architecture had to be implemented by hand using base classes from the sklearn library \cite{scikit-learn}. This is due to the architecture being adapted to each jet following the clustering algorithm applied to the considered jet. Therefore, using the implementation shared by the original article \cite{Louppe:2017ipp} as a base, many featured had to be re-implemented. For example, the fastjet \cite{Cacciari:2011ma} clustering algorithm interface had to be re-made in order to match the changes brought to the code, for example the matching of pseudo-jets to their respective extra information. Also the pre-processing and clustering evaluation steps have been reshaped to use multithreading, allowing faster computational times. Some libraries were changed to maximise computational efficiency, such as the disk writing format.
-
-A major upgrade that was implemented was related to trackability of the jets. Indeed, once the jet was pre-processed and re-clustered, the link with related information not involved in the network was lost. Once this feature was implemented, populations defined by the performance of both standard and RecNN methods could be studied on a broader level. A jet display was also implemented to study jets on a case-by-case basis. This jet-by-jet study allowed to understand the shortcomings of the network and design new features to avoid them.
-
-A feature that was mostly recovered from the original paper with minor changes was the parallelisation of tree evaluation and training computing steps. To implement this parallelisation, parameters are evaluated, or trained, simultaneously across each node depth level for multiple jets at a time, as illustrated in \ref{fig:RecNN_parall}. While this allows to gain time computationally, it adds a level of complexity to the whole structure of the code, as the neuron parameters are concatenated across node depth for several different jets at a time.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{Images/RecNN_diagram_parall.pdf}
-    \caption{Illustration of the parallelisation of computing in the RecNN. The red boxes correspond to node-depth levels that are evaluated and trained parallely.}
+    \includegraphics[width=\textwidth]{Images/RecNN_diagram_parall1.pdf}
+    \caption{Illustration of the parallelisation of computing in the RecNN. The red boxes correspond to node-depth levels that are evaluated and trained simultaneously in a single mini-batch.}
     \label{fig:RecNN_parall}
 \end{figure}
+
+
+
+\subsection{Implementation}
+
+While most neural network architectures can easily be implemented using widely available libraries, the nature of the RecNN architecture, mainly its changing structure that adapts to each jet, is not implemaentable from these libraries. The RecNN architecture was therefore implemented by the authors of \cite{Louppe:2017ipp} using basic classes from the sklearn library \cite{scikit-learn}. Therefore, the implementation shared by the original article \cite{Louppe:2017ipp} was used as a base for our own implementation. 
+
+The first difference brought by our implementation is purely an optimisation of the code. While the code was already designed to be run in parallel on several cores at the evaluation and training phases, the pre-processing steps were not. By adapting those steps and running in parallel the time needed for this step was significantly reduced. Time was also gained by changing the format under which the arrays were saved on disk.
+
+In order to compare the different methods and to study population effects, the code was adapted to be able to track jets through the evaluation process. Indeed, in the original code the formatting of particles into the arrays used as input to the RecNN meant the loss of its link with any other information, such as the score of the jet with the standard technique, or the gen-level information. This tracking also allowed to build a display of jets with their associated gen-level information, allowing a case-by-case study.
+
+\subsection{Upgrade}
+
+In the original implementation, particles are described only by their 4-momentum. But the nature of those particles as well as other available information is not used in this process yet. In order to add this information, the 4-momentum was changed to an array holding extra information. From the layout of a node, as illustrated in Figure \ref{fig:recnn}, this extra information must therefore consist of variables that can be added at each merging of two nodes.
+
+The first variables added are the energy contributions from each particle type, namely photons, electrons, muons, charged hadrons and neutral hadrons. In the case of charged particles, these contributions are also split each into two different contributions depending whether their trajectory is found to be displaced from the original vertex ($\Delta z < 0.2\,\mathrm{cm}$). 
+
+The decay modes of \tauh can only give a one or three charged hadrons and eventually a few photons in the final state. With this in mind the number of particle of each type is also added, as it is naturally considered a important information that the network was missing so far.
 
 \subsection{Performance}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{Images/ROC_comp.png}
+    \includegraphics[width=\textwidth]{Images/ROC_comp_all.pdf}
     \caption{\tauh identification ROC curve for the standard method and with the RecNN method. The x axis is set to a logarithmic scale.}
     \label{fig:RecNN_ROC}
 \end{figure}
 
-Even while limiting as much as possible the computational times, the later versions of the networks have proven to be long to train. Hyper-parameters are the overall parameters of the network, not to be mixed with each neuron parameters. The hyper-parameters of our network can be whether to use the gated scheme or not, the number of layers in a given part of the network, the number of neuron in each of the layer, the clustering order used to shape the embedding part of the network, the choice of loss function, optimizer and activation function for each neuron... The lengthy training times combined with the number of hyper-parameter meant that this study can't provide with the best version of our chosen architecture, but instead aims to show proof of concept.
+The ROC curves of both the standard method, the base RecNN implementation and the upgraded RecNN approach are presented in figure \ref{fig:RecNN_ROC}. While the area under the curve is strictly better in the RecNN approaches compared to the standard method, the efficiency of the standard method is still better at low jet misidentification rate. The gain from the upgrade of the RecNN, while significant, is less than expected. 
 
-All the clustering orderings have shown similar results in several stages of optimisation. While all should be tested in an optimisation study, the presented results have been produced with the anti-kt ordering. Also, at all stages the gated approach has lead to far better results than the non-gated, leading to the non-gated not being studied further.
-
-The ROC curves of both the standard method and the best found RecNN approach are presented in figure \ref{fig:RecNN_ROC}. While the area under the curve is strictly better in the RecNN approach, the efficiency of the standard method is still better at low jet misidentification rate. The working points used in the CMS analysis are around 60$\%$ identification efficiency, not far from where the curves cross. But the RecNN approach allows to reach far better QCD jet rejection at high \tauh efficiency.
 
 \subsection{Possible optimisation}
 
-Although the results have shown some potential, this study has not reached the level of optimisation that could help the RecNN to outperform the standard technique. Indeed, several upgrades that could benefit the RecNN approach have been considered, but where not fully implemented in time. 
+Although the results have shown some potential, this study has not reached the level of optimisation that could help the RecNN to outperform the standard technique systematically. Indeed, several upgrades that could benefit the RecNN approach have been considered, but where not fully implemented in time. 
 
-One such upgrade idea come from the study of QCD jets misidentified by the RecNN. Indeed, many examples such as the one displayed in figure \ref{fig:jet_display} show that the RecNN approach does not use the number of particle information as efficiently as it could. An upgrade would be to directly add the number of particle per type at the classifier-level, rather than the jet embedding level. This could help the network to easily reject trivial cases, while being able to specialize the jet-embedding part for the less straight-forward cases.
+Even while limiting as much as possible the computational times, the latest versions of the RecNN network have proven to be long to train, about two days on a dedicated machine with 40 cores. All the clustering orderings have shown similar results in several stages of optimisation. While all should be optimised and tested in time, the presented results have been produced with the anti-$k_t$ ordering.
 
-Another upgrade could be the use of subset in the training. Indeed, a majority of training cases are trivial, meaning most of the cases will not help the network to learn classify the difficult cases, but instead overtrain. Overtraining is the effect happening when the features that are learnt are specific to the sample and not applicable to the general task. The training of such machine learning algorithm is usually stopped as soon as this overtraining appears. To do so, a separate independent sample is used to evaluate the network's performance. Overtraining is declared when the performance on the independent sample starts degrading while the performance computed on the training samples keeps upgrading.
+One such upgrade idea come from the study of QCD jets misidentified by the RecNN. Indeed, many examples such as the QCD jet mistagged as a \tauh by the RecNN network displayed in figure \ref{fig:jet_display} show that the RecNN approach does not use the number of particle information as efficiently as it could. An upgrade would be to directly add the number of particle per type at the classifier-level, rather than the jet embedding level. This could help the network to easily reject trivial cases, while being able to specialize the jet-embedding part for the less straight-forward cases.
+
+In our training sample, a majority of training cases are trivial, meaning most of the cases will not help the network to learn the classification requirements of the difficult cases. While this could be mitigated by re-training more times using the training samples, the re-use of a training sample many times come with a problem called overtraining. This problem comes when the networks learns discrimination characteristics that are specific to the training sample, and not generalisable. To avoid this overtraining, the training phase is stopped when the evaluation of the network on an independent sample starts showing a worsening performance, while the performance on the training sample keeps getting better. A possible upgrade could then be the use of a selected subset of QCD jets in the training, specifically jets that are similar to \tauh. A part of other jets should still be present in the selected sample, as not to lower the rejection efficiency on those jets, but should take a less important part of the training sample. 
+
+While all those optimisations were attempted, these were not implemented in time. The RecNN approach has shown good performances already, and while the upgrades have improved these performances, further improvements are expected from the study on a case-by-case basis. The potential optimisation that were discussed could help reach new performances.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{Images/jet_display1.png}
+    \includegraphics[width=\textwidth]{Images/display.png}
     \caption{Scatter plots of the constituents in a QCD jet misidentified by the RecNN network. Top plot is the reconstructed jet, and the bottom plot is the gen-level jet. The size of the points are proportional to their \pt and their color depends on their type. Black is a charged hadron, yellow is a photon and red is a neutral hadron.}
     \label{fig:jet_display}
 \end{figure}

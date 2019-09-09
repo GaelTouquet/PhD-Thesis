@@ -1,7 +1,7 @@
 
 As seen before in sec \ref{sec:tau_lepton}, when a $\tau$ is produced in a collision, it can decay into several different final states.
 Hadronic final states, denoted \tauh, represent about 65\% of tau decays.
-These hadronic final states are characterised by one or three charged hadrons with or without \pizero .
+These hadronic final states are characterized by one or three charged hadrons with or without \pizero .
 
 But similar particles can be reconstructed from other processes and decays, such as QCD jets.
 Since these QCD jets greatly outnumber \tauh in the final states of proton-proton collisions at the LHC, \tauh identification algorithms have be designed in CMS to reject QCD jets as much as possible while keeping a \tauh identification efficiency somewhere between 35\% and 70\%, depending on the purity needed by the analyses. Identification is performed on a jet basis, meaning algorithms classifies all reconstructed jets as either background, meaning QCD jets, or signal, meaning \tauh decay products.
@@ -130,15 +130,15 @@ Muons are rejected by requiring that no track segments are found in at least two
 
 Performance are compared in terms of signal efficiency and background rejection. The signal efficiency is defined from the ratio of the number of well-tagged \tauh in the selected population over the total number of \tauh in this population. The background rejection is similarly defined as the ratio of the number of appropriately tagged QCD jets over the total number of QCD jets considered.
 
-While the goal of a classifier is to tag objects as signal or background, most will instead provide with a score between 0 and 1. A score close to 0 is to be interpreted as very likely to be background, and a score close to 1 as very likely to be signal. This continuous score can then be translated into a discrete tag by the choice of a working point (WP) value. For a given WP, every reconstructed jet that scores below the WP value is then tagged as QCD jet, and every reconstructed jet that scores higher than tha value a \tauh. The values of the signal efficiency and background rejection can be measured for a continuous scan of WP values, allowing to build a Receiver Operating Characteristic (ROC) curve. The standard identification ROC curve is shown in figure \ref{fig:std_ROC}
+While the goal of a classifier is to tag objects as signal or background, most will instead provide with a score between 0 and 1. A score close to 0 is to be interpreted as very likely to be background, and a score close to 1 as very likely to be signal. This continuous score can then be translated into a discrete tag by the choice of a working point (WP) value. For a given WP, every reconstructed jet that scores below the WP value is then tagged as QCD jet, and every reconstructed jet that scores higher than the value a \tauh. The values of the signal efficiency and background rejection can be measured for a continuous scan of WP values, allowing to build a Receiver Operating Characteristic (ROC) curve. The standard identification ROC curve is shown in figure \ref{fig:std_ROC}
 Generally, a numerical figure of merit is the area under the ROC curve, called ROC AUC, as it is maximum when signal efficiency and background rejection is perfect.
-In our case, ROC AUC might not be the best figure of merit, as it doesn't take into account which regions are best covered by the technique. Indeed, in our case the standard identification technique is based on applying hard cuts such as decay mode finding and anti-lepton discriminant before evaluating the score of the the isolation BDT. This is why the ROC of the standard technique reaches a plateau, as the plateau corresponds to maximum efficiency allowed by the previous cuts.
+In our case, ROC AUC might not be the best figure of merit, as it does not take into account which regions are best covered by the technique. Indeed, in our case the standard identification technique is based on applying hard cuts such as decay mode finding and anti-lepton discriminant before evaluating the score of the the isolation BDT. This is why the ROC of the standard technique reaches a plateau, as the plateau corresponds to maximum efficiency allowed by the previous cuts.
 QCD jets are also overwhelmingly more present in collisions than \tauh, meaning useful working points are in the region of high background rejection. 
 
 \subsection{Intrinsic limitations}
 
 Both cut-based and BDT-based identification methods rely heavily on designing variables that are likely to have discriminating power, to either create a hard cut directly, or to mix several of these variables into a BDT . But the construction of such variables potentially do not take into account other information that have been gathered in the detection and reconstruction.
-While the BDT combines more information than than the cut-based method, it requires fine tuning of the choice of variables. This tuning can lead to a tedious optimisation process since the possibilities of information combinations are potentially infinite. Machine learning techniques are intrinsically limited by the amount of information that is available in theirinputs. 
+While the BDT combines more information than than the cut-based method, it requires fine tuning of the choice of variables. This tuning can lead to a tedious optimization process since the possibilities of information combinations are potentially infinite. Machine learning techniques are intrinsically limited by the amount of information that is available in their inputs. 
 A possible improvement should therefore be expected from using a more complete set of variable rather than a selected subset, which is one of the philosophy of deep learning.
 
 
@@ -148,7 +148,7 @@ Neural networks are based on combining the principle of a human neuron into netw
 They usually require a substantial amount of fully known data as a reference to learn how to perform their given task. The possibility of using simulation allows to have such a substantial  well-known training dataset.
 Indeed, neural networks have brought a lot of new results in fields such as big data, image recognition and even pseudo-data generation.
 
-The organisation of the neurons in the network is called architecture. The choice of architecture has a strong influence on the training, as neural networks have shown their best achievements through the use of architectures specifically designed for the given task.
+The organization of the neurons in the network is called architecture. The choice of architecture has a strong influence on the training, as neural networks have shown their best achievements through the use of architectures specifically designed for the given task.
 
 \subsection{Basics : neurons, dense networks, deep learning}
 
@@ -165,7 +165,7 @@ The organisation of the neurons in the network is called architecture. The choic
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/activation_functions.png}
-    \caption{Some activation functions and their visualisation.}
+    \caption{Some activation functions and their visualization.}
     \label{fig:activation_functions}
 \end{figure}
 
@@ -181,14 +181,14 @@ A neuron is defined by an activation function $f$, a set of scalar weights $wi$ 
     \label{fig:dense_network}
 \end{figure}
 
-A network can be created by connecting neurons. A simple case is the feed-forward densely connected network, such as shown in figure \ref{fig:dense_network}. The feed forward nature means that there is no cycle in the propagation of the evaluation from inputs to outputs. In this architecture, neurons are organised by layers, with each neuron's output being an input to each neuron in the next layer. Such organisation creates the possibility of approximating theoretically any task as stated by the Universal approximation theorem states \cite{Cybenko1989}, as long as the activation function is non-linear.
+A network can be created by connecting neurons. A simple case is the feed-forward densely connected network, such as shown in figure \ref{fig:dense_network}. The feed forward nature means that there is no cycle in the propagation of the evaluation from inputs to outputs. In this architecture, neurons are organized by layers, with each neuron's output being an input to each neuron in the next layer. Such organization creates the possibility of approximating theoretically any task as stated by the Universal approximation theorem states \cite{Cybenko1989}, as long as the activation function is non-linear.
 
 \subsubsection{Loss function and backpropagation}
 
 In order to find the set of weights and bias most suited for a task, the network needs to be trained.
 The training phase relies on an example set of inputs associated with the target output value. Indeed, the output of the network for a given set of inputs is compared to the target output. This comparison is quantified through the use of a metric called the loss function. The loss function should be a differentiable function of the target value and the output of the network that should be minimum when these variables are equal. Training the network to perform task is therefore equivalent to minimizing the value of the loss function over all possible values for the parameters of the network (weights and biases) for the whole training set.
 
-But the space of configurations of the weights and biases, together called parameters, of the network has a huge dimensionnality. The iterative process of training the network can then lead to stagnation if examples are evaluated and parameters adapted for each example of the training set. To avoid this stagnation, the parameters are changed to minimize the average of the loss function over a number of examples, called mini-batch. The number of examples in each mini-batch is referred to as the mini-batch size.
+But the space of configurations of the weights and biases, together called parameters, of the network has a huge dimensionality. The iterative process of training the network can then lead to stagnation if examples are evaluated and parameters adapted for each example of the training set. To avoid this stagnation, the parameters are changed to minimize the average of the loss function over a number of examples, called mini-batch. The number of examples in each mini-batch is referred to as the mini-batch size.
 
 The way the parameters are changed to minimize the loss function depends on which optimizer algorithm is used. Most optimizers rely on backpropagation, meaning the variation that should undergo a parameter is computed by propagating the change of the loss function backwards through all the layers of neurons between the considered neuron and the output of the network. 
 
@@ -286,7 +286,7 @@ Neural network architectures should fit the format of the input while providing 
     \end{center}
 \end{figure}
 
-The network architecture will be divided into two parts, similarly to the recurrent architecture. A first embedding part is organised from a jet clustering structure. Its output then fed to a dense feed-forward network architecture, as illustrated in figure \ref{fig:recnn_architecture}.
+The network architecture will be divided into two parts, similarly to the recurrent architecture. A first embedding part is organized from a jet clustering structure. Its output then fed to a dense feed-forward network architecture, as illustrated in figure \ref{fig:recnn_architecture}.
 The jet-embedding part is built as an ensemble of nodes. Similarly to recurrent networks, the neuron layers in each node have the same parameters. Also similarly to the word-based scheme in recurrent network, the recursive network is particle-based, meaning the input jet is broken down to its constituent particles, and each particle is fed into an input node, called leaf-node. To build the jet-embedding structure, two nodes are selected using a chosen metric, and feed into a new node, iteratively, until there is only one node left. 
 The metric used to select which nodes are to be merged can be chosen among the following set:
     
@@ -307,7 +307,7 @@ In this expression $\Delta_{ij}$ corresponds to the distance of the particles in
 In the jet embedding part, the information takes two distinct paths, as illustrated in figure \ref{fig:recnn_nodes}.
 The vector $O_k$ was originally the 4-momentum of the pseudo-jet at the node k in the original design. It has been upgraded to hold extra information in the new version. First, The 4-momentum is split by particle type : photon, electron, muon, charged hadron, neutral hadron. This is done to allow the network to base its decision on the types of particles rather than just the overall 4-momentum. Second, the 4-momentum vector is also concatenated with information on each subjets. As the $O_k$ vector is computed as the sum of the $O_{kl}$ and $O_{kr}$ vectors, coming from the nodes that were merged into node $k$, the new information must be addable. The chosen extra variables are the total charge and total number of particles for each type constituent. On top of this, the distance in the ($\eta$,$\phi$) plane between the merged pseudo-jets is fed to the network at each successive step of the clustering. 
 
-At each node a full set of variables is also re-computed from the 4-momenta : p, \pt, m, $\eta$, $\phi$, $\theta$. All of these variables are then fed into a neuron layer called $\sigma_{u}$ instead of the 4-momentum in cartesian form.
+At each node a full set of variables is also re-computed from the 4-momenta : p, \pt, m, $\eta$, $\phi$, $\theta$. All of these variables are then fed into a neuron layer called $\sigma_{u}$ instead of the 4-momentum in Cartesian form.
 On a leaf node k, the output of $\sigma_{u}$ is then taken as the embedded output of this node, named $h_k$.
 On a non-leaf node k, the output of $\sigma_{u}$ is fed along the embedded outputs of the previous layers into another layer, namely $\sigma_h$. the output of $\sigma_h$ is then the embedded output $h_k$.
 Effectively there are indeed two paths for the information in the architecture: a direct pseudo-particle like clustering where 4-momentum and addable characteristics are added, and a path where neuron layers embed the information and mixes it with the existing previously embedded information.
@@ -334,7 +334,7 @@ Another issue arise from the distribution of signal and background jets in the t
 
 \subsection{Implementation}
 
-While most neural network architecture can easily be implemented using available libraries, the RecNN architecture had to be implemented by hand using base classes from the sklearn library \cite{scikit-learn}. This is due to the architecture being adapted to each jet following the clustering algorithm applied to the considered jet. Therefore, using the implementation shared by the original article \cite{Louppe:2017ipp} as a base, many featured had to be re-implemented. For example, the fastjet \cite{Cacciari:2011ma} clustering algorithm interface had to be re-made in order to match the changes brought to the code, for example the matching of pseudo-jets to their respective extra information. Also the pre-processing and clustering evaluation steps have been reshaped to use multithreading, allowing faster computational times. Some libraries were changed to maximise computational efficiency, such as the disk writing format.
+While most neural network architecture can easily be implemented using available libraries, the RecNN architecture had to be implemented by hand using base classes from the sklearn library \cite{scikit-learn}. This is due to the architecture being adapted to each jet following the clustering algorithm applied to the considered jet. Therefore, using the implementation shared by the original article \cite{Louppe:2017ipp} as a base, many featured had to be re-implemented. For example, the fastjet \cite{Cacciari:2011ma} clustering algorithm interface had to be re-made in order to match the changes brought to the code, for example the matching of pseudo-jets to their respective extra information. Also the pre-processing and clustering evaluation steps have been reshaped to use multithreading, allowing faster computational times. Some libraries were changed to maximize computational efficiency, such as the disk writing format.
 
 A major upgrade that was implemented was related to trackability of the jets. Indeed, once the jet was pre-processed and re-clustered, the link with related information not involved in the network was lost. Once this feature was implemented, populations defined by the performance of both standard and RecNN methods could be studied on a broader level. A jet display was also implemented to study jets on a case-by-case basis. This jet-by-jet study allowed to understand the shortcomings of the network and design new features to avoid them.
 
@@ -358,13 +358,13 @@ A feature that was mostly recovered from the original paper with minor changes w
 
 Even while limiting as much as possible the computational times, the later versions of the networks have proven to be long to train. Hyper-parameters are the overall parameters of the network, not to be mixed with each neuron parameters. The hyper-parameters of our network can be whether to use the gated scheme or not, the number of layers in a given part of the network, the number of neuron in each of the layer, the clustering order used to shape the embedding part of the network, the choice of loss function, optimizer and activation function for each neuron... The lengthy training times combined with the number of hyper-parameter meant that this study can't provide with the best version of our chosen architecture, but instead aims to show proof of concept.
 
-All the clustering orderings have shown similar results in several stages of optimisation. While all should be tested in an optimisation study, the presented results have been produced with the anti-kt ordering. Also, at all stages the gated approach has lead to far better results than the non-gated, leading to the non-gated not being studied further.
+All the clustering orderings have shown similar results in several stages of optimization. While all should be tested in an optimization study, the presented results have been produced with the anti-kt ordering. Also, at all stages the gated approach has lead to far better results than the non-gated, leading to the non-gated not being studied further.
 
 The ROC curves of both the standard method and the best found RecNN approach are presented in figure \ref{fig:RecNN_ROC}. While the area under the curve is strictly better in the RecNN approach, the efficiency of the standard method is still better at low jet misidentification rate. The working points used in the CMS analysis are around 60$\%$ identification efficiency, not far from where the curves cross. But the RecNN approach allows to reach far better QCD jet rejection at high \tauh efficiency.
 
-\subsection{Possible optimisation}
+\subsection{Possible optimization}
 
-Although the results have shown some potential, this study has not reached the level of optimisation that could help the RecNN to outperform the standard technique. Indeed, several upgrades that could benefit the RecNN approach have been considered, but where not fully implemented in time. 
+Although the results have shown some potential, this study has not reached the level of optimization that could help the RecNN to outperform the standard technique. Indeed, several upgrades that could benefit the RecNN approach have been considered, but where not fully implemented in time. 
 
 One such upgrade idea come from the study of QCD jets misidentified by the RecNN. Indeed, many examples such as the one displayed in figure \ref{fig:jet_display} show that the RecNN approach does not use the number of particle information as efficiently as it could. An upgrade would be to directly add the number of particle per type at the classifier-level, rather than the jet embedding level. This could help the network to easily reject trivial cases, while being able to specialize the jet-embedding part for the less straight-forward cases.
 
